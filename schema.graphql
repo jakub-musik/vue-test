@@ -1,0 +1,3548 @@
+type accountingRow implements ErrorHandling & Token {
+  """Errors string - example: session_not_found"""
+  backendError: String
+
+  """deposited amount, need to set types to DEPOSIT"""
+  depositAmount: BigInt
+
+  """Limit days - example: 90"""
+  limitDays: Int @deprecated(reason: "Not needed anymore")
+
+  """payout amount - need to set types to PAYOUT"""
+  payoutAmount: BigInt
+  rows: [modelAccountRow]
+
+  """stake amount - need to set types to TICKET"""
+  stakeAmount: BigInt
+
+  """subtotal after rows in cents - example: 1000"""
+  subtotalAfter: BigInt
+
+  """subtotal before rows in cents - example: 1000"""
+  subtotalBefore: BigInt
+
+  """Status of the mutation - example: true"""
+  success: Boolean!
+
+  """
+  JWT Token - example: "abc123"
+  """
+  token: String!
+
+  """Total rows - example: 20"""
+  totalRows: BigInt
+  visibleErrors: visibleErrors!
+
+  """winning amount - need to set types to WINNING"""
+  winningAmount: BigInt
+}
+
+"""sort accounting rows"""
+enum AccountingRowSortOption {
+  """sort by amount"""
+  AMOUNT
+
+  """sort by date"""
+  DATE
+}
+
+"""only show specific accounting row types"""
+enum AccountingRowTypes {
+  DEPOSIT
+  PAYOUT
+  TICKET
+  WINNING
+}
+
+type addScratchCardToBasket implements ErrorHandling & Token & BasketObject {
+  """Total amount - example: 120"""
+  amount: Int
+
+  """Amount to pay - example: 0"""
+  amountToPay: Int
+
+  """Errors string - example: session_not_found"""
+  backendError: String
+  coupon: modelCoupon
+
+  """If the basket may be purchased due to limits - example: true"""
+  isPurchasable: Boolean!
+
+  """Total amount reduced by credit - example: 0"""
+  reducedAmount: Int
+
+  """Status of the mutation - example: true"""
+  success: Boolean!
+
+  """system id of the inserted ticket - example: 231243"""
+  ticketId: BigInt
+  tickets: [modelTicket]
+
+  """
+  JWT Token - example: "abc123"
+  """
+  token: String!
+  visibleErrors: visibleErrors!
+}
+
+type addTicketToBasket implements ErrorHandling & Token & BasketObject {
+  """Total amount - example: 120"""
+  amount: Int
+
+  """Amount to pay - example: 0"""
+  amountToPay: Int
+
+  """Errors string - example: session_not_found"""
+  backendError: String
+  coupon: modelCoupon
+
+  """If the basket may be purchased due to limits - example: true"""
+  isPurchasable: Boolean!
+
+  """Total amount reduced by credit - example: 0"""
+  reducedAmount: Int
+
+  """Status of the mutation - example: true"""
+  success: Boolean!
+
+  """system id of the inserted ticket - example: 231243"""
+  ticketId: BigInt
+  tickets: [modelTicket]
+
+  """
+  JWT Token - example: "abc123"
+  """
+  token: String!
+  visibleErrors: visibleErrors!
+}
+
+type bankData implements ErrorHandling & Token {
+  """Errors string - example: session_not_found"""
+  backendError: String
+
+  """IBAN - example: DE44123456781234567890"""
+  iban: String
+
+  """Status of the mutation - example: true"""
+  success: Boolean!
+
+  """
+  JWT Token - example: "abc123"
+  """
+  token: String!
+  visibleErrors: visibleErrors!
+}
+
+interface BasketObject {
+  """Total amount - example: 120"""
+  amount: Int
+
+  """Amount to pay - example: 0"""
+  amountToPay: Int
+  coupon: modelCoupon
+
+  """If the basket may be purchased due to limits - example: true"""
+  isPurchasable: Boolean!
+
+  """Total amount reduced by credit - example: 0"""
+  reducedAmount: Int
+  tickets: [modelTicket]
+}
+
+type basketPay implements ErrorHandling & Token {
+  """Errors string - example: session_not_found"""
+  backendError: String
+
+  """
+  Basket id (except sofortueberweisung because payment process has not finished yet) - example: 1234
+  """
+  basketId: BigInt
+
+  """unique transaction id - example: 5c3493ebb55f283e94f0eafbc"""
+  merchantReference: String
+
+  """
+  URL to redirect to - example: https://ftg-customer-integration.giropay.de
+  """
+  redirectTo: String
+
+  """Revenue in cent - example: 3690"""
+  revenue: Int
+
+  """Revenue in cent - example: 3690"""
+  revenueGross: Int
+
+  """Status of the mutation - example: true"""
+  success: Boolean!
+
+  """Tex in cent - example: 0"""
+  tax: Int
+
+  """
+  JWT Token - example: "abc123"
+  """
+  token: String!
+  usedCoupons: [modelCoupon]
+  visibleErrors: visibleErrors!
+}
+
+type basketSummary implements ErrorHandling & Token & BasketObject {
+  """Total amount - example: 120"""
+  amount: Int
+
+  """Amount to pay - example: 0"""
+  amountToPay: Int
+
+  """Errors string - example: session_not_found"""
+  backendError: String
+  coupon: modelCoupon
+
+  """If the basket may be purchased due to limits - example: true"""
+  isPurchasable: Boolean!
+
+  """Total amount reduced by credit - example: 0"""
+  reducedAmount: Int
+
+  """Status of the mutation - example: true"""
+  success: Boolean!
+  tickets: [modelTicket]
+
+  """
+  JWT Token - example: "abc123"
+  """
+  token: String!
+  visibleErrors: visibleErrors!
+}
+
+"""
+Represents non-fractional signed whole numeric values. Since the value may
+exceed the size of a 32-bit integer, it's encoded as a string.
+"""
+scalar BigInt
+
+"""booked by"""
+enum BookedBy {
+  CUSTOMERCARE
+  PLAYER
+  SYSTEM
+}
+
+type cancelAbonnement implements ErrorHandling & Token {
+  """Errors string - example: session_not_found"""
+  backendError: String
+
+  """Status of the mutation - example: true"""
+  success: Boolean!
+  ticket: modelTicket
+
+  """
+  JWT Token - example: "abc123"
+  """
+  token: String!
+  visibleErrors: visibleErrors!
+}
+
+"""category filter"""
+enum CategoryFilter {
+  LAST_PLAYED
+  POPULAR
+}
+
+type checkSession implements ErrorHandling & Token {
+  """Errors string - example: session_not_found"""
+  backendError: String
+
+  """Session is logged in - example: true"""
+  loggedIn: Boolean
+
+  """Status of the mutation - example: true"""
+  success: Boolean!
+
+  """
+  JWT Token - example: "abc123"
+  """
+  token: String!
+  visibleErrors: visibleErrors!
+}
+
+type cities implements ErrorHandling {
+  """Errors string - example: session_not_found"""
+  backendError: String
+
+  """
+  List of cities - Example: ["Altenmoor", "Bokholt-Hanredder", "Elmshorn"]
+  """
+  cities: [String]!
+
+  """Status of the mutation - example: true"""
+  success: Boolean!
+  visibleErrors: visibleErrors!
+}
+
+type confirmPlayerGamesRevenues implements ErrorHandling & Token {
+  """Errors string - example: session_not_found"""
+  backendError: String
+
+  """Status of the mutation - example: true"""
+  success: Boolean!
+
+  """
+  JWT Token - example: "abc123"
+  """
+  token: String!
+  visibleErrors: visibleErrors!
+}
+
+type contact implements ErrorHandling {
+  """Errors string - example: session_not_found"""
+  backendError: String
+
+  """Status of the mutation - example: true"""
+  success: Boolean!
+  visibleErrors: visibleErrors!
+}
+
+"""category of the coupon"""
+enum CouponCategory {
+  """coupon belongs to the whole basket"""
+  BASKET
+
+  """coupon belongs to one ticket"""
+  TICKET
+
+  """coupon is for registration"""
+  REGISTRATION
+
+  """coupon is an enclosure code (belongs to one ticket)"""
+  ENCLOSURE
+}
+
+type couponConfig implements ErrorHandling {
+  """Errors string - example: session_not_found"""
+  backendError: String
+  coupon: modelCoupon
+
+  """Status of the mutation - example: true"""
+  success: Boolean!
+  visibleErrors: visibleErrors!
+}
+
+"""status of the coupon"""
+enum CouponStatus {
+  """coupon is only for player with age verification"""
+  AGE_VERIFICATION_NEEDED
+
+  """coupon is expired"""
+  EXPIRED
+
+  """coupon is incompatible with the product"""
+  INCOMPATIBLE_PRODUCT
+
+  """coupon minimum amount has not been reached with the basket or ticket"""
+  INSUFFICIENT_AMOUNT
+
+  """coupon is only for new customer"""
+  NO_NEW_CUSTOMER
+
+  """coupon is invalid for unknown reason"""
+  INVALID
+
+  """coupon has already been used"""
+  USED
+
+  """coupon is valid"""
+  VALID
+}
+
+type deadlines implements ErrorHandling {
+  """Errors string - example: session_not_found"""
+  backendError: String
+  deadlines: [modelDeadline]
+
+  """Status of the mutation - example: true"""
+  success: Boolean!
+  visibleErrors: visibleErrors!
+}
+
+type deposit implements ErrorHandling & Token {
+  """Errors string - example: session_not_found"""
+  backendError: String
+
+  """Redirect to this URL - example: /warenkorb"""
+  redirectTo: String
+
+  """Status of the mutation - example: true"""
+  success: Boolean!
+
+  """
+  JWT Token - example: "abc123"
+  """
+  token: String!
+  visibleErrors: visibleErrors!
+}
+
+"""type of the discount"""
+enum DiscountType {
+  """discount for an abonnement ticket"""
+  ABONNEMENT
+
+  """discount for a normal ticket"""
+  NORMAL
+
+  """discount for a scratchcard"""
+  SCRATCHCARD
+}
+
+type doubleOptIn implements ErrorHandling & Token {
+  """Errors string - example: session_not_found"""
+  backendError: String
+
+  """E-mail address was confirmed - example: true"""
+  confirmed: Boolean
+
+  """Status of the mutation - example: true"""
+  success: Boolean!
+
+  """
+  JWT Token - example: "abc123"
+  """
+  token: String!
+  visibleErrors: visibleErrors!
+}
+
+type draw implements ErrorHandling {
+  """Errors string - example: session_not_found"""
+  backendError: String
+  draws: [modelDraw]
+
+  """Status of the mutation - example: true"""
+  success: Boolean!
+  visibleErrors: visibleErrors!
+}
+
+type drawsdates implements ErrorHandling {
+  """Errors string - example: session_not_found"""
+  backendError: String
+  draws: [modeldrawdates]
+
+  """Status of the mutation - example: true"""
+  success: Boolean!
+  visibleErrors: visibleErrors!
+}
+
+type editAbonnement implements ErrorHandling & Token & BasketObject {
+  """Total amount - example: 120"""
+  amount: Int
+
+  """Amount to pay - example: 0"""
+  amountToPay: Int
+
+  """Errors string - example: session_not_found"""
+  backendError: String
+  coupon: modelCoupon
+
+  """If the basket may be purchased due to limits - example: true"""
+  isPurchasable: Boolean!
+
+  """Total amount reduced by credit - example: 0"""
+  reducedAmount: Int
+
+  """Status of the mutation - example: true"""
+  success: Boolean!
+  tickets: [modelTicket]
+
+  """
+  JWT Token - example: "abc123"
+  """
+  token: String!
+  visibleErrors: visibleErrors!
+}
+
+type email implements ErrorHandling & Token {
+  """Errors string - example: session_not_found"""
+  backendError: String
+
+  """Status of the mutation - example: true"""
+  success: Boolean!
+
+  """
+  JWT Token - example: "abc123"
+  """
+  token: String!
+  visibleErrors: visibleErrors!
+}
+
+interface ErrorHandling {
+  """Errors string - example: session_not_found"""
+  backendError: String
+
+  """Status of the mutation - example: true"""
+  success: Boolean!
+  visibleErrors: visibleErrors!
+}
+
+type filteredCategories implements ErrorHandling {
+  """Errors string - example: session_not_found"""
+  backendError: String
+  category: modelFilteredCategoriesCategory
+
+  """Status of the mutation - example: true"""
+  success: Boolean!
+  visibleErrors: visibleErrors!
+}
+
+type gameBreakLock implements ErrorHandling & Token {
+  """Errors string - example: session_not_found"""
+  backendError: String
+
+  """Status of the mutation - example: true"""
+  success: Boolean!
+
+  """
+  JWT Token - example: "abc123"
+  """
+  token: String!
+  visibleErrors: visibleErrors!
+}
+
+type gameConfig implements ErrorHandling {
+  """Errors string - example: session_not_found"""
+  backendError: String
+  com: [modelProvider]
+  de: [modelProvider]
+  providers: [modelProvider] @deprecated(reason: "Use field tlds")
+
+  """Status of the mutation - example: true"""
+  success: Boolean!
+  visibleErrors: visibleErrors!
+}
+
+type googleAnalytics implements ErrorHandling & Token {
+  actionField: modelActionField
+
+  """Errors string - example: session_not_found"""
+  backendError: String
+  products: [modelProduct]
+
+  """Retry call - example: true"""
+  retry: Boolean
+
+  """Status of the mutation - example: true"""
+  success: Boolean!
+
+  """
+  JWT Token - example: "abc123"
+  """
+  token: String!
+  visibleErrors: visibleErrors!
+}
+
+input inputModelDrawingNewsletterType {
+  """Is the alarm active - example: true"""
+  active: Boolean
+
+  """Name of the alarm - example: lotto"""
+  name: String
+}
+
+input inputModelFieldType {
+  """Chosen numbers - example: 1,2,3,4,5,6"""
+  numbers: String!
+
+  """Chosen extra numbers - example: 1,2"""
+  extraNumbers: String
+
+  """System - example: 007"""
+  system: String
+}
+
+input inputModelJackpotAlarmType {
+  """Is the alarm active - example: true"""
+  active: Boolean
+
+  """Amount of the alarm - example: 7"""
+  amount: Int
+
+  """Name of the alarm - example: lotto"""
+  name: String
+}
+
+input inputModelPushNotificationAuthorizedSubscription {
+  """activate the notification for a winning - example: [true, false]"""
+  winningNotification: Boolean
+}
+
+input inputModelPushNotificationGeneralSubscription {
+  """activate the notification for general news - example: [true, false]"""
+  news: Boolean
+}
+
+input inputModelPushNotificationSubscription {
+  """
+  threshold for the jackpot alert in cent (null for deactivation) - example: 500000000
+  """
+  jackpotAlertThreshold: Int
+
+  """
+  activate the notification for the winning numbers - example: [true, false]
+  """
+  numbers: Boolean!
+
+  """activate the notification for the deadline - example: [true, false]"""
+  deadline: Boolean!
+
+  """
+  Game type - [cash4life, dailymillion, eurojackpot, euromillions,
+  gluecksspirale, keno, lotto, lotto6aus45, megamillions, minilos, minilotto,
+  powerball, sonntagslotto, superlotto, swisslotto, worldmillions]
+  """
+  name: String!
+}
+
+input inputModelRedirectToType {
+  """abort url - example: /spiele/cash-wheel/?no_success=1"""
+  abort: String
+
+  """success url - example: /spiele/cash-wheel/spielen/"""
+  success: String
+}
+
+"""language of the player"""
+enum Language {
+  """german"""
+  DE
+
+  """english"""
+  EN
+}
+
+type login implements ErrorHandling & Token {
+  """Errors string - example: session_not_found"""
+  backendError: String
+  player: modelPlayer
+
+  """Status of the mutation - example: true"""
+  success: Boolean!
+
+  """
+  JWT Token - example: "abc123"
+  """
+  token: String!
+  visibleErrors: visibleErrors!
+}
+
+type logout implements ErrorHandling {
+  """Errors string - example: session_not_found"""
+  backendError: String
+
+  """Status of the mutation - example: true"""
+  success: Boolean!
+  visibleErrors: visibleErrors!
+}
+
+type luckyNumbers implements ErrorHandling {
+  """Errors string - example: session_not_found"""
+  backendError: String
+  luckyNumbers: [modelLuckyNumbersLuckyNumbers]!
+
+  """Status of the mutation - example: true"""
+  success: Boolean!
+  visibleErrors: visibleErrors!
+}
+
+type modelAccountRow {
+  """Bank account holder - example: Max Mustermann"""
+  accountHolder: String
+
+  """Amount in cents - example: 1000"""
+  amount: BigInt
+
+  """Bank account - example: 123456789"""
+  bankAccount: String
+
+  """Bank code - example: 1234567"""
+  bankCode: String
+
+  """Booked at - example: Jan 1 2018 00:00:00"""
+  bookedAt: String
+
+  """Booked by - example: PLAYER"""
+  bookedBy: BookedBy
+
+  """Chargeback At - example: Jan 1 2018 00:00:00"""
+  chargebackAt: String
+
+  """Comment - example: Kommentar für Benutzer"""
+  comment: String
+
+  """Gewinn-Doppler selected - example: false"""
+  doubleWin: Boolean
+
+  """First draw - example: Jan 1 2018 00:00:00"""
+  firstDraw: String
+
+  """IBAN - example: DE00123456781234567890"""
+  iban: String
+
+  """Is abonnement - example: false"""
+  isAbonnement: Boolean
+
+  """Is canceled - example: false"""
+  isCanceled: Boolean
+
+  """Jackpot-Knacker selected - example: false"""
+  jackpotCracker: Boolean
+
+  """Jackpot-Garantie selected - example: false"""
+  jackpotGuarantee: Boolean
+
+  """Last draw - example: Jan 1 2018 00:00:00"""
+  lastDraw: String
+
+  """Offset account type - example: LOTTO"""
+  offsetAccount: OffsetAccount
+
+  """Old balance - example: 1000"""
+  oldBalance: BigInt
+
+  """Order id - example: 12"""
+  orderId: String
+
+  """Participation day - example: B"""
+  participationDay: String
+
+  """Participations - example: 1"""
+  participations: Int
+
+  """Transaction type - example: BUY_LOTTO"""
+  transaction: Transaction
+
+  """Type of the game - example: lotto"""
+  type: String
+
+  """Printable type of the game - example: Lotto Normal"""
+  typeText: String
+
+  """Wager id - example: 4712"""
+  wid: String
+}
+
+type modelActionField {
+  """Coupon - example: freefee"""
+  coupon: String
+
+  """Id - example: 460826749"""
+  id: String
+
+  """Revenue: 2.60"""
+  revenue: String
+}
+
+type modelCoupon {
+  """amount in cents - example: 120"""
+  amount: Int!
+
+  """category as identifier - example: BASKET"""
+  category: CouponCategory!
+
+  """coupon code - example: 934105329"""
+  code: String!
+
+  """an optional special jackpot in € - example: 15000000"""
+  jackpot: BigInt
+
+  """min amount in cents if status is INSUFFICIENT_AMOUNT - example: 100"""
+  minAmount: Int
+
+  """name - example: 6 Kreuze gratis"""
+  name: String!
+
+  """status as identifier - example: VALID"""
+  status: CouponStatus!
+
+  """types for which the coupon is valid - example: [lotto, eurojackpot]"""
+  types: [String!]!
+}
+
+type modelCustomerTicketHit {
+  """amount in cents - example: 500"""
+  amount: BigInt!
+
+  """hit count - example: 1"""
+  count: Int!
+
+  """crosses made (keno only) - example: 2"""
+  crosses: Int
+
+  """name of the lottery - example: lotto"""
+  lottery: String!
+
+  """winning class - example: 9"""
+  winningClass: Int!
+}
+
+type modelDeadline {
+  """Deadline - example: Jan 1 2018 19:00:00"""
+  deadline: String
+
+  """Current jackpot - example: 1000000"""
+  jackpot: BigInt
+
+  """Game type - example: lotto"""
+  type: String
+}
+
+type modelDiscount {
+  """id - example: 12345678"""
+  id: Int!
+
+  """original price, without discount in cent - example: 100"""
+  originalPrice: Int
+
+  """percent - example: 10"""
+  percent: Int!
+
+  """discount type as identifier - example: ABONNEMENT"""
+  type: DiscountType!
+}
+
+type modelDraw {
+  """Additional numbers - example: ["1","2"]"""
+  additionalNumbers: [String]
+
+  """Date of the draw - example: Sep 01 1980"""
+  date: String
+
+  """Game amount in cents - example: 100000000"""
+  gameAmount: BigInt
+
+  """Jackpot for the draw - example: 1000000"""
+  jackpot: BigInt
+
+  """
+  MegaPlier - example: "2"
+  """
+  megaPlier: String
+
+  """Draw numbers - example: ["1","2","3","4","5","6"]"""
+  numbers: [String]
+  odds: [modelOdd]
+
+  """
+  PowerPlay - example: "2"
+  """
+  powerPlay: String
+  seo: modelSeo
+
+  """Shares - example: ["1","2","5","10"]"""
+  shares: [String]
+
+  """
+  Time of the draw - example: 14:00 (only lotteries, that are several times a day)
+  """
+  time: String
+
+  """Video URL - example: https://www.youtube.com/embed/ABCD1234"""
+  video: String
+}
+
+type modeldrawdates {
+  """Date of the draw - example: Sep 01 1980"""
+  date: String
+
+  """
+  Time of the draw - example: 14:00 (only lotteries, that are several times a day)
+  """
+  time: String
+}
+
+type modelDrawing {
+  """Timestamp of the draw - example: Sep 01 1980"""
+  dateTime: String
+
+  """Id of the draw - example: 2017081"""
+  id: String
+}
+
+type modelDrawingNewsletter {
+  """Is active - example: true"""
+  active: Boolean
+
+  """Name of the jackpot alarm - example: lotto"""
+  name: String
+}
+
+type modelField {
+  """Chosen extra numbers - example: 1,2"""
+  extraNumbers: String
+
+  """Chosen numbers - example: 1,2,3,4,5,6"""
+  numbers: String
+
+  """System - example: 007"""
+  system: String
+}
+
+type modelFilteredCategoriesCategory {
+  filter: CategoryFilter!
+
+  """
+  items of the filtered category - example: [super_cash_buster, cash_wheel]
+  """
+  items: [String!]!
+}
+
+type modelGame {
+  """Available - example: true"""
+  available: Boolean
+
+  """Display - example: Super Cash Buster"""
+  displayText: String
+
+  """High win in cents - example: 100000000"""
+  highWin: Int @deprecated(reason: "is no longer needed")
+
+  """Price in cents - example: 100"""
+  price: Int
+
+  """Provider - example: pariplay"""
+  provider: String
+
+  """URL - example: super-cash-buster"""
+  url: String
+
+  """Variant - example: super_cash_buster"""
+  variant: String
+}
+
+type modelGameCommunity {
+  """Available - example: true"""
+  available: Boolean
+  gameCommunityLotteries: [modelGameCommunityLottery]
+
+  """ID - example: duo_jackpot"""
+  id: String
+
+  """Is abonnement - example: true"""
+  isAbonnement: Boolean
+
+  """Is jackpot cracker - example: false"""
+  jackpotCracker: Boolean
+
+  """Name - example: Duo Jackpot"""
+  name: String
+
+  """Participations - example: 1"""
+  participations: Int
+
+  """Price in cents - example: 1000"""
+  price: Int
+
+  """Variant - example: xxl_chance"""
+  variant: String
+
+  """xxlChanceLottery - example: lotto"""
+  xxlChanceLottery: String @deprecated(reason: "is no longer needed")
+}
+
+type modelGameCommunityLottery {
+  """Count - example: 3"""
+  count: Int
+
+  """Daily Million Plus - example: false"""
+  dailymillionplus: Boolean
+
+  """EuroMillions 2. Chance - example: false"""
+  euromillionsSecondChance: Boolean
+  euromillions_second_chance: Boolean @deprecated(reason: "Camel case and not snake case required")
+
+  """GlücksSpirale - example: true"""
+  gluecksspirale: Boolean
+
+  """LOTTO Plus - example: false"""
+  lottoplus: Boolean
+
+  """MegaPlier - example: true"""
+  megaPlier: Boolean
+
+  """Plus5 - example: true"""
+  plus5: Boolean
+
+  """PowerPlay - example: true"""
+  powerPlay: Boolean
+
+  """SharesFrom - example: 50"""
+  sharesFrom: Int
+
+  """Sieger-Chance - example: true"""
+  siegerchance: Boolean
+
+  """Spiel77 - example: true"""
+  spiel77: Boolean
+
+  """Super6 - example: true"""
+  super6: Boolean
+
+  """System - example: 007"""
+  system: String
+
+  """Type - example: lotto"""
+  type: String
+
+  """weekdays - example: [1, 3]"""
+  weekdays: [Int]
+
+  """Gewinngarantie - example: true"""
+  winGuarantee: Boolean
+}
+
+type modelJackpotAlarm {
+  """Is active - example: true"""
+  active: Boolean
+
+  """Which amount is chosen - example: 50"""
+  amount: Int
+
+  """Name of the jackpot alarm - example: lotto"""
+  name: String
+}
+
+type modelLuckyNumbersLuckyNumbers {
+  numbers: [modelLuckyNumbersNumbers!]!
+
+  """Year - example: 2019"""
+  year: Int!
+}
+
+type modelLuckyNumbersNumbers {
+  """Date - example: Jan 1 2018"""
+  date: String!
+
+  """ExtraNumbers - example: [1]"""
+  extraNumbers: [Int!]!
+
+  """Numbers - example: [1, 2, 3, 4, 5]"""
+  numbers: [Int!]!
+}
+
+type modelNewsletterConfiguration {
+  drawings: [modelDrawingNewsletter]
+  jackpotAlarms: [modelJackpotAlarm]
+
+  """news notification - example: false"""
+  news: Boolean
+
+  """sportsBetting notification - example: false"""
+  sportsBetting: Boolean
+
+  """Winning SMS notification - example: true"""
+  winningSMSNotification: Boolean
+}
+
+type modelOdd {
+  """
+  Link to PDF (WeihnachtsLotterie) - example: "/winnings.pdf"
+  """
+  link: String
+
+  """Number of winners - example: 1"""
+  numberOfWinners: BigInt
+
+  """Winning numbers - example: ["2345678"]"""
+  numbers: [String]
+
+  """Odd in cents - example: 100000000"""
+  odd: BigInt
+
+  """Winning class - example: 1"""
+  winningClass: Int
+
+  """
+  With options for PowerBall & MegaMillions - example: ["powerplay", "megaplier"]
+  """
+  withOptions: [String]
+}
+
+type modelPaymentMethod {
+  """Is the payment allowed - example: true"""
+  allowed: Boolean
+
+  """Name of payment method - example: elv"""
+  name: String
+}
+
+type modelPaymentRestriction {
+  """Is the checkout allowed - example: true"""
+  allowedCheckout: Boolean
+
+  """Is the deposit allowed - example: true"""
+  allowedDeposit: Boolean
+
+  """Name of payment method - example: mastercard"""
+  name: String
+}
+
+type modelPlayer {
+  """Bank account holder - example: Max Mustermann"""
+  accountHolder: String
+
+  """Age verified - example: true"""
+  ageVerified: Boolean
+
+  """Auto paying out winnings - example: true"""
+  autoPayingOut: Boolean
+
+  """Current balance of the player in cents - example: 123"""
+  balance: BigInt
+
+  """Current cashable balance of the player in cents - example: 123"""
+  balanceCashable: BigInt
+
+  """Basket checkout payment types"""
+  checkoutPaymentMethods: [modelPaymentMethod]
+
+  """City - example: Berlin"""
+  city: String
+
+  """Date of birth - example: Sep 01 1980"""
+  dateOfBirth: String
+
+  """Account deposit payment types"""
+  depositPaymentMethods: [modelPaymentMethod]
+
+  """Email address - example: not.me@sumcumo.com"""
+  email: String
+
+  """is email address confirmed - example: true"""
+  emailConfirmed: Boolean!
+
+  """First name of player - example: Max"""
+  firstName: String
+
+  """Full name of the player - example: Max Mustermann"""
+  fullName: String
+
+  """
+  Last time the game revenue overview was confirmed - example 2020-10-25 14:25:33
+  """
+  gamesRevenuesLastSeen: String
+
+  """The player has already used direct debit payment - example: true"""
+  hasUsedDirectDebit: Boolean
+
+  """Hash key of player - example: lkasdf3oun"""
+  hashKey: String
+
+  """House number - example: 1b"""
+  houseNumber: String
+
+  """IBAN - example: DE00123456781234567890"""
+  iban: String
+
+  """When player is allowed to change IBAN - example: Nov 01 2018"""
+  ibanNextAllowedChangeDate: String
+
+  """Player number - example: 312345678"""
+  id: String
+  language: Language
+
+  """Last name of player - example: Mustermann"""
+  lastName: String
+
+  """Last used payment method - example: gh"""
+  lastUsedPaymentMethod: String
+  locks: [modelPlayerLocks]
+
+  """The player dont need to pay the fee - example: true"""
+  noFees: Boolean
+  paymentRestrictions: [modelPaymentRestriction]
+
+  """IBAN for payouts - example: DE00123456781234567890"""
+  payoutIban: String
+
+  """Mobile number - example: 0177123123123"""
+  phone: String
+  playLimits: modelPlayLimit
+  pseudoCreditcards: [modelPseudoCreditcards]
+
+  """Salutation of player - example: Herr"""
+  salutation: String
+
+  """Street - Example: Unter der Brücke"""
+  street: String
+
+  """Name of the tip community - example: Glücksritter"""
+  tipCommunity: String
+
+  """Zip code - example: 12345"""
+  zipCode: String
+}
+
+type modelPlayerLocks {
+  """Is the lock active - example: true"""
+  active: Boolean
+
+  """End of lock - example: Jan 1 2019 00:00:00"""
+  lockEnd: String
+
+  """Type of lock - example: addiction"""
+  type: String
+}
+
+type modelPlayLimit {
+  """current week stakes in cents - example: 20"""
+  currentWeekStakes: Int
+
+  """weekly deposit limit in cents - example: 10000"""
+  depositLimit: Int
+
+  """begin of the new weekly deposit limit - example: Sep 01 2018"""
+  depositLimitBegin: String
+
+  """left amount of the weekly deposit limit in cents - example: 10000"""
+  depositLimitLeft: Int
+
+  """max amount of the weekly deposit limit in cents - example: 10000"""
+  depositLimitMax: Int
+
+  """min amount of the weekly deposit limit in cents - example: 10000"""
+  depositLimitMin: Int
+
+  """new weekly deposit limit in cents - example: 10000"""
+  depositNewLimit: Int
+
+  """weekly game limit in cents - example: 10000"""
+  gameLimit: Int
+
+  """begin of the new weekly game limit - example: Sep 01 2018"""
+  gameLimitBegin: String
+
+  """left amount of the weekly game limit in cents - example: 10000"""
+  gameLimitLeft: Int
+
+  """max amount of the weekly game limit in cents - example: 10000"""
+  gameLimitMax: Int
+
+  """min amount of the weekly game limit in cents - example: 10000"""
+  gameLimitMin: Int
+
+  """new weekly game limit in cents - example: 10000"""
+  gameNewLimit: Int
+
+  """weekly lottery and scratch card limit in cents - example: 10000"""
+  lotteryAndScratchCardLimit: Int
+
+  """
+  begin of the new weekly lottery and scratch card limit - example: Sep 01 2018
+  """
+  lotteryAndScratchCardLimitBegin: String
+
+  """
+  left amount of the weekly lottery and scratch card limit in cents - example: 10000
+  """
+  lotteryAndScratchCardLimitLeft: Int
+
+  """
+  max amount of the weekly lottery and scratch card limit in cents - example: 10000
+  """
+  lotteryAndScratchCardLimitMax: Int
+
+  """
+  min amount of the weekly lottery and scratch card limit in cents - example: 10000
+  """
+  lotteryAndScratchCardLimitMin: Int
+
+  """new weekly lottery and scratch card limit in cents - example: 10000"""
+  lotteryAndScratchCardNewLimit: Int
+
+  """weekly sportsbetting limit in cents - example: 10000"""
+  sportsBettingLimit: Int
+
+  """begin of the new weekly sportsbetting limit - example: Sep 01 2018"""
+  sportsBettingLimitBegin: String
+
+  """
+  left amount of the weekly sportsbetting limit in cents - example: 10000
+  """
+  sportsBettingLimitLeft: Int
+
+  """max amount of the weekly sportsbetting limit in cents - example: 10000"""
+  sportsBettingLimitMax: Int
+
+  """min amount of the weekly sportsbetting limit in cents - example: 10000"""
+  sportsBettingLimitMin: Int
+
+  """new weekly sportsbetting limit in cents - example: 10000"""
+  sportsBettingNewLimit: Int
+}
+
+type modelProduct {
+  """Category - example: KENO"""
+  category: String
+
+  """Coupon - example: freefee"""
+  coupon: String
+
+  """Dimension1 - example: Normal"""
+  dimension1: String
+
+  """Dimension10 - example: 0"""
+  dimension10: String
+
+  """Dimension11 - example: 0"""
+  dimension11: String
+
+  """Dimension2 - example: 2 Felder"""
+  dimension2: String
+
+  """Dimension3 - example: """
+  dimension3: String
+
+  """Dimension4 - example: """
+  dimension4: String
+
+  """Dimension5 - example: Dauerspiel"""
+  dimension5: String
+
+  """Dimension6 - example: """
+  dimension6: String
+
+  """Dimension7 - example: 0"""
+  dimension7: String
+
+  """Dimension8 - example: 0"""
+  dimension8: String
+
+  """Dimension9 - example: 0"""
+  dimension9: String
+
+  """Id - example: 41903"""
+  id: BigInt
+
+  """Item id - example: keno"""
+  itemId: String
+
+  """Metric1 - example: 2"""
+  metric1: String
+
+  """Name - example: KENO - Dauerspiel -  - """
+  name: String
+
+  """Price - example: 56.20"""
+  price: String
+
+  """Quantity - example: 1"""
+  quantity: Int
+}
+
+type modelProvider {
+  games: [modelGame]
+
+  """Name - example: black_pearl"""
+  name: String
+}
+
+type modelPseudoCreditcards {
+  """cardNumber - example: 555544******1111"""
+  cardNumber: String
+
+  """ccType - example: mc, vi"""
+  ccType: String
+
+  """creditcardName - example: MasterCard, VISA"""
+  creditcardName: String
+
+  """creditcardNameShort - example: Master, VISA"""
+  creditcardNameShort: String
+
+  """displayName - example: MasterCard, VISA"""
+  displayName: String
+
+  """expireMonth - example: 8"""
+  expireMonth: Int
+
+  """expireYear - example: 2018"""
+  expireYear: Int
+
+  """thirdPartyReferenz - example: 1234567890123456"""
+  thirdPartyReferenz: String
+
+  """type - example: ACC, SDD"""
+  type: String
+}
+
+type modelPushNotificationAuthorizedSubscription {
+  """the notification status for a winning - example: [true, false]"""
+  winningNotification: Boolean
+}
+
+type modelPushNotificationGeneralSubscription {
+  """subscribed for news - example: [true, false]"""
+  news: Boolean
+}
+
+type modelPushNotificationLotterySubscription {
+  """the notification status for the deadline - example: [true, false]"""
+  deadline: Boolean
+
+  """
+  the threshold for the jackpot alert (null for deactivation) - example: 500000000 (5 Mio in €-cent)
+  """
+  jackpotAlertThreshold: BigInt
+
+  """
+  name of lottery - example: [cash4life, dailymillion, eurojackpot,
+  euromillions, gluecksspirale, keno, lotto, lotto6aus45, megamillions, minilos,
+  minilotto, powerball, sonntagslotto, superlotto, swisslotto, worldmillions]
+  """
+  name: String!
+
+  """
+  the notification status for the winning numbers - example: [true, false]
+  """
+  numbers: Boolean
+}
+
+type modelScratchCard {
+  """Display - example: Black Pearl"""
+  displayText: String
+
+  """Group, also fragment of the group url"""
+  group: String
+  packets: [modelScratchCardPacket]
+
+  """Price in cents - example: 1000"""
+  price: Int
+
+  """Status as identifier - example: AVAILABLE"""
+  status: ScratchCardStatus
+
+  """URL - example: black-pearl"""
+  url: String
+
+  """Variant - example: black_pearl"""
+  variant: String
+}
+
+type modelScratchCardChance {
+  """free scratch card - example: false"""
+  freeScratchCard: Boolean!
+
+  """free ticket - example: false"""
+  freeTicket: Boolean!
+
+  """Numbers of winners - example: 1"""
+  numberOfWinners: BigInt!
+
+  """Odd in cents - example: 500000"""
+  odd: Int!
+}
+
+type modelScratchCardChances {
+  """Amount - example: 1000000"""
+  amount: Int
+  chances: [modelScratchCardChance]
+
+  """Variant - example: black_pearl"""
+  variant: String
+}
+
+type modelScratchCardPacket {
+  """Amount to buy - example: 3"""
+  amount: Int
+
+  """Percent of reduction - example: 3"""
+  percent: Int
+
+  """Price per card in cents - example: 900"""
+  pricePerCard: Int
+  price_per_card: Int @deprecated(reason: "Camel case and not snake case required")
+}
+
+type modelSeo {
+  """Meta Description - example: Description"""
+  description: String
+  texts: [modelSeoText]
+
+  """Title - example: Title"""
+  title: String
+}
+
+type modelSeoText {
+  """Content - example: Content"""
+  content: String
+
+  """Headline - example: Headline"""
+  headline: String
+}
+
+type modelShare {
+  """Share is valid from - example: Jan 01 2016 00:00:00"""
+  from: String
+
+  """System ID for the share - example: 5"""
+  id: Int
+
+  """Name of share - example: L"""
+  name: String
+
+  """
+  Price in cents for share. If it is 0 it have to be computed - example: 24499
+  """
+  price: Int
+
+  """Numbers of share - example: 44"""
+  shares: Int
+
+  """Comma separated list, of available shares - example: 1,2,3,4,5"""
+  sharesSelection: String
+
+  """Name of the system for the share - example: 007"""
+  system: String
+
+  """Share is valid till - example: null"""
+  till: String
+
+  """Share game name - example: eurojackpot_system"""
+  type: String
+}
+
+type modelStatisticsNumbers {
+  """Count - example: 10"""
+  count: Int!
+
+  """Number - example: 1"""
+  number: Int!
+}
+
+type modelStatisticsStatistics {
+  numbers: [modelStatisticsNumbers!]!
+
+  """Weekdays - example: [3, 6] (1 = Monday .. 7 = Sunday)"""
+  weekdays: [Int!]!
+
+  """With ExtraNumbers - example: true"""
+  withExtraNumbers: Boolean!
+}
+
+type modelSubDetails {
+  """Amount in cents - example: 3690"""
+  amount: BigInt
+
+  """Date - example: Jan 1 2018 17:07:00"""
+  date: String
+
+  """Wager id - example: 4712"""
+  wid: String
+
+  """Win amount in cents - example: 90"""
+  winAmount: Int
+
+  """Number of won scratch cards - example: 0"""
+  winScratchCards: Int
+
+  """Number of won tickets - example: 0"""
+  winTickets: Int
+}
+
+type modelTicket {
+  """Additional ticket numbers - example: [1234567, 2345678]"""
+  additionalTicketNumbers: [String]
+
+  """Amount - example: 3690"""
+  amount: BigInt @deprecated(reason: "is no longer needed")
+
+  """Amount to pay - example: 3650"""
+  amountToPay: BigInt @deprecated(reason: "is no longer needed")
+  coupon: modelCoupon
+
+  """Daily Million Plus selected - example: false"""
+  dailymillionplus: Boolean
+
+  """Deadline of the ticket - example: Jan 1 2018 00:00:00"""
+  deadline: String
+  discount: modelDiscount
+
+  """Double win selected - example: false"""
+  doubleWin: Boolean
+  drawings: [modelDrawing]
+
+  """EuroMillions 2. Chance selected - example: false"""
+  euromillionsSecondChance: Boolean
+  euromillions_second_chance: Boolean @deprecated(reason: "Camel case and not snakecase required")
+
+  """Fee - example: 40"""
+  fee: BigInt
+  fields: [modelField]
+
+  """First draw - example: Jan 1 2018 00:00:00"""
+  firstDraw: String
+
+  """GlücksSpirale selected - example: true"""
+  gluecksspirale: Boolean
+
+  """Id of the ticket - example: 815"""
+  id: BigInt
+
+  """Is abonnment - example: false"""
+  isAbonnement: Boolean
+
+  """Is active - example: true"""
+  isActive: Boolean
+
+  """Is replayable - example: true"""
+  isReplayable: Boolean!
+
+  """Is jackpot cracker - example: true"""
+  jackpotCracker: Boolean
+
+  """Jackpot guarantee selected - example: true"""
+  jackpotGuarantee: Boolean
+
+  """Last draw - example: Jan 1 2018 00:00:00"""
+  lastDraw: String
+
+  """LOTTO Plus selected - example: false"""
+  lottoplus: Boolean
+
+  """megaPlier selected - example: true"""
+  megaPlier: Boolean
+
+  """Participation day - example: B"""
+  participationDay: String
+
+  """Participation day text - example: Kombi"""
+  participationDayText: String
+
+  """
+  Time of lotteries with two drawings per day - Possible values[1, 2, 3] (1 = afternoon, 2 = evening, 3 = both)
+  """
+  participationTime: String
+
+  """Participations - example: 1"""
+  participations: Int
+
+  """Payed at - example: Jan 1 2018 00:00:00"""
+  payedAt: String
+
+  """Payment method - example: elv"""
+  paymentMethod: String
+
+  """plus5 selected - example: true"""
+  plus5: Boolean
+
+  """powerPlay selected - example: true"""
+  powerPlay: Boolean
+
+  """Original Price without fees - example: 3690"""
+  price: Int
+
+  """Package Id for a discounted scratch card bundle - example: 1234"""
+  scratchCardPackageId: Int
+  sharePackage: modelShare
+
+  """Share text to display - example: ?"""
+  shareText: String
+
+  """Amount of shares - example: 1"""
+  shares: Int
+
+  """Siegerchance - example: false"""
+  siegerchance: Boolean
+
+  """Spiel77 selected - example: true"""
+  spiel77: Boolean
+
+  """Stake (e.g. KENO) in cents - example: 100"""
+  stake: Int
+
+  """status of the ticket as identifier - example: WIN"""
+  statusText: TicketStatus
+  subDetails: [modelSubDetails]
+  subTickets: [modelTicket]
+
+  """Super6 selected - example: true"""
+  super6: Boolean
+
+  """Super Fette Jahre selected - example: true"""
+  superFetteJahre: Boolean
+
+  """Super number (e.g. SonntagsLotto) - example: 7"""
+  superNumber: String
+  super_fette_jahre: Boolean @deprecated(reason: "Camel case and not snake case required")
+
+  """Ticket number - example: 1234567"""
+  ticketNumber: String
+
+  """Total win amount in cents - example: 0"""
+  totalWinAmount: BigInt
+
+  """Number of won scratch cards - example: 0"""
+  totalWinScratchCards: BigInt
+
+  """Number of won tickets - example: 0"""
+  totalWinTickets: BigInt
+
+  """Type of the game - example: lotto"""
+  type: String
+
+  """Printable type text - example: Lotto Normal"""
+  typeText: String
+
+  """Unknown winnings of draw ids - example: ['2018011']"""
+  unknownWinnings: [String]
+
+  """Variant - example: black_pearl"""
+  variant: String
+
+  """Max weekly amount in cent - example: 400"""
+  weeklyAmount: Int
+
+  """Wager id - example: 4712"""
+  wid: String
+
+  """Win guarantee selected - example: true"""
+  winGuarantee: Boolean
+  winnings: [modelWinning]
+}
+
+type modelTicketTypes {
+  """name of the ticket - example: EuroJackpot"""
+  name: String!
+
+  """type of the ticket - example: eurojackpot"""
+  type: String!
+}
+
+type modelWinning {
+  """Amount in cents - example: 200"""
+  amount: BigInt
+
+  """Description - example: Rubbellos: 2,00&euro; gewonnen!"""
+  description: String
+
+  """Draw id - example: 2017472"""
+  drawId: String
+
+  """Encoded description - example: Rubbellos: 2,00&euro; gewonnen!"""
+  encodedDescription: String
+
+  """Is high win - example: false"""
+  highWin: Boolean
+
+  """High win status - example: 0"""
+  highWinStatus: Int
+  hits: [modelCustomerTicketHit]
+
+  """Wager id - example: 81781408465"""
+  wid: String
+
+  """Win is winning guarantee - example: false"""
+  winGuarantee: Boolean
+}
+
+type Mutation {
+  """Adds a scratch card to the basket"""
+  addScratchCardToBasket(
+    """Coupon code - example: 784094077"""
+    coupon: String
+
+    """Amount of tickets - default 1"""
+    count: Int
+
+    """ScratchCard variant - example: dickes_ei"""
+    variant: String!
+  ): addScratchCardToBasket
+
+  """Adds a ticket to the basket"""
+  addTicketToBasket(
+    """Abonnement selected - example: false"""
+    abonnement: Boolean
+
+    """Additional ticket numbers - example: [1234567]"""
+    additionalTicketNumbers: [String]
+
+    """Coupon code - example: 784094077"""
+    coupon: String
+
+    """Amount of tickets - default 1"""
+    count: Int
+
+    """Daily Million Plus selected - example: false"""
+    dailymillionplus: Boolean
+
+    """EuroMillions 2. Chance selected - example: false"""
+    euromillions_second_chance: Boolean
+    fields: [inputModelFieldType]
+
+    """First participation - example: Jan 31 2018 18:10:00"""
+    firstDraw: String
+
+    """GlücksSpirale selected - example: false"""
+    gluecksspirale: Boolean
+
+    """Jackpot-Knacker selected - example: false"""
+    jackpotCracker: Boolean
+
+    """LOTTO Plus selected - example: false"""
+    lottoplus: Boolean
+
+    """MegaPlier selected - example: false"""
+    megaPlier: Boolean
+
+    """Day of participation - example: we,sa"""
+    participationDay: String
+
+    """Amount of participations - example: 1"""
+    participations: Int
+
+    """
+    Time of lotteries with two drawings per day - Possible values[1, 2, 3] (1 = afternoon, 2 = evening, 3 = both)
+    """
+    participationTime: String
+
+    """Plus5 selected - example: false"""
+    plus5: Boolean
+
+    """PowerPlay selected - example: false"""
+    powerPlay: Boolean
+
+    """Name of the share - example: L"""
+    shareName: String
+
+    """Amount of shares - example: 1"""
+    shares: Int
+
+    """Sieger-Chance selected - example: false"""
+    siegerchance: Boolean
+
+    """Spiel 77 selected - example: false"""
+    spiel77: Boolean
+
+    """Stake (e.g. KENO) in cents - example: 100"""
+    stake: Int
+
+    """Super 6 selected - example: true"""
+    super6: Boolean
+
+    """Super Fette Jahre selected - example: true"""
+    super_fette_jahre: Boolean
+
+    """Super number (e.g. SonntagsLotto & SwissLotto) - example: 1"""
+    superNumber: Int
+
+    """Ticket number - example: 0123456"""
+    ticketNumber: String
+
+    """
+    Game type - [cash4life, dailymillion, elgordo, elnino, eurojackpot,
+    eurojackpot_system, eurojackpot_system_anteile, euromillions,
+    euromillions_system, fuenfundzwanzig_fette_jahre, hello_monday,
+    euromillions_system_anteile, gluecksspirale, gluecksspirale_jahresrente,
+    gluecksspirale_system_anteile, halloweenlotterie, hotpicks_eurojackpot,
+    hotpicks_euromillions, hotpicks_lotto, hotpicks_superlotto, keno, lotto,
+    lotto_system, lotto6aus45, megamillions, megamillions_system,
+    megamillions_system_anteile, minilos, minilotto, osterlotterie, powerball,
+    powerball_system, powerball_system_anteile, silvestermillionen,
+    sommerlotterie, sonntagslotto, spielgemeinschaft, superlotto, swisslotto,
+    weihnachtslotterie, worldmillions]
+    """
+    type: String
+
+    """Game community variant - example: duo_jackpot"""
+    variant: String
+
+    """Gewinngarantie selected - example: false"""
+    winGuarantee: Boolean
+  ): addTicketToBasket
+
+  """Saves bank data"""
+  bankData(
+    """Change win account - example: true"""
+    changeWinAccount: Boolean
+
+    """Iban - example: DE44123456781234567890"""
+    iban: String
+  ): bankData
+
+  """Pays the basket"""
+  basketPay(
+    """base64 encoded session-data from SEON"""
+    sessionPayload: String
+  ): basketPay
+
+  """Cancels an abonnement"""
+  cancelAbonnement(
+    """Ticket id - example: 874653654"""
+    abonnementId: BigInt
+  ): cancelAbonnement
+
+  """confirms that the player has seen the game revenues"""
+  confirmPlayerGamesRevenues: confirmPlayerGamesRevenues
+
+  """Sends contact form"""
+  contact(
+    """Email address - example: ex@ample.org"""
+    from: String
+
+    """Subject - example: asdfgh12"""
+    subject: String
+
+    """Salutation - [Herr|Frau|Tippgemeinschaft]"""
+    salutation: String
+
+    """Tip community - example: Asdfgasdf"""
+    tipCommunity: String
+
+    """First name - example: Max"""
+    firstName: String
+
+    """last name - example: Mustermann"""
+    lastName: String
+
+    """body - example: Ich kann kein...."""
+    body: String
+  ): contact
+
+  """Deposit money"""
+  deposit(
+    """Amount in cents to deposit - example: 100"""
+    amount: Int!
+
+    """Payment method - [elv | cc | gp | su]"""
+    paymentMethod: String!
+    redirectTo: inputModelRedirectToType
+
+    """base64 encoded session-data from SEON"""
+    sessionPayload: String
+  ): deposit
+
+  """Activates newsletters"""
+  doubleOptIn(
+    """Identification hash - example: 98asd93jh7"""
+    hashKey: String
+  ): doubleOptIn
+
+  """Cancels an abonnement and puts a new to the basket"""
+  editAbonnement(
+    """Ticket id - example: 874653654"""
+    abonnementId: BigInt
+  ): editAbonnement
+
+  """Changes the e-mail address"""
+  email(
+    """email address - example: t@est.de"""
+    email: String
+
+    """email addess confirmation - example: t@est.de"""
+    emailConfirmation: String
+  ): email
+
+  """adds a game break lock"""
+  gameBreakLock(
+    """duration of game break lock in hours - example: 24"""
+    duration: Int!
+  ): gameBreakLock
+
+  """Logs in an user"""
+  login(
+    """User email address - example: ex@ample.org"""
+    email: String!
+
+    """Password - example: asdfgh12"""
+    password: String!
+
+    """Webtrekk everid - example: asda2"""
+    webtrekkEverid: String
+
+    """Keep session - example: true"""
+    keep: Boolean
+
+    """is login device mobile - example: false"""
+    mobile: Boolean
+
+    """login user agent - example: Mozilla/5.0 (Macintosh; Intel Mac OS X..."""
+    userAgent: String
+
+    """login operating system - example: MacIntel"""
+    operatingSystem: String
+
+    """login screen size - example: 2560×1440@24Bit"""
+    screenSize: String
+
+    """base64 encoded session-data from SEON"""
+    sessionPayload: String
+  ): login
+
+  """Logs out current user"""
+  logout: logout
+
+  """Sets a new password"""
+  newPassword(
+    """Identification hash - example: 98asd93jh7s7"""
+    hashKey: String
+
+    """New password - example: asdfgh12"""
+    password: String
+
+    """Password confirmation - example: asdfgh12"""
+    passwordConfirmation: String
+
+    """One time password - example: kj2h4s"""
+    otPassword: String
+  ): newPassword
+
+  """Sets the newsletter configuration"""
+  newsletterConfiguration(
+    """Campaign identifier - example: 123123123"""
+    cid: String
+    drawings: [inputModelDrawingNewsletterType]
+
+    """
+    identification hash for setting the newsletter configuration when not logged in - example: 98asd93jh7
+    """
+    hashKey: String
+    jackpotAlarms: [inputModelJackpotAlarmType]
+
+    """Launch list identifier - example: 123123123"""
+    llid: String
+
+    """news notification - example: false"""
+    news: Boolean
+
+    """sportsBetting notification - example: false"""
+    sportsBetting: Boolean
+
+    """Mobile number for SMS notification - example: 01771234567"""
+    phone: String
+
+    """The string contact identifier - example: 123123123"""
+    uid: String
+
+    """Winning SMS notification - example: true"""
+    winningSMSNotification: Boolean
+  ): newsletterConfiguration
+
+  """Changes the password"""
+  password(
+    """Password - example: asdfgh12"""
+    oldPassword: String
+
+    """Password - example: besondersSicher"""
+    password: String
+
+    """Password confirmation - example: besondersSicher"""
+    passwordConfirmation: String
+  ): password
+
+  """Pays out money to the bank account"""
+  payOut(
+    """Amount to pay out in cents - example: 100"""
+    amount: Int!
+  ): payOut
+
+  """Sets the payment method"""
+  paymentMethod(
+    """BIC - example: PBNKDEFFXXX"""
+    bic: String
+
+    """Credit card reference - example: jh76"""
+    ccReference: String
+
+    """Change win account - example: true"""
+    changeWinAccount: Boolean
+    creditCardType: PaymentMethodCreditCardType
+
+    """Coded credit card information - example: x2s7d"""
+    cse: String
+
+    """for deposit - example: false"""
+    deposit: Boolean
+
+    """IBAN - example: DE44123456781234567890"""
+    iban: String
+
+    """Payment method - [elv | cc | nn | gh | su]"""
+    paymentMethod: String
+
+    """Save credit card data - example: true"""
+    saveCcData: Boolean
+
+    """Terms - example: true"""
+    terms: Boolean
+  ): paymentMethod
+
+  """Changes the personal data"""
+  personalData(
+    """City - example: Berlin"""
+    city: String
+
+    """email address - example: t@est.de"""
+    email: String
+
+    """Mobile number - example: 01771234567"""
+    phone: String
+
+    """Street - example: Unter der Brücke 1b"""
+    street: String
+
+    """Zip code - example: 12345"""
+    zipCode: String
+  ): personalData
+
+  """Saves player limits"""
+  playerLimits(
+    """weekly deposit limit in cents - example: 10000"""
+    depositLimit: Int
+
+    """weekly game limit in cents - example: 10000"""
+    gameLimit: Int
+
+    """weekly lottery and scratch card limit in cents - example: 10000"""
+    lotteryAndScratchCardLimit: Int
+
+    """weekly sportsbetting limit in cents - example: 10000"""
+    sportsBettingLimit: Int
+  ): playerLimits
+
+  """stores the push notification settings"""
+  pushNotification(
+    """The firebase token - example: 123456789 """
+    token: String!
+
+    """Collection of general subscriptions"""
+    generalSubscriptions: inputModelPushNotificationGeneralSubscription
+
+    """
+    Collection of subscriptions where you need to have the relation to the
+    player. Call the mutation "login" in order to get a "player_id".
+    """
+    authorizedSubscriptions: inputModelPushNotificationAuthorizedSubscription
+
+    """
+    Collection of lottery related subscriptions. If you leave out a lottery completely it remains unchanged.
+    """
+    lotterySubscriptions: [inputModelPushNotificationSubscription]
+  ): pushNotification
+
+  """Registers a player"""
+  register(
+    """Affiliate id - example: td34hdf"""
+    affiliateId: String
+
+    """City - example: Berlin"""
+    city: String
+
+    """Coupon - example: test"""
+    coupon: String
+
+    """Date of birth - example: Jan 18 1980"""
+    dateOfBirth: String
+
+    """email address - example: t@est.de"""
+    email: String
+
+    """First name - example: Max"""
+    firstName: String
+    language: Language
+
+    """uuid-hash for threatmetrix - example: 6c3a2921fab7da8badaa41588d1d970e"""
+    metrixHash: String
+
+    """Last name - example: Mustermann"""
+    lastName: String
+
+    """Password - example: asdfgh12"""
+    password: String
+
+    """Password confirmation - example: asdfgh12"""
+    passwordConfirmation: String
+
+    """Salutation - [Herr | Frau | Tippgemeinschaft]"""
+    salutation: String
+
+    """base64 encoded session-data from SEON"""
+    sessionPayload: String
+
+    """Street - example: Unter der Brücke 1b"""
+    street: String
+
+    """TradeDoubler data - example: kjh234"""
+    tdData: String
+
+    """Tip community name - example: Muskeltiere"""
+    tipCommunity: String
+
+    """Webtrekk everid - example: 7asdfasuzdf"""
+    webtrekkEverid: String
+
+    """zip code - example: 12345"""
+    zipCode: String
+  ): register
+
+  """Removes specified tickets from the basket"""
+  removeTicketsFromBasket(
+    """ticketIds - example: [4711, 4712]"""
+    ticketIds: [Int!]!
+
+    """Coupon code - example: test"""
+    coupon: String
+  ): removeTicketsFromBasket
+
+  """Adds a ticket to the basket"""
+  replaceTicket(
+    """Ticket id to replace - example: 12345"""
+    ticketId: BigInt
+
+    """Abonnement selected - example: false"""
+    abonnement: Boolean
+
+    """Additional ticket numbers - example: [1234567]"""
+    additionalTicketNumbers: [String]
+
+    """Amount of tickets - default 1"""
+    count: Int
+
+    """Daily Million Plus selected - example: false"""
+    dailymillionplus: Boolean
+
+    """EuroMillions 2. Chance selected - example: false"""
+    euromillions_second_chance: Boolean
+    fields: [inputModelFieldType]
+
+    """First participation - example: Jan 31 2018 18:10:00"""
+    firstDraw: String
+
+    """GlücksSpirale selected - example: false"""
+    gluecksspirale: Boolean
+
+    """Jackpot-Knacker selected - example: false"""
+    jackpotCracker: Boolean
+
+    """LOTTO Plus selected - example: false"""
+    lottoplus: Boolean
+
+    """MegaPlier selected - example: false"""
+    megaPlier: Boolean
+
+    """Day of participation - example: we,sa"""
+    participationDay: String
+
+    """Amount of participations - example: 1"""
+    participations: Int
+
+    """
+    Time of lotteries with two drawings per day - Possible values[1, 2, 3] (1 = afternoon, 2 = evening, 3 = both)
+    """
+    participationTime: String
+
+    """Plus5 selected - example: false"""
+    plus5: Boolean
+
+    """PowerPlay selected - example: false"""
+    powerPlay: Boolean
+
+    """Name of the share - example: L"""
+    shareName: String
+
+    """Amount of shares - example: 1"""
+    shares: Int
+
+    """Sieger-Chance selected - example: false"""
+    siegerchance: Boolean
+
+    """Spiel 77 selected - example: false"""
+    spiel77: Boolean
+
+    """Stake (e.g. KENO) in cents - example: 100"""
+    stake: Int
+
+    """Super 6 selected - example: true"""
+    super6: Boolean
+
+    """Super Fette Jahre selected - example: true"""
+    super_fette_jahre: Boolean
+
+    """Super number (e.g. SonntagsLotto) - example: 1"""
+    superNumber: Int
+
+    """Ticket number - example: 0123456"""
+    ticketNumber: String
+
+    """
+    Game type - [cash4life, dailymillion, elgordo, elnino, eurojackpot,
+    eurojackpot_system, eurojackpot_system_anteile, euromillions,
+    euromillions_system, fuenfundzwanzig_fette_jahre, hello_monday,
+    euromillions_system_anteile, gluecksspirale, gluecksspirale_jahresrente,
+    gluecksspirale_system_anteile, halloweenlotterie, hotpicks_eurojackpot,
+    hotpicks_euromillions, hotpicks_lotto, hotpicks_superlotto, keno, lotto,
+    lotto_system, lotto6aus45, megamillions, megamillions_system,
+    megamillions_system_anteile, minilos, minilotto, osterlotterie, powerball,
+    powerball_system, powerball_system_anteile, silvestermillionen,
+    sommerlotterie, sonntagslotto, spielgemeinschaft, superlotto, swisslotto,
+    weihnachtslotterie, worldmillions]
+    """
+    type: String
+
+    """Game community variant - example: duo_jackpot"""
+    variant: String
+
+    """Gewinngarantie selected - example: false"""
+    winGuarantee: Boolean
+  ): addTicketToBasket
+
+  """Adds played ticket to basket"""
+  replayTicket(
+    """ticketId - example: 4711"""
+    ticketId: BigInt
+  ): replayTicket
+
+  """Resends the double opt in mail"""
+  resendDoubleOptIn(
+    """Identification hash - example: 98asd93jh7"""
+    hashKey: String!
+  ): resendDoubleOptIn
+
+  """Resets the newsletter configuration"""
+  resetNewsletterConfiguration(
+    """
+    identification hash for setting the newsletter configuration when not logged in - example: 98asd93jh
+    """
+    hashKey: String
+  ): resetNewsletterConfiguration
+
+  """Sends reset password email"""
+  resetPassword(
+    """User email address - example: ex@ample.org"""
+    email: String!
+
+    """Date of birth - example: Jan 18 1980"""
+    dateOfBirth: String!
+  ): resetPassword
+
+  """Save partner id in session"""
+  savePartner(
+    """Partner id"""
+    id: String!
+  ): savePartner
+
+  """Sends receipt email"""
+  sendReceipt(
+    """ticketId - example: 4711"""
+    ticketId: BigInt
+  ): sendReceipt
+
+  """sets a casino pause lock for fixed 24 hours"""
+  setCasinoPause: setCasinoPause
+
+  """Sets a new password"""
+  sofortueberweisung(
+    """Transaction id - example: 98asd93jh"""
+    transactionId: String
+
+    """Transaction type - [success|abort]"""
+    type: String!
+  ): sofortueberweisung
+
+  """Saves win account data"""
+  winAccount(
+    """Auto paying out winnings - example: true"""
+    autoPayingOut: Boolean
+
+    """IBAN for payouts - example: DE44123456781234567890"""
+    payoutIban: String
+  ): winAccount
+}
+
+type newPassword implements ErrorHandling & Token {
+  """Errors string - example: session_not_found"""
+  backendError: String
+
+  """Status of the mutation - example: true"""
+  success: Boolean!
+
+  """
+  JWT Token - example: "abc123"
+  """
+  token: String!
+  visibleErrors: visibleErrors!
+}
+
+type newsletterConfiguration implements ErrorHandling & Token {
+  """Errors string - example: session_not_found"""
+  backendError: String
+
+  """Status of the mutation - example: true"""
+  success: Boolean!
+
+  """
+  JWT Token - example: "abc123"
+  """
+  token: String!
+  visibleErrors: visibleErrors!
+}
+
+"""offset account type"""
+enum OffsetAccount {
+  API
+  BANK_DEPOSIT
+  FUENFUNDZWANZIG_FETTE_JAHRE
+  CASH4LIFE
+  CHARGEBACK
+  CHARGEBACK_FEE
+  COUPON
+  CREDITCARD
+  DAILYMILLION
+  DIRECT_DEBIT
+  ELGORDO
+  ELNINO
+  EUROJACKPOT
+  EUROJACKPOT_SYSTEM
+  EUROMILLIONS
+  EUROMILLIONS_SYSTEM
+  GAME_GLUECK
+  GAME_PARIPLAY
+  GIROPAY
+  GLUECKSSPIRALE
+  GLUECKSSPIRALE_JAHRESRENTE
+  GLUECKSSPIRALE_SYSTEM
+  GOODWILL_CREDIT
+  HALLOWEENLOTTERIE
+  HELLO_MONDAY
+  HOTPICKS_EUROJACKPOT
+  HOTPICKS_EUROMILLIONS
+  HOTPICKS_LOTTO
+  HOTPICKS_SUPERLOTTO
+  KENO
+  LOTTO
+  LOTTO_SYSTEM
+  LOTTO6AUS45
+  MARKETING
+  MEGAMILLIONS
+  MEGAMILLIONS_SYSTEM
+  MIGRATION
+  MINILOS
+  MINILOTTO
+  OSTERLOTTERIE
+  PAYOUT
+  PAYPAL
+  POWERBALL
+  POWERBALL_SYSTEM
+  REGISTRATION
+  RUBBELLOS
+  SILVESTERMILLIONEN
+  SOFORTUEBERWEISUNG
+  SOMMERLOTTERIE
+  SONNTAGSLOTTO
+  SPIELGEMEINSCHAFT
+  SUPERLOTTO
+  SWISSLOTTO
+  TEST
+  TRANSFER
+  WEIHNACHTSLOTTERIE
+  WIN
+  WORLDMILLIONS
+  SPORTSBETTING
+}
+
+type password implements ErrorHandling & Token {
+  """Errors string - example: session_not_found"""
+  backendError: String
+
+  """Status of the mutation - example: true"""
+  success: Boolean!
+
+  """
+  JWT Token - example: "abc123"
+  """
+  token: String!
+  visibleErrors: visibleErrors!
+}
+
+type paymentMethod implements ErrorHandling & Token {
+  """Errors string - example: session_not_found"""
+  backendError: String
+
+  """Status of the mutation - example: true"""
+  success: Boolean!
+
+  """
+  JWT Token - example: "abc123"
+  """
+  token: String!
+  visibleErrors: visibleErrors!
+}
+
+"""credit card type"""
+enum PaymentMethodCreditCardType {
+  MC
+  VI
+}
+
+type payOut implements ErrorHandling & Token {
+  """Errors string - example: session_not_found"""
+  backendError: String
+
+  """Current balance of the player in cents - example: 123"""
+  balance: BigInt
+
+  """Cashable amount of the player in cents - example: 100"""
+  cashable: BigInt
+
+  """Status of the mutation - example: true"""
+  success: Boolean!
+
+  """
+  JWT Token - example: "abc123"
+  """
+  token: String!
+  visibleErrors: visibleErrors!
+}
+
+type personalData implements ErrorHandling & Token {
+  """Errors string - example: session_not_found"""
+  backendError: String
+
+  """Status of the mutation - example: true"""
+  success: Boolean!
+
+  """
+  JWT Token - example: "abc123"
+  """
+  token: String!
+  visibleErrors: visibleErrors!
+}
+
+type player implements ErrorHandling & Token {
+  """Errors string - example: session_not_found"""
+  backendError: String
+  player: modelPlayer
+
+  """Status of the mutation - example: true"""
+  success: Boolean!
+
+  """
+  JWT Token - example: "abc123"
+  """
+  token: String!
+  visibleErrors: visibleErrors!
+}
+
+type playerGamesRevenues implements ErrorHandling & Token {
+  """Errors string - example: session_not_found"""
+  backendError: String
+
+  """loosing amount"""
+  loosingAmount: BigInt
+
+  """stake amount"""
+  stakeAmount: BigInt
+
+  """Status of the mutation - example: true"""
+  success: Boolean!
+
+  """
+  JWT Token - example: "abc123"
+  """
+  token: String!
+  visibleErrors: visibleErrors!
+
+  """winning amount"""
+  winningAmount: BigInt
+}
+
+type playerLimits implements ErrorHandling & Token {
+  """Errors string - example: session_not_found"""
+  backendError: String
+  limits: modelPlayLimit
+
+  """Status of the mutation - example: true"""
+  success: Boolean!
+
+  """
+  JWT Token - example: "abc123"
+  """
+  token: String!
+  visibleErrors: visibleErrors!
+}
+
+type playerTickets implements ErrorHandling & Token {
+  """Errors string - example: session_not_found"""
+  backendError: String
+
+  """Status of the mutation - example: true"""
+  success: Boolean!
+  tickets: [modelTicket]!
+
+  """
+  JWT Token - example: "abc123"
+  """
+  token: String!
+
+  """Total items - example: 10"""
+  totalItemCount: Int!
+
+  """Total tickets - example: 20"""
+  totalTicketCount: Int!
+  visibleErrors: visibleErrors!
+}
+
+type playerTicketTypes implements ErrorHandling & Token {
+  """Errors string - example: session_not_found"""
+  backendError: String
+
+  """Status of the mutation - example: true"""
+  success: Boolean!
+  ticketTypes: [modelTicketTypes]!
+
+  """
+  JWT Token - example: "abc123"
+  """
+  token: String!
+  visibleErrors: visibleErrors!
+}
+
+type playGame implements ErrorHandling & Token {
+  """Errors string - example: session_not_found"""
+  backendError: String
+
+  """If player´s balance is too low - example: false"""
+  notEnoughBalance: Boolean
+
+  """Redirect to this URL - example: https://pariplay.com/89sd9fhskjhg9"""
+  redirectTo: String
+
+  """Status of the mutation - example: true"""
+  success: Boolean!
+
+  """
+  JWT Token - example: "abc123"
+  """
+  token: String!
+  visibleErrors: visibleErrors!
+}
+
+type pushNotification implements ErrorHandling {
+  """Errors string - example: session_not_found"""
+  backendError: String
+
+  """Status of the mutation - example: true"""
+  success: Boolean!
+  visibleErrors: visibleErrors!
+}
+
+type pushNotificationStatus implements ErrorHandling & Token {
+  authorizedSubscriptions: modelPushNotificationAuthorizedSubscription
+
+  """Errors string - example: session_not_found"""
+  backendError: String
+  generalSubscriptions: modelPushNotificationGeneralSubscription
+  lotterySubscriptions: [modelPushNotificationLotterySubscription]
+
+  """Status of the mutation - example: true"""
+  success: Boolean!
+
+  """
+  JWT Token - example: "abc123"
+  """
+  token: String!
+  visibleErrors: visibleErrors!
+}
+
+type Query {
+  """Returns accounting history rows of the player"""
+  accountingRow(
+    """End date - example: Jan 01 2019"""
+    endDate: String!
+
+    """Pagination limit - example: 10"""
+    limit: Int!
+
+    """Pagination offset - example: 0"""
+    offset: Int!
+    sortOption: AccountingRowSortOption!
+
+    """Start date - example: Jan 01 2018"""
+    startDate: String!
+    types: [AccountingRowTypes]!
+  ): accountingRow
+
+  """Validates the basket and returns it"""
+  basketSummary: basketSummary
+
+  """Returns session informations"""
+  checkSession: checkSession
+
+  """Returns cities that have the given zip code"""
+  cities(
+    """Zip code - example: 25335"""
+    zip: String
+  ): cities
+
+  """Returns the config for one coupon"""
+  couponConfig(
+    """coupon code - example: 934105329"""
+    coupon: String!
+  ): couponConfig
+
+  """Returns deadlines"""
+  deadlines: deadlines
+
+  """Returns the requested draw(s)"""
+  draw(
+    """Date of draw - example: Jan 18 2018"""
+    date: String
+
+    """Limit - example: 10"""
+    limit: Int
+
+    """
+    Game type - [cash4life, dailymillion, dailymillionplus, elgordo, elnino,
+    eurojackpot, euromillions, euromillions_second_chance,
+    fuenfundzwanzig_fette_jahre, hello_monday, gluecksspirale,
+    gluecksspirale_jahresrente, halloweenlotterie, keno, lotto, lotto6aus45,
+    lotto6aus45_joker, lottoplus, megamillions, minilos, minilotto,
+    osterlotterie, powerball, siegerchance, silvestermillionen, sommerlotterie,
+    sonntagslotto, spiel77, super6, superlotto, swisslotto, swisslotto_joker,
+    weihnachtslotterie, worldmillions]
+    """
+    type: String
+  ): draw
+
+  """Returns the requested drawing dates for a type"""
+  drawDates(
+    """
+    Limit - example: 10 (The default value is "-1" which will return all entries.)
+    """
+    limit: Int
+
+    """
+    Game type - [cash4life, dailymillion, dailymillionplus, elgordo, elnino,
+    eurojackpot, euromillions, euromillions_second_chance,
+    fuenfundzwanzig_fette_jahre, hello_monday, gluecksspirale,
+    gluecksspirale_jahresrente, halloweenlotterie, keno, lotto, lotto6aus45,
+    lotto6aus45_joker, lottoplus, megamillions, minilos, minilotto,
+    osterlotterie, powerball, siegerchance, silvestermillionen, sommerlotterie,
+    sonntagslotto, spiel77, super6, superlotto, swisslotto, swisslotto_joker,
+    weihnachtslotterie, worldmillions]
+    """
+    type: String!
+  ): drawsdates
+
+  """Returns the category items for the given type and filter"""
+  filteredCategories(filter: CategoryFilter!, type: TicketsType!): filteredCategories
+
+  """Returns game config"""
+  gameConfig: gameConfig
+
+  """Returns google???"""
+  googleAnalytics(
+    """Order id - example: SU394"""
+    orderId: String
+  ): googleAnalytics
+
+  """Returns the requested lucky numbers"""
+  luckyNumbers(
+    """Lottery - example: lotto"""
+    lottery: String!
+
+    """Numbers - example: [1, 2, 3]"""
+    numbers: [Int!]!
+  ): luckyNumbers
+
+  """Ping Query - For nagios healthcheck monitoring"""
+  ping: String!
+
+  """Returns a game URL"""
+  playGame(
+    """Mobile URL - example: false"""
+    mobile: Boolean
+
+    """Game provider - [pariplay|glueck]"""
+    provider: String
+
+    """Game variant - example: gluexsterne"""
+    variant: String
+
+    """Play demo - example: true"""
+    demo: Boolean
+  ): playGame
+
+  """Returns current player"""
+  player: player
+
+  """Returns games revenues of the player from the last 30 days"""
+  playerGamesRevenues: playerGamesRevenues
+
+  """Returns the types of tickets for the player"""
+  playerTicketTypes(
+    """
+    returns archive tickets if true, otherwise active tickets - example: false
+    """
+    archive: Boolean!
+    type: TicketsType!
+  ): playerTicketTypes
+
+  """Returns tickets of the player"""
+  playerTickets(
+    """
+    returns archive tickets if true, otherwise active tickets - example: false
+    """
+    archive: Boolean!
+
+    """Pagination limit - example: 10"""
+    limit: Int!
+
+    """Pagination offset - example: 0"""
+    offset: Int!
+    type: TicketsType!
+  ): playerTickets
+
+  """Returns the current PushNotification settings"""
+  pushNotificationStatus(
+    """
+    FCM Token - example: eB9kOz-_vMs:APA91bG_p1Ud-Pykn_wZHgKNh5nSC01WDF7fkQEgVQU4nTs1t7QX50zYM4UlTU7W-j8mbv49vmRYZdikT3haRQ2RmMsC2qmbSKQYEZI60EZx1w5a_EnZNDdmaH7bcEqvUwQrnT2XiMYL
+    """
+    fcmToken: String!
+  ): pushNotificationStatus
+
+  """Returns randomized numbers for a lottery"""
+  quickPick(
+    """number of randomized numbers - example: 1"""
+    fields: Int!
+
+    """lottery - example: lotto"""
+    type: String!
+  ): quickPick
+
+  """Returns the receipt data"""
+  receipt(
+    """ticketId - example: 4711"""
+    ticketId: BigInt
+  ): receipt
+
+  """Returns scratch card chances"""
+  scratchCardChances: scratchCardChances
+
+  """Returns scratch card config"""
+  scratchCardConfig: scratchCardConfig
+
+  """Returns a scratch card demo URL"""
+  scratchCardDemo(
+    """Scratch card variant - example: dickes_ei"""
+    variant: String
+
+    """Mobile URL - example: false"""
+    mobile: Boolean
+  ): scratchCardDemo
+
+  """Returns not opened scratch card info"""
+  scratchCardInfo: scratchCardInfo
+
+  """Returns a scratch card URL"""
+  scratchCardPlay(
+    """Scratch card variant - example: dickes_ei"""
+    variant: String
+
+    """Mobile URL - example: false"""
+    mobile: Boolean
+  ): scratchCardPlay
+
+  """Returns the timestamp of the server"""
+  serverDateTime: serverDateTime
+
+  """Returns filtered lottery archive tickets of the player"""
+  sortedLotteryTickets(
+    """End date - example: Jan 01 2019"""
+    endDate: String
+
+    """Pagination limit - example: 10"""
+    limit: Int!
+
+    """Pagination offset - example: 0"""
+    offset: Int!
+    sortOption: SortedLotteryTicketsSortOption
+
+    """Start date - example: Jan 01 2019"""
+    startDate: String
+
+    """game type - example: lotto"""
+    type: String
+
+    """
+    returns only tickets with winnings if true; archive only - example: false
+    """
+    only_winnings: Boolean!
+  ): playerTickets
+
+  """Token Service for sports betting"""
+  sportsBettingTokenService: sportsBettingTokenService
+
+  """Returns the requested statistics"""
+  statistics(
+    """Lottery - example: lotto"""
+    lottery: String!
+  ): statistics
+
+  """Returns the ticket definition for the requested lotterie type"""
+  ticketDefinition(
+    """
+    Game type - [cash4life, dailymillion, elgordo, elnino, eurojackpot,
+    eurojackpot_system, euromillions, euromillions_system,
+    fuenfundzwanzig_fette_jahre, hello_monday, gluecksspirale,
+    gluecksspirale_jahresrente, gluecksspirale_system, halloweenlotterie,
+    hotpicks_eurojackpot, hotpicks_euromillions, hotpicks_lotto,
+    hotpicks_superlotto, keno, lotto, lotto_system, lotto6aus45, megamillions,
+    megamillions_system, minilos, minilotto, osterlotterie, powerball,
+    powerball_system, silvestermillionen, sommerlotterie, sonntagslotto,
+    spielgemeinschaft, superlotto, swisslotto, weihnachtslotterie, worldmillions]
+    """
+    type: String!
+
+    """
+    game community group for type "spielgemeinschaft" - example: lotto_start
+    """
+    gameCommunityGroup: String
+  ): ticketDefinition
+
+  """Returns a free ticket number"""
+  ticketNumber(
+    """Amount of numbers (worldmillions) - example: 1"""
+    limit: Int
+
+    """Day of participation (worldmillions) - example: [th, su]"""
+    participationDay: String
+
+    """
+    Share name (for elgordo, elnino, sommerlotterie, worldmillions) - example: 1/50
+    """
+    shareName: String
+
+    """
+    Game type - [elgordo, elnino, halloweenlotterie, osterlotterie,
+    silvestermillionen, sommerlotterie, weihnachtslotterie, worldmillions]
+    """
+    type: String!
+  ): ticketNumber
+
+  """Returns newsletter_configuration of the player"""
+  viewNewsletterConfiguration(
+    """Hash key of the player - example: akjshdf"""
+    hashKey: String
+  ): viewNewsletterConfiguration
+}
+
+type quickPick implements ErrorHandling & Token {
+  """Errors string - example: session_not_found"""
+  backendError: String
+  fields: [modelField]
+
+  """Status of the mutation - example: true"""
+  success: Boolean!
+
+  """Ticket number for lotto - example: 1234567"""
+  ticketNumber: String
+
+  """
+  JWT Token - example: "abc123"
+  """
+  token: String!
+  visibleErrors: visibleErrors!
+}
+
+type receipt implements ErrorHandling & Token {
+  """Errors string - example: session_not_found"""
+  backendError: String
+
+  """Status of the mutation - example: true"""
+  success: Boolean!
+  ticket: modelTicket
+
+  """
+  JWT Token - example: "abc123"
+  """
+  token: String!
+  visibleErrors: visibleErrors!
+}
+
+type register implements ErrorHandling & Token {
+  """Errors string - example: session_not_found"""
+  backendError: String
+  player: modelPlayer
+
+  """Status of the mutation - example: true"""
+  success: Boolean!
+
+  """
+  JWT Token - example: "abc123"
+  """
+  token: String!
+  visibleErrors: visibleErrors!
+}
+
+type removeTicketsFromBasket implements ErrorHandling & Token & BasketObject {
+  """Total amount - example: 120"""
+  amount: Int
+
+  """Amount to pay - example: 0"""
+  amountToPay: Int
+
+  """Errors string - example: session_not_found"""
+  backendError: String
+  coupon: modelCoupon
+
+  """If the basket may be purchased due to limits - example: true"""
+  isPurchasable: Boolean!
+
+  """Total amount reduced by credit - example: 0"""
+  reducedAmount: Int
+
+  """Status of the mutation - example: true"""
+  success: Boolean!
+  tickets: [modelTicket]
+
+  """
+  JWT Token - example: "abc123"
+  """
+  token: String!
+  visibleErrors: visibleErrors!
+}
+
+type replayTicket implements ErrorHandling & Token & BasketObject {
+  """Total amount - example: 120"""
+  amount: Int
+
+  """Amount to pay - example: 0"""
+  amountToPay: Int
+
+  """Errors string - example: session_not_found"""
+  backendError: String
+  coupon: modelCoupon
+
+  """If the basket may be purchased due to limits - example: true"""
+  isPurchasable: Boolean!
+
+  """Total amount reduced by credit - example: 0"""
+  reducedAmount: Int
+
+  """Status of the mutation - example: true"""
+  success: Boolean!
+  tickets: [modelTicket]
+
+  """
+  JWT Token - example: "abc123"
+  """
+  token: String!
+  visibleErrors: visibleErrors!
+}
+
+type resendDoubleOptIn implements ErrorHandling & Token {
+  """Errors string - example: session_not_found"""
+  backendError: String
+
+  """Status of the mutation - example: true"""
+  success: Boolean!
+
+  """
+  JWT Token - example: "abc123"
+  """
+  token: String!
+  visibleErrors: visibleErrors!
+}
+
+type resetNewsletterConfiguration implements ErrorHandling & Token {
+  """Errors string - example: session_not_found"""
+  backendError: String
+  newsletterConfiguration: modelNewsletterConfiguration
+
+  """Status of the mutation - example: true"""
+  success: Boolean!
+
+  """
+  JWT Token - example: "abc123"
+  """
+  token: String!
+  visibleErrors: visibleErrors!
+}
+
+type resetPassword implements ErrorHandling & Token {
+  """Errors string - example: session_not_found"""
+  backendError: String
+
+  """Status of the mutation - example: true"""
+  success: Boolean!
+
+  """
+  JWT Token - example: "abc123"
+  """
+  token: String!
+  visibleErrors: visibleErrors!
+}
+
+type savePartner implements ErrorHandling & Token {
+  """Errors string - example: session_not_found"""
+  backendError: String
+
+  """Status of the mutation - example: true"""
+  success: Boolean!
+
+  """
+  JWT Token - example: "abc123"
+  """
+  token: String!
+  visibleErrors: visibleErrors!
+}
+
+type scratchCardChances implements ErrorHandling {
+  """Errors string - example: session_not_found"""
+  backendError: String
+  scratchCards: [modelScratchCardChances]
+
+  """Status of the mutation - example: true"""
+  success: Boolean!
+  visibleErrors: visibleErrors!
+}
+
+type scratchCardConfig implements ErrorHandling {
+  """Errors string - example: session_not_found"""
+  backendError: String
+  scratchCards: [modelScratchCard]
+
+  """Status of the mutation - example: true"""
+  success: Boolean!
+  visibleErrors: visibleErrors!
+}
+
+type scratchCardDemo implements ErrorHandling & Token {
+  """Errors string - example: session_not_found"""
+  backendError: String
+
+  """Redirect to this URL - example: https://glueck.com/89sd9fhskjhg9"""
+  redirectTo: String
+
+  """Status of the mutation - example: true"""
+  success: Boolean!
+
+  """
+  JWT Token - example: "abc123"
+  """
+  token: String!
+  visibleErrors: visibleErrors!
+}
+
+type scratchCardInfo implements ErrorHandling & Token {
+  """Errors string - example: session_not_found"""
+  backendError: String
+
+  """JSON string of unplayed scratch cards - example: {"platin7": 1}"""
+  scratchCards: String
+
+  """Status of the mutation - example: true"""
+  success: Boolean!
+
+  """
+  JWT Token - example: "abc123"
+  """
+  token: String!
+  visibleErrors: visibleErrors!
+}
+
+type scratchCardPlay implements ErrorHandling & Token {
+  """Errors string - example: session_not_found"""
+  backendError: String
+
+  """Redirect to this URL - example: https://glueck.com/89sd9fhskjhg9"""
+  redirectTo: String
+
+  """Status of the mutation - example: true"""
+  success: Boolean!
+
+  """
+  JWT Token - example: "abc123"
+  """
+  token: String!
+  visibleErrors: visibleErrors!
+}
+
+"""status of the scratchcard"""
+enum ScratchCardStatus {
+  """scratchcard is available"""
+  AVAILABLE
+
+  """scratchcard is not available"""
+  NOT_AVAILABLE
+
+  """scratchcard is sold out"""
+  SOLD_OUT
+}
+
+type sendReceipt implements ErrorHandling & Token {
+  """Errors string - example: session_not_found"""
+  backendError: String
+
+  """Status of the mutation - example: true"""
+  success: Boolean!
+
+  """
+  JWT Token - example: "abc123"
+  """
+  token: String!
+  visibleErrors: visibleErrors!
+}
+
+type serverDateTime implements ErrorHandling {
+  """Errors string - example: session_not_found"""
+  backendError: String
+
+  """Status of the mutation - example: true"""
+  success: Boolean!
+
+  """timestamp - example: 2019-05-01T08:00:00.000+0000"""
+  timestamp: String!
+  visibleErrors: visibleErrors!
+}
+
+type setCasinoPause implements ErrorHandling & Token {
+  """Errors string - example: session_not_found"""
+  backendError: String
+
+  """Status of the mutation - example: true"""
+  success: Boolean!
+
+  """
+  JWT Token - example: "abc123"
+  """
+  token: String!
+  visibleErrors: visibleErrors!
+}
+
+type sofortueberweisung implements ErrorHandling & Token {
+  """Paid amount in Euro - example: 5.95"""
+  amount: String
+
+  """Errors string - example: session_not_found"""
+  backendError: String
+
+  """Basket id - example: 1234"""
+  basketId: BigInt
+
+  """Deposit transaction - example: false"""
+  deposit: Boolean
+
+  """Order id - example: 5223"""
+  orderId: BigInt
+
+  """Payment result - example: ?untraceable"""
+  paymentResult: String
+
+  """JSON string of unplayed scratch cards - example: {"platin7": 1}"""
+  scratchCards: String
+
+  """Status of the mutation - example: true"""
+  success: Boolean!
+
+  """
+  JWT Token - example: "abc123"
+  """
+  token: String!
+  visibleErrors: visibleErrors!
+}
+
+"""sort tickets by buy date or drawing date"""
+enum SortedLotteryTicketsSortOption {
+  BUYDATE_ASC
+  BUYDATE_DESC
+  DRAWINGDATE_ASC
+  DRAWINGDATE_DESC
+}
+
+type sportsBettingTokenService implements ErrorHandling {
+  """Errors string - example: session_not_found"""
+  backendError: String
+  sportsBettingToken: String!
+
+  """Status of the mutation - example: true"""
+  success: Boolean!
+  visibleErrors: visibleErrors!
+}
+
+type statistics implements ErrorHandling {
+  """Errors string - example: session_not_found"""
+  backendError: String
+  statistics: [modelStatisticsStatistics]!
+
+  """Status of the mutation - example: true"""
+  success: Boolean!
+  visibleErrors: visibleErrors!
+}
+
+type ticketDefinition implements ErrorHandling {
+  """Lottery is available - example: true"""
+  available: Boolean
+
+  """Errors string - example: session_not_found"""
+  backendError: String
+  discounts: [modelDiscount]
+
+  """Drawing days"""
+  drawings: [ticketDefinitionDrawing]
+
+  """Number of playing fields per ticket - example: 8"""
+  fields: Int
+  gameCommunities: [modelGameCommunity]
+
+  """Current jackpot - example: 1000000"""
+  jackpot: BigInt
+
+  """Amount of draws since last jackpot hit - example: 2"""
+  jackpotDrawsSinceLastHit: Int
+
+  """Date of last jackpot hit - example: May 25 1979"""
+  jackpotLastHit: String
+
+  """Tipable numbers per field"""
+  numbersPerField: ticketDefinitionField
+
+  """Lottery is seasonal - example: false"""
+  seasonal: Boolean
+  shares: [modelShare]
+
+  """Status of the mutation - example: true"""
+  success: Boolean!
+
+  """Tips needed to complete a field"""
+  tipsPerField: ticketDefinitionField
+
+  """Lottery is visible - example: true"""
+  visible: Boolean
+  visibleErrors: visibleErrors!
+}
+
+type ticketDefinitionDrawing {
+  """available additional games"""
+  additionalGames: [ticketDefinitionGame]
+
+  """available additional game options"""
+  additionalOptions: [ticketDefinitionGame]
+
+  """deadline - example: Dec 23 2018 19:00:00"""
+  deadline: String
+
+  """drawing - example: Dec 23 2018 19:15:00"""
+  drawing: String
+
+  """price per field in cents - example: 100"""
+  pricePerField: Int
+
+  """ticket fee in cents - example: 20"""
+  ticketFee: Int
+}
+
+type ticketDefinitionField {
+  """Max base numbers - example: 5"""
+  base: Int
+
+  """Max extra numbers - example: 2"""
+  extra: Int
+}
+
+type ticketDefinitionGame {
+  """fee in cents for the ticket, if it is chosen - example: 0"""
+  fee: Int
+
+  """Name of the game - example: spiel77"""
+  game: String
+
+  """price in cents for each participation - example: 250"""
+  price: Int
+}
+
+type ticketNumber implements ErrorHandling & Token {
+  """Errors string - example: session_not_found"""
+  backendError: String
+
+  """Free numbers - example: [12345, 67890]"""
+  numbers: [String]
+
+  """Status of the mutation - example: true"""
+  success: Boolean!
+
+  """
+  JWT Token - example: "abc123"
+  """
+  token: String!
+  visibleErrors: visibleErrors!
+}
+
+"""status of the ticket"""
+enum TicketStatus {
+  """ticket has been created"""
+  CREATED
+
+  """ticket has not yet been paid"""
+  IN_PAYMENT
+
+  """ticket has been paid and will be submitted"""
+  PAID
+
+  """abonnement was terminated"""
+  TERMINATED
+
+  """abonnement will be extended"""
+  IN_EXTENSION
+
+  """ticket participates"""
+  PARTICIPATES
+
+  """ticket has participated"""
+  PARTICIPATED
+
+  """ticket won"""
+  WON
+
+  """ticket did not win"""
+  NOT_WON
+
+  """ticket has been canceled"""
+  CANCELED
+
+  """Fallback: ticket status is unknown"""
+  UNKNOWN
+}
+
+"""ticket type"""
+enum TicketsType {
+  GAME
+  LOTTERY
+  SCRATCHCARD
+  SPORTSBETTING
+}
+
+interface Token {
+  """
+  JWT Token - example: "abc123"
+  """
+  token: String!
+}
+
+"""transaction type"""
+enum Transaction {
+  BUY_CASH4LIFE
+  BUY_DAILYMILLION
+  BUY_ELGORDO
+  BUY_ELNINO
+  BUY_EUROJACKPOT
+  BUY_EUROJACKPOT_SYSTEM
+  BUY_EUROMILLIONS
+  BUY_EUROMILLIONS_SYSTEM
+  BUY_FUENFUNDZWANZIG_FETTE_JAHRE
+  BUY_GAME_GLUECK
+  BUY_GAME_PARIPLAY
+  BUY_GLUECKSSPIRALE
+  BUY_GLUECKSSPIRALE_JAHRESRENTE
+  BUY_GLUECKSSPIRALE_SYSTEM
+  BUY_HALLOWEENLOTTERIE
+  BUY_HELLO_MONDAY
+  BUY_HOTPICKS_EUROJACKPOT
+  BUY_HOTPICKS_EUROMILLIONS
+  BUY_HOTPICKS_LOTTO
+  BUY_HOTPICKS_SUPERLOTTO
+  BUY_KENO
+  BUY_LOTTO
+  BUY_LOTTO_SYSTEM
+  BUY_LOTTO6AUS45
+  BUY_MEGAMILLIONS
+  BUY_MEGAMILLIONS_SYSTEM
+  BUY_MINILOS
+  BUY_MINILOTTO
+  BUY_OSTERLOTTERIE
+  BUY_POWERBALL
+  BUY_POWERBALL_SYSTEM
+  BUY_RUBBELLOS
+  BUY_SILVESTERMILLIONEN
+  BUY_SOMMERLOTTERIE
+  BUY_SONNTAGSLOTTO
+  BUY_SPIELGEMEINSCHAFT
+  BUY_SUPERLOTTO
+  BUY_SWISSLOTTO
+  BUY_WEIHNACHTSLOTTERIE
+  BUY_WORLDMILLIONS
+  BUY_SPORTSBETTING
+  CANCELLATION_GLUECKSSPIRALE
+  CHARGEBACK
+  CHARGEBACK_FEE
+  CUSTOMER_ACCOUNT_FILLING_API
+  CUSTOMER_ACCOUNT_FILLING_COUPON
+  CUSTOMER_ACCOUNT_FILLING_CREDITCARD
+  CUSTOMER_ACCOUNT_FILLING_DEPOSIT
+  CUSTOMER_ACCOUNT_FILLING_DIRECT_DEBIT
+  CUSTOMER_ACCOUNT_FILLING_GIROPAY
+  CUSTOMER_ACCOUNT_FILLING_PAYPAL
+  CUSTOMER_ACCOUNT_FILLING_SOFORTUEBERWEISUNG
+  GOODWILL_CREDIT
+  MIGRATION
+  REFUND
+  REGISTRATION
+  TELEKOM_MEGADEAL
+  TEST
+  WIN_RUBBELLOS
+  REFUND_SPORTSBETTING
+  CASHOUT_SPORTSBETTING
+  NEWCREDIT_SPORTSBETTING
+  NEWDEBIT_SPORTSBETTING
+}
+
+type viewNewsletterConfiguration implements ErrorHandling & Token {
+  """Errors string - example: session_not_found"""
+  backendError: String
+  newsletterConfiguration: modelNewsletterConfiguration
+
+  """Status of the mutation - example: true"""
+  success: Boolean!
+
+  """
+  JWT Token - example: "abc123"
+  """
+  token: String!
+  visibleErrors: visibleErrors!
+}
+
+type visibleErrors {
+  """List of error keys - example: ["email.Message_Email_Already_Exists"]"""
+  idents: [String]!
+
+  """
+  List of error messages - don't translate them - example: ["Hallo Max Mustermann ..."]
+  """
+  messages: [String]!
+
+  """List of error types - example: ["NOT_AVAILABLE"]"""
+  types: [String]
+}
+
+type winAccount implements ErrorHandling & Token {
+  """Auto paying out winnings - example: true"""
+  autoPayingOut: Boolean
+
+  """Errors string - example: session_not_found"""
+  backendError: String
+
+  """Bank data already exists - example: true"""
+  doubleBank: Boolean
+
+  """Masked IBAN for payments - example: DE44****90"""
+  iban: String
+
+  """Masked IBAN for payouts - example: DE44****90"""
+  payoutIban: String
+
+  """Status of the mutation - example: true"""
+  success: Boolean!
+
+  """
+  JWT Token - example: "abc123"
+  """
+  token: String!
+  visibleErrors: visibleErrors!
+}
+
