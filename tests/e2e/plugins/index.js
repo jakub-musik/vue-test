@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable arrow-body-style */
 // https://docs.cypress.io/guides/guides/plugins-guide.html
 
@@ -6,14 +7,23 @@
 // as explained in the cypress docs
 // https://docs.cypress.io/api/plugins/preprocessors-api.html#Examples
 
-// /* eslint-disable import/no-extraneous-dependencies, global-require */
-// const webpack = require('@cypress/webpack-preprocessor')
+/* eslint-disable global-require */
 
 module.exports = (on, config) => {
-  // on('file:preprocessor', webpack({
-  //  webpackOptions: require('@vue/cli-service/webpack.config'),
-  //  watchOptions: {}
-  // }))
+  const webpackOptions = require("@vue/cli-service/webpack.config");
+  const webpack = require("@cypress/webpack-preprocessor");
+
+  webpackOptions.mode = "development";
+  webpackOptions.entry = undefined;
+  webpackOptions.optimization = undefined;
+
+  on(
+    "file:preprocessor",
+    webpack({
+      webpackOptions,
+      watchOptions: {}
+    })
+  );
 
   return Object.assign({}, config, {
     fixturesFolder: "tests/e2e/fixtures",

@@ -6,13 +6,14 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { Welcome } from "@/components/Welcome.vue";
 
-import Welcome from "@/components/Welcome.vue";
-
-export default defineComponent({
+export const Home = defineComponent({
   name: "Home",
   components: {
     Welcome
   }
 });
+
+export default Home;
 </script>

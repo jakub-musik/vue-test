@@ -3,6 +3,7 @@ module.exports = {
   env: {
     node: true
   },
+  ignorePatterns: ["src/shims-vue.d.ts"],
   extends: [
     "plugin:vue/vue3-essential",
     "eslint:recommended",

@@ -9,7 +9,9 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 
-export default defineComponent({
+export const Welcome = defineComponent({
   name: "Welcome"
 });
+
+export default Welcome;
 </script>

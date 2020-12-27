@@ -1,27 +1,43 @@
 type accountingRow implements ErrorHandling & Token {
-  """Errors string - example: session_not_found"""
+  """
+  Errors string - example: session_not_found
+  """
   backendError: String
 
-  """deposited amount, need to set types to DEPOSIT"""
+  """
+  deposited amount, need to set types to DEPOSIT
+  """
   depositAmount: BigInt
 
-  """Limit days - example: 90"""
+  """
+  Limit days - example: 90
+  """
   limitDays: Int @deprecated(reason: "Not needed anymore")
 
-  """payout amount - need to set types to PAYOUT"""
+  """
+  payout amount - need to set types to PAYOUT
+  """
   payoutAmount: BigInt
   rows: [modelAccountRow]
 
-  """stake amount - need to set types to TICKET"""
+  """
+  stake amount - need to set types to TICKET
+  """
   stakeAmount: BigInt
 
-  """subtotal after rows in cents - example: 1000"""
+  """
+  subtotal after rows in cents - example: 1000
+  """
   subtotalAfter: BigInt
 
-  """subtotal before rows in cents - example: 1000"""
+  """
+  subtotal before rows in cents - example: 1000
+  """
   subtotalBefore: BigInt
 
-  """Status of the mutation - example: true"""
+  """
+  Status of the mutation - example: true
+  """
   success: Boolean!
 
   """
@@ -29,24 +45,36 @@ type accountingRow implements ErrorHandling & Token {
   """
   token: String!
 
-  """Total rows - example: 20"""
+  """
+  Total rows - example: 20
+  """
   totalRows: BigInt
   visibleErrors: visibleErrors!
 
-  """winning amount - need to set types to WINNING"""
+  """
+  winning amount - need to set types to WINNING
+  """
   winningAmount: BigInt
 }
 
-"""sort accounting rows"""
+"""
+sort accounting rows
+"""
 enum AccountingRowSortOption {
-  """sort by amount"""
+  """
+  sort by amount
+  """
   AMOUNT
 
-  """sort by date"""
+  """
+  sort by date
+  """
   DATE
 }
 
-"""only show specific accounting row types"""
+"""
+only show specific accounting row types
+"""
 enum AccountingRowTypes {
   DEPOSIT
   PAYOUT
@@ -55,26 +83,40 @@ enum AccountingRowTypes {
 }
 
 type addScratchCardToBasket implements ErrorHandling & Token & BasketObject {
-  """Total amount - example: 120"""
+  """
+  Total amount - example: 120
+  """
   amount: Int
 
-  """Amount to pay - example: 0"""
+  """
+  Amount to pay - example: 0
+  """
   amountToPay: Int
 
-  """Errors string - example: session_not_found"""
+  """
+  Errors string - example: session_not_found
+  """
   backendError: String
   coupon: modelCoupon
 
-  """If the basket may be purchased due to limits - example: true"""
+  """
+  If the basket may be purchased due to limits - example: true
+  """
   isPurchasable: Boolean!
 
-  """Total amount reduced by credit - example: 0"""
+  """
+  Total amount reduced by credit - example: 0
+  """
   reducedAmount: Int
 
-  """Status of the mutation - example: true"""
+  """
+  Status of the mutation - example: true
+  """
   success: Boolean!
 
-  """system id of the inserted ticket - example: 231243"""
+  """
+  system id of the inserted ticket - example: 231243
+  """
   ticketId: BigInt
   tickets: [modelTicket]
 
@@ -86,26 +128,40 @@ type addScratchCardToBasket implements ErrorHandling & Token & BasketObject {
 }
 
 type addTicketToBasket implements ErrorHandling & Token & BasketObject {
-  """Total amount - example: 120"""
+  """
+  Total amount - example: 120
+  """
   amount: Int
 
-  """Amount to pay - example: 0"""
+  """
+  Amount to pay - example: 0
+  """
   amountToPay: Int
 
-  """Errors string - example: session_not_found"""
+  """
+  Errors string - example: session_not_found
+  """
   backendError: String
   coupon: modelCoupon
 
-  """If the basket may be purchased due to limits - example: true"""
+  """
+  If the basket may be purchased due to limits - example: true
+  """
   isPurchasable: Boolean!
 
-  """Total amount reduced by credit - example: 0"""
+  """
+  Total amount reduced by credit - example: 0
+  """
   reducedAmount: Int
 
-  """Status of the mutation - example: true"""
+  """
+  Status of the mutation - example: true
+  """
   success: Boolean!
 
-  """system id of the inserted ticket - example: 231243"""
+  """
+  system id of the inserted ticket - example: 231243
+  """
   ticketId: BigInt
   tickets: [modelTicket]
 
@@ -117,13 +173,19 @@ type addTicketToBasket implements ErrorHandling & Token & BasketObject {
 }
 
 type bankData implements ErrorHandling & Token {
-  """Errors string - example: session_not_found"""
+  """
+  Errors string - example: session_not_found
+  """
   backendError: String
 
-  """IBAN - example: DE44123456781234567890"""
+  """
+  IBAN - example: DE44123456781234567890
+  """
   iban: String
 
-  """Status of the mutation - example: true"""
+  """
+  Status of the mutation - example: true
+  """
   success: Boolean!
 
   """
@@ -134,23 +196,33 @@ type bankData implements ErrorHandling & Token {
 }
 
 interface BasketObject {
-  """Total amount - example: 120"""
+  """
+  Total amount - example: 120
+  """
   amount: Int
 
-  """Amount to pay - example: 0"""
+  """
+  Amount to pay - example: 0
+  """
   amountToPay: Int
   coupon: modelCoupon
 
-  """If the basket may be purchased due to limits - example: true"""
+  """
+  If the basket may be purchased due to limits - example: true
+  """
   isPurchasable: Boolean!
 
-  """Total amount reduced by credit - example: 0"""
+  """
+  Total amount reduced by credit - example: 0
+  """
   reducedAmount: Int
   tickets: [modelTicket]
 }
 
 type basketPay implements ErrorHandling & Token {
-  """Errors string - example: session_not_found"""
+  """
+  Errors string - example: session_not_found
+  """
   backendError: String
 
   """
@@ -158,7 +230,9 @@ type basketPay implements ErrorHandling & Token {
   """
   basketId: BigInt
 
-  """unique transaction id - example: 5c3493ebb55f283e94f0eafbc"""
+  """
+  unique transaction id - example: 5c3493ebb55f283e94f0eafbc
+  """
   merchantReference: String
 
   """
@@ -166,16 +240,24 @@ type basketPay implements ErrorHandling & Token {
   """
   redirectTo: String
 
-  """Revenue in cent - example: 3690"""
+  """
+  Revenue in cent - example: 3690
+  """
   revenue: Int
 
-  """Revenue in cent - example: 3690"""
+  """
+  Revenue in cent - example: 3690
+  """
   revenueGross: Int
 
-  """Status of the mutation - example: true"""
+  """
+  Status of the mutation - example: true
+  """
   success: Boolean!
 
-  """Tex in cent - example: 0"""
+  """
+  Tex in cent - example: 0
+  """
   tax: Int
 
   """
@@ -187,23 +269,35 @@ type basketPay implements ErrorHandling & Token {
 }
 
 type basketSummary implements ErrorHandling & Token & BasketObject {
-  """Total amount - example: 120"""
+  """
+  Total amount - example: 120
+  """
   amount: Int
 
-  """Amount to pay - example: 0"""
+  """
+  Amount to pay - example: 0
+  """
   amountToPay: Int
 
-  """Errors string - example: session_not_found"""
+  """
+  Errors string - example: session_not_found
+  """
   backendError: String
   coupon: modelCoupon
 
-  """If the basket may be purchased due to limits - example: true"""
+  """
+  If the basket may be purchased due to limits - example: true
+  """
   isPurchasable: Boolean!
 
-  """Total amount reduced by credit - example: 0"""
+  """
+  Total amount reduced by credit - example: 0
+  """
   reducedAmount: Int
 
-  """Status of the mutation - example: true"""
+  """
+  Status of the mutation - example: true
+  """
   success: Boolean!
   tickets: [modelTicket]
 
@@ -220,7 +314,9 @@ exceed the size of a 32-bit integer, it's encoded as a string.
 """
 scalar BigInt
 
-"""booked by"""
+"""
+booked by
+"""
 enum BookedBy {
   CUSTOMERCARE
   PLAYER
@@ -228,10 +324,14 @@ enum BookedBy {
 }
 
 type cancelAbonnement implements ErrorHandling & Token {
-  """Errors string - example: session_not_found"""
+  """
+  Errors string - example: session_not_found
+  """
   backendError: String
 
-  """Status of the mutation - example: true"""
+  """
+  Status of the mutation - example: true
+  """
   success: Boolean!
   ticket: modelTicket
 
@@ -242,20 +342,28 @@ type cancelAbonnement implements ErrorHandling & Token {
   visibleErrors: visibleErrors!
 }
 
-"""category filter"""
+"""
+category filter
+"""
 enum CategoryFilter {
   LAST_PLAYED
   POPULAR
 }
 
 type checkSession implements ErrorHandling & Token {
-  """Errors string - example: session_not_found"""
+  """
+  Errors string - example: session_not_found
+  """
   backendError: String
 
-  """Session is logged in - example: true"""
+  """
+  Session is logged in - example: true
+  """
   loggedIn: Boolean
 
-  """Status of the mutation - example: true"""
+  """
+  Status of the mutation - example: true
+  """
   success: Boolean!
 
   """
@@ -266,7 +374,9 @@ type checkSession implements ErrorHandling & Token {
 }
 
 type cities implements ErrorHandling {
-  """Errors string - example: session_not_found"""
+  """
+  Errors string - example: session_not_found
+  """
   backendError: String
 
   """
@@ -274,16 +384,22 @@ type cities implements ErrorHandling {
   """
   cities: [String]!
 
-  """Status of the mutation - example: true"""
+  """
+  Status of the mutation - example: true
+  """
   success: Boolean!
   visibleErrors: visibleErrors!
 }
 
 type confirmPlayerGamesRevenues implements ErrorHandling & Token {
-  """Errors string - example: session_not_found"""
+  """
+  Errors string - example: session_not_found
+  """
   backendError: String
 
-  """Status of the mutation - example: true"""
+  """
+  Status of the mutation - example: true
+  """
   success: Boolean!
 
   """
@@ -294,84 +410,130 @@ type confirmPlayerGamesRevenues implements ErrorHandling & Token {
 }
 
 type contact implements ErrorHandling {
-  """Errors string - example: session_not_found"""
+  """
+  Errors string - example: session_not_found
+  """
   backendError: String
 
-  """Status of the mutation - example: true"""
+  """
+  Status of the mutation - example: true
+  """
   success: Boolean!
   visibleErrors: visibleErrors!
 }
 
-"""category of the coupon"""
+"""
+category of the coupon
+"""
 enum CouponCategory {
-  """coupon belongs to the whole basket"""
+  """
+  coupon belongs to the whole basket
+  """
   BASKET
 
-  """coupon belongs to one ticket"""
+  """
+  coupon belongs to one ticket
+  """
   TICKET
 
-  """coupon is for registration"""
+  """
+  coupon is for registration
+  """
   REGISTRATION
 
-  """coupon is an enclosure code (belongs to one ticket)"""
+  """
+  coupon is an enclosure code (belongs to one ticket)
+  """
   ENCLOSURE
 }
 
 type couponConfig implements ErrorHandling {
-  """Errors string - example: session_not_found"""
+  """
+  Errors string - example: session_not_found
+  """
   backendError: String
   coupon: modelCoupon
 
-  """Status of the mutation - example: true"""
+  """
+  Status of the mutation - example: true
+  """
   success: Boolean!
   visibleErrors: visibleErrors!
 }
 
-"""status of the coupon"""
+"""
+status of the coupon
+"""
 enum CouponStatus {
-  """coupon is only for player with age verification"""
+  """
+  coupon is only for player with age verification
+  """
   AGE_VERIFICATION_NEEDED
 
-  """coupon is expired"""
+  """
+  coupon is expired
+  """
   EXPIRED
 
-  """coupon is incompatible with the product"""
+  """
+  coupon is incompatible with the product
+  """
   INCOMPATIBLE_PRODUCT
 
-  """coupon minimum amount has not been reached with the basket or ticket"""
+  """
+  coupon minimum amount has not been reached with the basket or ticket
+  """
   INSUFFICIENT_AMOUNT
 
-  """coupon is only for new customer"""
+  """
+  coupon is only for new customer
+  """
   NO_NEW_CUSTOMER
 
-  """coupon is invalid for unknown reason"""
+  """
+  coupon is invalid for unknown reason
+  """
   INVALID
 
-  """coupon has already been used"""
+  """
+  coupon has already been used
+  """
   USED
 
-  """coupon is valid"""
+  """
+  coupon is valid
+  """
   VALID
 }
 
 type deadlines implements ErrorHandling {
-  """Errors string - example: session_not_found"""
+  """
+  Errors string - example: session_not_found
+  """
   backendError: String
   deadlines: [modelDeadline]
 
-  """Status of the mutation - example: true"""
+  """
+  Status of the mutation - example: true
+  """
   success: Boolean!
   visibleErrors: visibleErrors!
 }
 
 type deposit implements ErrorHandling & Token {
-  """Errors string - example: session_not_found"""
+  """
+  Errors string - example: session_not_found
+  """
   backendError: String
 
-  """Redirect to this URL - example: /warenkorb"""
+  """
+  Redirect to this URL - example: /warenkorb
+  """
   redirectTo: String
 
-  """Status of the mutation - example: true"""
+  """
+  Status of the mutation - example: true
+  """
   success: Boolean!
 
   """
@@ -381,26 +543,40 @@ type deposit implements ErrorHandling & Token {
   visibleErrors: visibleErrors!
 }
 
-"""type of the discount"""
+"""
+type of the discount
+"""
 enum DiscountType {
-  """discount for an abonnement ticket"""
+  """
+  discount for an abonnement ticket
+  """
   ABONNEMENT
 
-  """discount for a normal ticket"""
+  """
+  discount for a normal ticket
+  """
   NORMAL
 
-  """discount for a scratchcard"""
+  """
+  discount for a scratchcard
+  """
   SCRATCHCARD
 }
 
 type doubleOptIn implements ErrorHandling & Token {
-  """Errors string - example: session_not_found"""
+  """
+  Errors string - example: session_not_found
+  """
   backendError: String
 
-  """E-mail address was confirmed - example: true"""
+  """
+  E-mail address was confirmed - example: true
+  """
   confirmed: Boolean
 
-  """Status of the mutation - example: true"""
+  """
+  Status of the mutation - example: true
+  """
   success: Boolean!
 
   """
@@ -411,43 +587,63 @@ type doubleOptIn implements ErrorHandling & Token {
 }
 
 type draw implements ErrorHandling {
-  """Errors string - example: session_not_found"""
+  """
+  Errors string - example: session_not_found
+  """
   backendError: String
   draws: [modelDraw]
 
-  """Status of the mutation - example: true"""
+  """
+  Status of the mutation - example: true
+  """
   success: Boolean!
   visibleErrors: visibleErrors!
 }
 
 type drawsdates implements ErrorHandling {
-  """Errors string - example: session_not_found"""
+  """
+  Errors string - example: session_not_found
+  """
   backendError: String
   draws: [modeldrawdates]
 
-  """Status of the mutation - example: true"""
+  """
+  Status of the mutation - example: true
+  """
   success: Boolean!
   visibleErrors: visibleErrors!
 }
 
 type editAbonnement implements ErrorHandling & Token & BasketObject {
-  """Total amount - example: 120"""
+  """
+  Total amount - example: 120
+  """
   amount: Int
 
-  """Amount to pay - example: 0"""
+  """
+  Amount to pay - example: 0
+  """
   amountToPay: Int
 
-  """Errors string - example: session_not_found"""
+  """
+  Errors string - example: session_not_found
+  """
   backendError: String
   coupon: modelCoupon
 
-  """If the basket may be purchased due to limits - example: true"""
+  """
+  If the basket may be purchased due to limits - example: true
+  """
   isPurchasable: Boolean!
 
-  """Total amount reduced by credit - example: 0"""
+  """
+  Total amount reduced by credit - example: 0
+  """
   reducedAmount: Int
 
-  """Status of the mutation - example: true"""
+  """
+  Status of the mutation - example: true
+  """
   success: Boolean!
   tickets: [modelTicket]
 
@@ -459,10 +655,14 @@ type editAbonnement implements ErrorHandling & Token & BasketObject {
 }
 
 type email implements ErrorHandling & Token {
-  """Errors string - example: session_not_found"""
+  """
+  Errors string - example: session_not_found
+  """
   backendError: String
 
-  """Status of the mutation - example: true"""
+  """
+  Status of the mutation - example: true
+  """
   success: Boolean!
 
   """
@@ -473,29 +673,41 @@ type email implements ErrorHandling & Token {
 }
 
 interface ErrorHandling {
-  """Errors string - example: session_not_found"""
+  """
+  Errors string - example: session_not_found
+  """
   backendError: String
 
-  """Status of the mutation - example: true"""
+  """
+  Status of the mutation - example: true
+  """
   success: Boolean!
   visibleErrors: visibleErrors!
 }
 
 type filteredCategories implements ErrorHandling {
-  """Errors string - example: session_not_found"""
+  """
+  Errors string - example: session_not_found
+  """
   backendError: String
   category: modelFilteredCategoriesCategory
 
-  """Status of the mutation - example: true"""
+  """
+  Status of the mutation - example: true
+  """
   success: Boolean!
   visibleErrors: visibleErrors!
 }
 
 type gameBreakLock implements ErrorHandling & Token {
-  """Errors string - example: session_not_found"""
+  """
+  Errors string - example: session_not_found
+  """
   backendError: String
 
-  """Status of the mutation - example: true"""
+  """
+  Status of the mutation - example: true
+  """
   success: Boolean!
 
   """
@@ -506,13 +718,17 @@ type gameBreakLock implements ErrorHandling & Token {
 }
 
 type gameConfig implements ErrorHandling {
-  """Errors string - example: session_not_found"""
+  """
+  Errors string - example: session_not_found
+  """
   backendError: String
   com: [modelProvider]
   de: [modelProvider]
   providers: [modelProvider] @deprecated(reason: "Use field tlds")
 
-  """Status of the mutation - example: true"""
+  """
+  Status of the mutation - example: true
+  """
   success: Boolean!
   visibleErrors: visibleErrors!
 }
@@ -520,14 +736,20 @@ type gameConfig implements ErrorHandling {
 type googleAnalytics implements ErrorHandling & Token {
   actionField: modelActionField
 
-  """Errors string - example: session_not_found"""
+  """
+  Errors string - example: session_not_found
+  """
   backendError: String
   products: [modelProduct]
 
-  """Retry call - example: true"""
+  """
+  Retry call - example: true
+  """
   retry: Boolean
 
-  """Status of the mutation - example: true"""
+  """
+  Status of the mutation - example: true
+  """
   success: Boolean!
 
   """
@@ -538,42 +760,62 @@ type googleAnalytics implements ErrorHandling & Token {
 }
 
 input inputModelDrawingNewsletterType {
-  """Is the alarm active - example: true"""
+  """
+  Is the alarm active - example: true
+  """
   active: Boolean
 
-  """Name of the alarm - example: lotto"""
+  """
+  Name of the alarm - example: lotto
+  """
   name: String
 }
 
 input inputModelFieldType {
-  """Chosen numbers - example: 1,2,3,4,5,6"""
+  """
+  Chosen numbers - example: 1,2,3,4,5,6
+  """
   numbers: String!
 
-  """Chosen extra numbers - example: 1,2"""
+  """
+  Chosen extra numbers - example: 1,2
+  """
   extraNumbers: String
 
-  """System - example: 007"""
+  """
+  System - example: 007
+  """
   system: String
 }
 
 input inputModelJackpotAlarmType {
-  """Is the alarm active - example: true"""
+  """
+  Is the alarm active - example: true
+  """
   active: Boolean
 
-  """Amount of the alarm - example: 7"""
+  """
+  Amount of the alarm - example: 7
+  """
   amount: Int
 
-  """Name of the alarm - example: lotto"""
+  """
+  Name of the alarm - example: lotto
+  """
   name: String
 }
 
 input inputModelPushNotificationAuthorizedSubscription {
-  """activate the notification for a winning - example: [true, false]"""
+  """
+  activate the notification for a winning - example: [true, false]
+  """
   winningNotification: Boolean
 }
 
 input inputModelPushNotificationGeneralSubscription {
-  """activate the notification for general news - example: [true, false]"""
+  """
+  activate the notification for general news - example: [true, false]
+  """
   news: Boolean
 }
 
@@ -588,7 +830,9 @@ input inputModelPushNotificationSubscription {
   """
   numbers: Boolean!
 
-  """activate the notification for the deadline - example: [true, false]"""
+  """
+  activate the notification for the deadline - example: [true, false]
+  """
   deadline: Boolean!
 
   """
@@ -600,28 +844,42 @@ input inputModelPushNotificationSubscription {
 }
 
 input inputModelRedirectToType {
-  """abort url - example: /spiele/cash-wheel/?no_success=1"""
+  """
+  abort url - example: /spiele/cash-wheel/?no_success=1
+  """
   abort: String
 
-  """success url - example: /spiele/cash-wheel/spielen/"""
+  """
+  success url - example: /spiele/cash-wheel/spielen/
+  """
   success: String
 }
 
-"""language of the player"""
+"""
+language of the player
+"""
 enum Language {
-  """german"""
+  """
+  german
+  """
   DE
 
-  """english"""
+  """
+  english
+  """
   EN
 }
 
 type login implements ErrorHandling & Token {
-  """Errors string - example: session_not_found"""
+  """
+  Errors string - example: session_not_found
+  """
   backendError: String
   player: modelPlayer
 
-  """Status of the mutation - example: true"""
+  """
+  Status of the mutation - example: true
+  """
   success: Boolean!
 
   """
@@ -632,191 +890,303 @@ type login implements ErrorHandling & Token {
 }
 
 type logout implements ErrorHandling {
-  """Errors string - example: session_not_found"""
+  """
+  Errors string - example: session_not_found
+  """
   backendError: String
 
-  """Status of the mutation - example: true"""
+  """
+  Status of the mutation - example: true
+  """
   success: Boolean!
   visibleErrors: visibleErrors!
 }
 
 type luckyNumbers implements ErrorHandling {
-  """Errors string - example: session_not_found"""
+  """
+  Errors string - example: session_not_found
+  """
   backendError: String
   luckyNumbers: [modelLuckyNumbersLuckyNumbers]!
 
-  """Status of the mutation - example: true"""
+  """
+  Status of the mutation - example: true
+  """
   success: Boolean!
   visibleErrors: visibleErrors!
 }
 
 type modelAccountRow {
-  """Bank account holder - example: Max Mustermann"""
+  """
+  Bank account holder - example: Max Mustermann
+  """
   accountHolder: String
 
-  """Amount in cents - example: 1000"""
+  """
+  Amount in cents - example: 1000
+  """
   amount: BigInt
 
-  """Bank account - example: 123456789"""
+  """
+  Bank account - example: 123456789
+  """
   bankAccount: String
 
-  """Bank code - example: 1234567"""
+  """
+  Bank code - example: 1234567
+  """
   bankCode: String
 
-  """Booked at - example: Jan 1 2018 00:00:00"""
+  """
+  Booked at - example: Jan 1 2018 00:00:00
+  """
   bookedAt: String
 
-  """Booked by - example: PLAYER"""
+  """
+  Booked by - example: PLAYER
+  """
   bookedBy: BookedBy
 
-  """Chargeback At - example: Jan 1 2018 00:00:00"""
+  """
+  Chargeback At - example: Jan 1 2018 00:00:00
+  """
   chargebackAt: String
 
-  """Comment - example: Kommentar für Benutzer"""
+  """
+  Comment - example: Kommentar für Benutzer
+  """
   comment: String
 
-  """Gewinn-Doppler selected - example: false"""
+  """
+  Gewinn-Doppler selected - example: false
+  """
   doubleWin: Boolean
 
-  """First draw - example: Jan 1 2018 00:00:00"""
+  """
+  First draw - example: Jan 1 2018 00:00:00
+  """
   firstDraw: String
 
-  """IBAN - example: DE00123456781234567890"""
+  """
+  IBAN - example: DE00123456781234567890
+  """
   iban: String
 
-  """Is abonnement - example: false"""
+  """
+  Is abonnement - example: false
+  """
   isAbonnement: Boolean
 
-  """Is canceled - example: false"""
+  """
+  Is canceled - example: false
+  """
   isCanceled: Boolean
 
-  """Jackpot-Knacker selected - example: false"""
+  """
+  Jackpot-Knacker selected - example: false
+  """
   jackpotCracker: Boolean
 
-  """Jackpot-Garantie selected - example: false"""
+  """
+  Jackpot-Garantie selected - example: false
+  """
   jackpotGuarantee: Boolean
 
-  """Last draw - example: Jan 1 2018 00:00:00"""
+  """
+  Last draw - example: Jan 1 2018 00:00:00
+  """
   lastDraw: String
 
-  """Offset account type - example: LOTTO"""
+  """
+  Offset account type - example: LOTTO
+  """
   offsetAccount: OffsetAccount
 
-  """Old balance - example: 1000"""
+  """
+  Old balance - example: 1000
+  """
   oldBalance: BigInt
 
-  """Order id - example: 12"""
+  """
+  Order id - example: 12
+  """
   orderId: String
 
-  """Participation day - example: B"""
+  """
+  Participation day - example: B
+  """
   participationDay: String
 
-  """Participations - example: 1"""
+  """
+  Participations - example: 1
+  """
   participations: Int
 
-  """Transaction type - example: BUY_LOTTO"""
+  """
+  Transaction type - example: BUY_LOTTO
+  """
   transaction: Transaction
 
-  """Type of the game - example: lotto"""
+  """
+  Type of the game - example: lotto
+  """
   type: String
 
-  """Printable type of the game - example: Lotto Normal"""
+  """
+  Printable type of the game - example: Lotto Normal
+  """
   typeText: String
 
-  """Wager id - example: 4712"""
+  """
+  Wager id - example: 4712
+  """
   wid: String
 }
 
 type modelActionField {
-  """Coupon - example: freefee"""
+  """
+  Coupon - example: freefee
+  """
   coupon: String
 
-  """Id - example: 460826749"""
+  """
+  Id - example: 460826749
+  """
   id: String
 
-  """Revenue: 2.60"""
+  """
+  Revenue: 2.60
+  """
   revenue: String
 }
 
 type modelCoupon {
-  """amount in cents - example: 120"""
+  """
+  amount in cents - example: 120
+  """
   amount: Int!
 
-  """category as identifier - example: BASKET"""
+  """
+  category as identifier - example: BASKET
+  """
   category: CouponCategory!
 
-  """coupon code - example: 934105329"""
+  """
+  coupon code - example: 934105329
+  """
   code: String!
 
-  """an optional special jackpot in € - example: 15000000"""
+  """
+  an optional special jackpot in € - example: 15000000
+  """
   jackpot: BigInt
 
-  """min amount in cents if status is INSUFFICIENT_AMOUNT - example: 100"""
+  """
+  min amount in cents if status is INSUFFICIENT_AMOUNT - example: 100
+  """
   minAmount: Int
 
-  """name - example: 6 Kreuze gratis"""
+  """
+  name - example: 6 Kreuze gratis
+  """
   name: String!
 
-  """status as identifier - example: VALID"""
+  """
+  status as identifier - example: VALID
+  """
   status: CouponStatus!
 
-  """types for which the coupon is valid - example: [lotto, eurojackpot]"""
+  """
+  types for which the coupon is valid - example: [lotto, eurojackpot]
+  """
   types: [String!]!
 }
 
 type modelCustomerTicketHit {
-  """amount in cents - example: 500"""
+  """
+  amount in cents - example: 500
+  """
   amount: BigInt!
 
-  """hit count - example: 1"""
+  """
+  hit count - example: 1
+  """
   count: Int!
 
-  """crosses made (keno only) - example: 2"""
+  """
+  crosses made (keno only) - example: 2
+  """
   crosses: Int
 
-  """name of the lottery - example: lotto"""
+  """
+  name of the lottery - example: lotto
+  """
   lottery: String!
 
-  """winning class - example: 9"""
+  """
+  winning class - example: 9
+  """
   winningClass: Int!
 }
 
 type modelDeadline {
-  """Deadline - example: Jan 1 2018 19:00:00"""
+  """
+  Deadline - example: Jan 1 2018 19:00:00
+  """
   deadline: String
 
-  """Current jackpot - example: 1000000"""
+  """
+  Current jackpot - example: 1000000
+  """
   jackpot: BigInt
 
-  """Game type - example: lotto"""
+  """
+  Game type - example: lotto
+  """
   type: String
 }
 
 type modelDiscount {
-  """id - example: 12345678"""
+  """
+  id - example: 12345678
+  """
   id: Int!
 
-  """original price, without discount in cent - example: 100"""
+  """
+  original price, without discount in cent - example: 100
+  """
   originalPrice: Int
 
-  """percent - example: 10"""
+  """
+  percent - example: 10
+  """
   percent: Int!
 
-  """discount type as identifier - example: ABONNEMENT"""
+  """
+  discount type as identifier - example: ABONNEMENT
+  """
   type: DiscountType!
 }
 
 type modelDraw {
-  """Additional numbers - example: ["1","2"]"""
+  """
+  Additional numbers - example: ["1","2"]
+  """
   additionalNumbers: [String]
 
-  """Date of the draw - example: Sep 01 1980"""
+  """
+  Date of the draw - example: Sep 01 1980
+  """
   date: String
 
-  """Game amount in cents - example: 100000000"""
+  """
+  Game amount in cents - example: 100000000
+  """
   gameAmount: BigInt
 
-  """Jackpot for the draw - example: 1000000"""
+  """
+  Jackpot for the draw - example: 1000000
+  """
   jackpot: BigInt
 
   """
@@ -824,7 +1194,9 @@ type modelDraw {
   """
   megaPlier: String
 
-  """Draw numbers - example: ["1","2","3","4","5","6"]"""
+  """
+  Draw numbers - example: ["1","2","3","4","5","6"]
+  """
   numbers: [String]
   odds: [modelOdd]
 
@@ -834,7 +1206,9 @@ type modelDraw {
   powerPlay: String
   seo: modelSeo
 
-  """Shares - example: ["1","2","5","10"]"""
+  """
+  Shares - example: ["1","2","5","10"]
+  """
   shares: [String]
 
   """
@@ -842,12 +1216,16 @@ type modelDraw {
   """
   time: String
 
-  """Video URL - example: https://www.youtube.com/embed/ABCD1234"""
+  """
+  Video URL - example: https://www.youtube.com/embed/ABCD1234
+  """
   video: String
 }
 
 type modeldrawdates {
-  """Date of the draw - example: Sep 01 1980"""
+  """
+  Date of the draw - example: Sep 01 1980
+  """
   date: String
 
   """
@@ -857,29 +1235,43 @@ type modeldrawdates {
 }
 
 type modelDrawing {
-  """Timestamp of the draw - example: Sep 01 1980"""
+  """
+  Timestamp of the draw - example: Sep 01 1980
+  """
   dateTime: String
 
-  """Id of the draw - example: 2017081"""
+  """
+  Id of the draw - example: 2017081
+  """
   id: String
 }
 
 type modelDrawingNewsletter {
-  """Is active - example: true"""
+  """
+  Is active - example: true
+  """
   active: Boolean
 
-  """Name of the jackpot alarm - example: lotto"""
+  """
+  Name of the jackpot alarm - example: lotto
+  """
   name: String
 }
 
 type modelField {
-  """Chosen extra numbers - example: 1,2"""
+  """
+  Chosen extra numbers - example: 1,2
+  """
   extraNumbers: String
 
-  """Chosen numbers - example: 1,2,3,4,5,6"""
+  """
+  Chosen numbers - example: 1,2,3,4,5,6
+  """
   numbers: String
 
-  """System - example: 007"""
+  """
+  System - example: 007
+  """
   system: String
 }
 
@@ -893,135 +1285,214 @@ type modelFilteredCategoriesCategory {
 }
 
 type modelGame {
-  """Available - example: true"""
+  """
+  Available - example: true
+  """
   available: Boolean
 
-  """Display - example: Super Cash Buster"""
+  """
+  Display - example: Super Cash Buster
+  """
   displayText: String
 
-  """High win in cents - example: 100000000"""
+  """
+  High win in cents - example: 100000000
+  """
   highWin: Int @deprecated(reason: "is no longer needed")
 
-  """Price in cents - example: 100"""
+  """
+  Price in cents - example: 100
+  """
   price: Int
 
-  """Provider - example: pariplay"""
+  """
+  Provider - example: pariplay
+  """
   provider: String
 
-  """URL - example: super-cash-buster"""
+  """
+  URL - example: super-cash-buster
+  """
   url: String
 
-  """Variant - example: super_cash_buster"""
+  """
+  Variant - example: super_cash_buster
+  """
   variant: String
 }
 
 type modelGameCommunity {
-  """Available - example: true"""
+  """
+  Available - example: true
+  """
   available: Boolean
   gameCommunityLotteries: [modelGameCommunityLottery]
 
-  """ID - example: duo_jackpot"""
+  """
+  ID - example: duo_jackpot
+  """
   id: String
 
-  """Is abonnement - example: true"""
+  """
+  Is abonnement - example: true
+  """
   isAbonnement: Boolean
 
-  """Is jackpot cracker - example: false"""
+  """
+  Is jackpot cracker - example: false
+  """
   jackpotCracker: Boolean
 
-  """Name - example: Duo Jackpot"""
+  """
+  Name - example: Duo Jackpot
+  """
   name: String
 
-  """Participations - example: 1"""
+  """
+  Participations - example: 1
+  """
   participations: Int
 
-  """Price in cents - example: 1000"""
+  """
+  Price in cents - example: 1000
+  """
   price: Int
 
-  """Variant - example: xxl_chance"""
+  """
+  Variant - example: xxl_chance
+  """
   variant: String
 
-  """xxlChanceLottery - example: lotto"""
+  """
+  xxlChanceLottery - example: lotto
+  """
   xxlChanceLottery: String @deprecated(reason: "is no longer needed")
 }
 
 type modelGameCommunityLottery {
-  """Count - example: 3"""
+  """
+  Count - example: 3
+  """
   count: Int
 
-  """Daily Million Plus - example: false"""
+  """
+  Daily Million Plus - example: false
+  """
   dailymillionplus: Boolean
 
-  """EuroMillions 2. Chance - example: false"""
+  """
+  EuroMillions 2. Chance - example: false
+  """
   euromillionsSecondChance: Boolean
-  euromillions_second_chance: Boolean @deprecated(reason: "Camel case and not snake case required")
+  euromillions_second_chance: Boolean
+    @deprecated(reason: "Camel case and not snake case required")
 
-  """GlücksSpirale - example: true"""
+  """
+  GlücksSpirale - example: true
+  """
   gluecksspirale: Boolean
 
-  """LOTTO Plus - example: false"""
+  """
+  LOTTO Plus - example: false
+  """
   lottoplus: Boolean
 
-  """MegaPlier - example: true"""
+  """
+  MegaPlier - example: true
+  """
   megaPlier: Boolean
 
-  """Plus5 - example: true"""
+  """
+  Plus5 - example: true
+  """
   plus5: Boolean
 
-  """PowerPlay - example: true"""
+  """
+  PowerPlay - example: true
+  """
   powerPlay: Boolean
 
-  """SharesFrom - example: 50"""
+  """
+  SharesFrom - example: 50
+  """
   sharesFrom: Int
 
-  """Sieger-Chance - example: true"""
+  """
+  Sieger-Chance - example: true
+  """
   siegerchance: Boolean
 
-  """Spiel77 - example: true"""
+  """
+  Spiel77 - example: true
+  """
   spiel77: Boolean
 
-  """Super6 - example: true"""
+  """
+  Super6 - example: true
+  """
   super6: Boolean
 
-  """System - example: 007"""
+  """
+  System - example: 007
+  """
   system: String
 
-  """Type - example: lotto"""
+  """
+  Type - example: lotto
+  """
   type: String
 
-  """weekdays - example: [1, 3]"""
+  """
+  weekdays - example: [1, 3]
+  """
   weekdays: [Int]
 
-  """Gewinngarantie - example: true"""
+  """
+  Gewinngarantie - example: true
+  """
   winGuarantee: Boolean
 }
 
 type modelJackpotAlarm {
-  """Is active - example: true"""
+  """
+  Is active - example: true
+  """
   active: Boolean
 
-  """Which amount is chosen - example: 50"""
+  """
+  Which amount is chosen - example: 50
+  """
   amount: Int
 
-  """Name of the jackpot alarm - example: lotto"""
+  """
+  Name of the jackpot alarm - example: lotto
+  """
   name: String
 }
 
 type modelLuckyNumbersLuckyNumbers {
   numbers: [modelLuckyNumbersNumbers!]!
 
-  """Year - example: 2019"""
+  """
+  Year - example: 2019
+  """
   year: Int!
 }
 
 type modelLuckyNumbersNumbers {
-  """Date - example: Jan 1 2018"""
+  """
+  Date - example: Jan 1 2018
+  """
   date: String!
 
-  """ExtraNumbers - example: [1]"""
+  """
+  ExtraNumbers - example: [1]
+  """
   extraNumbers: [Int!]!
 
-  """Numbers - example: [1, 2, 3, 4, 5]"""
+  """
+  Numbers - example: [1, 2, 3, 4, 5]
+  """
   numbers: [Int!]!
 }
 
@@ -1029,13 +1500,19 @@ type modelNewsletterConfiguration {
   drawings: [modelDrawingNewsletter]
   jackpotAlarms: [modelJackpotAlarm]
 
-  """news notification - example: false"""
+  """
+  news notification - example: false
+  """
   news: Boolean
 
-  """sportsBetting notification - example: false"""
+  """
+  sportsBetting notification - example: false
+  """
   sportsBetting: Boolean
 
-  """Winning SMS notification - example: true"""
+  """
+  Winning SMS notification - example: true
+  """
   winningSMSNotification: Boolean
 }
 
@@ -1045,16 +1522,24 @@ type modelOdd {
   """
   link: String
 
-  """Number of winners - example: 1"""
+  """
+  Number of winners - example: 1
+  """
   numberOfWinners: BigInt
 
-  """Winning numbers - example: ["2345678"]"""
+  """
+  Winning numbers - example: ["2345678"]
+  """
   numbers: [String]
 
-  """Odd in cents - example: 100000000"""
+  """
+  Odd in cents - example: 100000000
+  """
   odd: BigInt
 
-  """Winning class - example: 1"""
+  """
+  Winning class - example: 1
+  """
   winningClass: Int
 
   """
@@ -1064,62 +1549,98 @@ type modelOdd {
 }
 
 type modelPaymentMethod {
-  """Is the payment allowed - example: true"""
+  """
+  Is the payment allowed - example: true
+  """
   allowed: Boolean
 
-  """Name of payment method - example: elv"""
+  """
+  Name of payment method - example: elv
+  """
   name: String
 }
 
 type modelPaymentRestriction {
-  """Is the checkout allowed - example: true"""
+  """
+  Is the checkout allowed - example: true
+  """
   allowedCheckout: Boolean
 
-  """Is the deposit allowed - example: true"""
+  """
+  Is the deposit allowed - example: true
+  """
   allowedDeposit: Boolean
 
-  """Name of payment method - example: mastercard"""
+  """
+  Name of payment method - example: mastercard
+  """
   name: String
 }
 
 type modelPlayer {
-  """Bank account holder - example: Max Mustermann"""
+  """
+  Bank account holder - example: Max Mustermann
+  """
   accountHolder: String
 
-  """Age verified - example: true"""
+  """
+  Age verified - example: true
+  """
   ageVerified: Boolean
 
-  """Auto paying out winnings - example: true"""
+  """
+  Auto paying out winnings - example: true
+  """
   autoPayingOut: Boolean
 
-  """Current balance of the player in cents - example: 123"""
+  """
+  Current balance of the player in cents - example: 123
+  """
   balance: BigInt
 
-  """Current cashable balance of the player in cents - example: 123"""
+  """
+  Current cashable balance of the player in cents - example: 123
+  """
   balanceCashable: BigInt
 
-  """Basket checkout payment types"""
+  """
+  Basket checkout payment types
+  """
   checkoutPaymentMethods: [modelPaymentMethod]
 
-  """City - example: Berlin"""
+  """
+  City - example: Berlin
+  """
   city: String
 
-  """Date of birth - example: Sep 01 1980"""
+  """
+  Date of birth - example: Sep 01 1980
+  """
   dateOfBirth: String
 
-  """Account deposit payment types"""
+  """
+  Account deposit payment types
+  """
   depositPaymentMethods: [modelPaymentMethod]
 
-  """Email address - example: not.me@sumcumo.com"""
+  """
+  Email address - example: not.me@sumcumo.com
+  """
   email: String
 
-  """is email address confirmed - example: true"""
+  """
+  is email address confirmed - example: true
+  """
   emailConfirmed: Boolean!
 
-  """First name of player - example: Max"""
+  """
+  First name of player - example: Max
+  """
   firstName: String
 
-  """Full name of the player - example: Max Mustermann"""
+  """
+  Full name of the player - example: Max Mustermann
+  """
   fullName: String
 
   """
@@ -1127,109 +1648,173 @@ type modelPlayer {
   """
   gamesRevenuesLastSeen: String
 
-  """The player has already used direct debit payment - example: true"""
+  """
+  The player has already used direct debit payment - example: true
+  """
   hasUsedDirectDebit: Boolean
 
-  """Hash key of player - example: lkasdf3oun"""
+  """
+  Hash key of player - example: lkasdf3oun
+  """
   hashKey: String
 
-  """House number - example: 1b"""
+  """
+  House number - example: 1b
+  """
   houseNumber: String
 
-  """IBAN - example: DE00123456781234567890"""
+  """
+  IBAN - example: DE00123456781234567890
+  """
   iban: String
 
-  """When player is allowed to change IBAN - example: Nov 01 2018"""
+  """
+  When player is allowed to change IBAN - example: Nov 01 2018
+  """
   ibanNextAllowedChangeDate: String
 
-  """Player number - example: 312345678"""
+  """
+  Player number - example: 312345678
+  """
   id: String
   language: Language
 
-  """Last name of player - example: Mustermann"""
+  """
+  Last name of player - example: Mustermann
+  """
   lastName: String
 
-  """Last used payment method - example: gh"""
+  """
+  Last used payment method - example: gh
+  """
   lastUsedPaymentMethod: String
   locks: [modelPlayerLocks]
 
-  """The player dont need to pay the fee - example: true"""
+  """
+  The player dont need to pay the fee - example: true
+  """
   noFees: Boolean
   paymentRestrictions: [modelPaymentRestriction]
 
-  """IBAN for payouts - example: DE00123456781234567890"""
+  """
+  IBAN for payouts - example: DE00123456781234567890
+  """
   payoutIban: String
 
-  """Mobile number - example: 0177123123123"""
+  """
+  Mobile number - example: 0177123123123
+  """
   phone: String
   playLimits: modelPlayLimit
   pseudoCreditcards: [modelPseudoCreditcards]
 
-  """Salutation of player - example: Herr"""
+  """
+  Salutation of player - example: Herr
+  """
   salutation: String
 
-  """Street - Example: Unter der Brücke"""
+  """
+  Street - Example: Unter der Brücke
+  """
   street: String
 
-  """Name of the tip community - example: Glücksritter"""
+  """
+  Name of the tip community - example: Glücksritter
+  """
   tipCommunity: String
 
-  """Zip code - example: 12345"""
+  """
+  Zip code - example: 12345
+  """
   zipCode: String
 }
 
 type modelPlayerLocks {
-  """Is the lock active - example: true"""
+  """
+  Is the lock active - example: true
+  """
   active: Boolean
 
-  """End of lock - example: Jan 1 2019 00:00:00"""
+  """
+  End of lock - example: Jan 1 2019 00:00:00
+  """
   lockEnd: String
 
-  """Type of lock - example: addiction"""
+  """
+  Type of lock - example: addiction
+  """
   type: String
 }
 
 type modelPlayLimit {
-  """current week stakes in cents - example: 20"""
+  """
+  current week stakes in cents - example: 20
+  """
   currentWeekStakes: Int
 
-  """weekly deposit limit in cents - example: 10000"""
+  """
+  weekly deposit limit in cents - example: 10000
+  """
   depositLimit: Int
 
-  """begin of the new weekly deposit limit - example: Sep 01 2018"""
+  """
+  begin of the new weekly deposit limit - example: Sep 01 2018
+  """
   depositLimitBegin: String
 
-  """left amount of the weekly deposit limit in cents - example: 10000"""
+  """
+  left amount of the weekly deposit limit in cents - example: 10000
+  """
   depositLimitLeft: Int
 
-  """max amount of the weekly deposit limit in cents - example: 10000"""
+  """
+  max amount of the weekly deposit limit in cents - example: 10000
+  """
   depositLimitMax: Int
 
-  """min amount of the weekly deposit limit in cents - example: 10000"""
+  """
+  min amount of the weekly deposit limit in cents - example: 10000
+  """
   depositLimitMin: Int
 
-  """new weekly deposit limit in cents - example: 10000"""
+  """
+  new weekly deposit limit in cents - example: 10000
+  """
   depositNewLimit: Int
 
-  """weekly game limit in cents - example: 10000"""
+  """
+  weekly game limit in cents - example: 10000
+  """
   gameLimit: Int
 
-  """begin of the new weekly game limit - example: Sep 01 2018"""
+  """
+  begin of the new weekly game limit - example: Sep 01 2018
+  """
   gameLimitBegin: String
 
-  """left amount of the weekly game limit in cents - example: 10000"""
+  """
+  left amount of the weekly game limit in cents - example: 10000
+  """
   gameLimitLeft: Int
 
-  """max amount of the weekly game limit in cents - example: 10000"""
+  """
+  max amount of the weekly game limit in cents - example: 10000
+  """
   gameLimitMax: Int
 
-  """min amount of the weekly game limit in cents - example: 10000"""
+  """
+  min amount of the weekly game limit in cents - example: 10000
+  """
   gameLimitMin: Int
 
-  """new weekly game limit in cents - example: 10000"""
+  """
+  new weekly game limit in cents - example: 10000
+  """
   gameNewLimit: Int
 
-  """weekly lottery and scratch card limit in cents - example: 10000"""
+  """
+  weekly lottery and scratch card limit in cents - example: 10000
+  """
   lotteryAndScratchCardLimit: Int
 
   """
@@ -1252,13 +1837,19 @@ type modelPlayLimit {
   """
   lotteryAndScratchCardLimitMin: Int
 
-  """new weekly lottery and scratch card limit in cents - example: 10000"""
+  """
+  new weekly lottery and scratch card limit in cents - example: 10000
+  """
   lotteryAndScratchCardNewLimit: Int
 
-  """weekly sportsbetting limit in cents - example: 10000"""
+  """
+  weekly sportsbetting limit in cents - example: 10000
+  """
   sportsBettingLimit: Int
 
-  """begin of the new weekly sportsbetting limit - example: Sep 01 2018"""
+  """
+  begin of the new weekly sportsbetting limit - example: Sep 01 2018
+  """
   sportsBettingLimitBegin: String
 
   """
@@ -1266,123 +1857,193 @@ type modelPlayLimit {
   """
   sportsBettingLimitLeft: Int
 
-  """max amount of the weekly sportsbetting limit in cents - example: 10000"""
+  """
+  max amount of the weekly sportsbetting limit in cents - example: 10000
+  """
   sportsBettingLimitMax: Int
 
-  """min amount of the weekly sportsbetting limit in cents - example: 10000"""
+  """
+  min amount of the weekly sportsbetting limit in cents - example: 10000
+  """
   sportsBettingLimitMin: Int
 
-  """new weekly sportsbetting limit in cents - example: 10000"""
+  """
+  new weekly sportsbetting limit in cents - example: 10000
+  """
   sportsBettingNewLimit: Int
 }
 
 type modelProduct {
-  """Category - example: KENO"""
+  """
+  Category - example: KENO
+  """
   category: String
 
-  """Coupon - example: freefee"""
+  """
+  Coupon - example: freefee
+  """
   coupon: String
 
-  """Dimension1 - example: Normal"""
+  """
+  Dimension1 - example: Normal
+  """
   dimension1: String
 
-  """Dimension10 - example: 0"""
+  """
+  Dimension10 - example: 0
+  """
   dimension10: String
 
-  """Dimension11 - example: 0"""
+  """
+  Dimension11 - example: 0
+  """
   dimension11: String
 
-  """Dimension2 - example: 2 Felder"""
+  """
+  Dimension2 - example: 2 Felder
+  """
   dimension2: String
 
-  """Dimension3 - example: """
+  """
+  Dimension3 - example:
+  """
   dimension3: String
 
-  """Dimension4 - example: """
+  """
+  Dimension4 - example:
+  """
   dimension4: String
 
-  """Dimension5 - example: Dauerspiel"""
+  """
+  Dimension5 - example: Dauerspiel
+  """
   dimension5: String
 
-  """Dimension6 - example: """
+  """
+  Dimension6 - example:
+  """
   dimension6: String
 
-  """Dimension7 - example: 0"""
+  """
+  Dimension7 - example: 0
+  """
   dimension7: String
 
-  """Dimension8 - example: 0"""
+  """
+  Dimension8 - example: 0
+  """
   dimension8: String
 
-  """Dimension9 - example: 0"""
+  """
+  Dimension9 - example: 0
+  """
   dimension9: String
 
-  """Id - example: 41903"""
+  """
+  Id - example: 41903
+  """
   id: BigInt
 
-  """Item id - example: keno"""
+  """
+  Item id - example: keno
+  """
   itemId: String
 
-  """Metric1 - example: 2"""
+  """
+  Metric1 - example: 2
+  """
   metric1: String
 
-  """Name - example: KENO - Dauerspiel -  - """
+  """
+  Name - example: KENO - Dauerspiel -  -
+  """
   name: String
 
-  """Price - example: 56.20"""
+  """
+  Price - example: 56.20
+  """
   price: String
 
-  """Quantity - example: 1"""
+  """
+  Quantity - example: 1
+  """
   quantity: Int
 }
 
 type modelProvider {
   games: [modelGame]
 
-  """Name - example: black_pearl"""
+  """
+  Name - example: black_pearl
+  """
   name: String
 }
 
 type modelPseudoCreditcards {
-  """cardNumber - example: 555544******1111"""
+  """
+  cardNumber - example: 555544******1111
+  """
   cardNumber: String
 
-  """ccType - example: mc, vi"""
+  """
+  ccType - example: mc, vi
+  """
   ccType: String
 
-  """creditcardName - example: MasterCard, VISA"""
+  """
+  creditcardName - example: MasterCard, VISA
+  """
   creditcardName: String
 
-  """creditcardNameShort - example: Master, VISA"""
+  """
+  creditcardNameShort - example: Master, VISA
+  """
   creditcardNameShort: String
 
-  """displayName - example: MasterCard, VISA"""
+  """
+  displayName - example: MasterCard, VISA
+  """
   displayName: String
 
-  """expireMonth - example: 8"""
+  """
+  expireMonth - example: 8
+  """
   expireMonth: Int
 
-  """expireYear - example: 2018"""
+  """
+  expireYear - example: 2018
+  """
   expireYear: Int
 
-  """thirdPartyReferenz - example: 1234567890123456"""
+  """
+  thirdPartyReferenz - example: 1234567890123456
+  """
   thirdPartyReferenz: String
 
-  """type - example: ACC, SDD"""
+  """
+  type - example: ACC, SDD
+  """
   type: String
 }
 
 type modelPushNotificationAuthorizedSubscription {
-  """the notification status for a winning - example: [true, false]"""
+  """
+  the notification status for a winning - example: [true, false]
+  """
   winningNotification: Boolean
 }
 
 type modelPushNotificationGeneralSubscription {
-  """subscribed for news - example: [true, false]"""
+  """
+  subscribed for news - example: [true, false]
+  """
   news: Boolean
 }
 
 type modelPushNotificationLotterySubscription {
-  """the notification status for the deadline - example: [true, false]"""
+  """
+  the notification status for the deadline - example: [true, false]
+  """
   deadline: Boolean
 
   """
@@ -1404,86 +2065,131 @@ type modelPushNotificationLotterySubscription {
 }
 
 type modelScratchCard {
-  """Display - example: Black Pearl"""
+  """
+  Display - example: Black Pearl
+  """
   displayText: String
 
-  """Group, also fragment of the group url"""
+  """
+  Group, also fragment of the group url
+  """
   group: String
   packets: [modelScratchCardPacket]
 
-  """Price in cents - example: 1000"""
+  """
+  Price in cents - example: 1000
+  """
   price: Int
 
-  """Status as identifier - example: AVAILABLE"""
+  """
+  Status as identifier - example: AVAILABLE
+  """
   status: ScratchCardStatus
 
-  """URL - example: black-pearl"""
+  """
+  URL - example: black-pearl
+  """
   url: String
 
-  """Variant - example: black_pearl"""
+  """
+  Variant - example: black_pearl
+  """
   variant: String
 }
 
 type modelScratchCardChance {
-  """free scratch card - example: false"""
+  """
+  free scratch card - example: false
+  """
   freeScratchCard: Boolean!
 
-  """free ticket - example: false"""
+  """
+  free ticket - example: false
+  """
   freeTicket: Boolean!
 
-  """Numbers of winners - example: 1"""
+  """
+  Numbers of winners - example: 1
+  """
   numberOfWinners: BigInt!
 
-  """Odd in cents - example: 500000"""
+  """
+  Odd in cents - example: 500000
+  """
   odd: Int!
 }
 
 type modelScratchCardChances {
-  """Amount - example: 1000000"""
+  """
+  Amount - example: 1000000
+  """
   amount: Int
   chances: [modelScratchCardChance]
 
-  """Variant - example: black_pearl"""
+  """
+  Variant - example: black_pearl
+  """
   variant: String
 }
 
 type modelScratchCardPacket {
-  """Amount to buy - example: 3"""
+  """
+  Amount to buy - example: 3
+  """
   amount: Int
 
-  """Percent of reduction - example: 3"""
+  """
+  Percent of reduction - example: 3
+  """
   percent: Int
 
-  """Price per card in cents - example: 900"""
+  """
+  Price per card in cents - example: 900
+  """
   pricePerCard: Int
-  price_per_card: Int @deprecated(reason: "Camel case and not snake case required")
+  price_per_card: Int
+    @deprecated(reason: "Camel case and not snake case required")
 }
 
 type modelSeo {
-  """Meta Description - example: Description"""
+  """
+  Meta Description - example: Description
+  """
   description: String
   texts: [modelSeoText]
 
-  """Title - example: Title"""
+  """
+  Title - example: Title
+  """
   title: String
 }
 
 type modelSeoText {
-  """Content - example: Content"""
+  """
+  Content - example: Content
+  """
   content: String
 
-  """Headline - example: Headline"""
+  """
+  Headline - example: Headline
+  """
   headline: String
 }
 
 type modelShare {
-  """Share is valid from - example: Jan 01 2016 00:00:00"""
+  """
+  Share is valid from - example: Jan 01 2016 00:00:00
+  """
   from: String
 
-  """System ID for the share - example: 5"""
+  """
+  System ID for the share - example: 5
+  """
   id: Int
 
-  """Name of share - example: L"""
+  """
+  Name of share - example: L
+  """
   name: String
 
   """
@@ -1491,127 +2197,200 @@ type modelShare {
   """
   price: Int
 
-  """Numbers of share - example: 44"""
+  """
+  Numbers of share - example: 44
+  """
   shares: Int
 
-  """Comma separated list, of available shares - example: 1,2,3,4,5"""
+  """
+  Comma separated list, of available shares - example: 1,2,3,4,5
+  """
   sharesSelection: String
 
-  """Name of the system for the share - example: 007"""
+  """
+  Name of the system for the share - example: 007
+  """
   system: String
 
-  """Share is valid till - example: null"""
+  """
+  Share is valid till - example: null
+  """
   till: String
 
-  """Share game name - example: eurojackpot_system"""
+  """
+  Share game name - example: eurojackpot_system
+  """
   type: String
 }
 
 type modelStatisticsNumbers {
-  """Count - example: 10"""
+  """
+  Count - example: 10
+  """
   count: Int!
 
-  """Number - example: 1"""
+  """
+  Number - example: 1
+  """
   number: Int!
 }
 
 type modelStatisticsStatistics {
   numbers: [modelStatisticsNumbers!]!
 
-  """Weekdays - example: [3, 6] (1 = Monday .. 7 = Sunday)"""
+  """
+  Weekdays - example: [3, 6] (1 = Monday .. 7 = Sunday)
+  """
   weekdays: [Int!]!
 
-  """With ExtraNumbers - example: true"""
+  """
+  With ExtraNumbers - example: true
+  """
   withExtraNumbers: Boolean!
 }
 
 type modelSubDetails {
-  """Amount in cents - example: 3690"""
+  """
+  Amount in cents - example: 3690
+  """
   amount: BigInt
 
-  """Date - example: Jan 1 2018 17:07:00"""
+  """
+  Date - example: Jan 1 2018 17:07:00
+  """
   date: String
 
-  """Wager id - example: 4712"""
+  """
+  Wager id - example: 4712
+  """
   wid: String
 
-  """Win amount in cents - example: 90"""
+  """
+  Win amount in cents - example: 90
+  """
   winAmount: Int
 
-  """Number of won scratch cards - example: 0"""
+  """
+  Number of won scratch cards - example: 0
+  """
   winScratchCards: Int
 
-  """Number of won tickets - example: 0"""
+  """
+  Number of won tickets - example: 0
+  """
   winTickets: Int
 }
 
 type modelTicket {
-  """Additional ticket numbers - example: [1234567, 2345678]"""
+  """
+  Additional ticket numbers - example: [1234567, 2345678]
+  """
   additionalTicketNumbers: [String]
 
-  """Amount - example: 3690"""
+  """
+  Amount - example: 3690
+  """
   amount: BigInt @deprecated(reason: "is no longer needed")
 
-  """Amount to pay - example: 3650"""
+  """
+  Amount to pay - example: 3650
+  """
   amountToPay: BigInt @deprecated(reason: "is no longer needed")
   coupon: modelCoupon
 
-  """Daily Million Plus selected - example: false"""
+  """
+  Daily Million Plus selected - example: false
+  """
   dailymillionplus: Boolean
 
-  """Deadline of the ticket - example: Jan 1 2018 00:00:00"""
+  """
+  Deadline of the ticket - example: Jan 1 2018 00:00:00
+  """
   deadline: String
   discount: modelDiscount
 
-  """Double win selected - example: false"""
+  """
+  Double win selected - example: false
+  """
   doubleWin: Boolean
   drawings: [modelDrawing]
 
-  """EuroMillions 2. Chance selected - example: false"""
+  """
+  EuroMillions 2. Chance selected - example: false
+  """
   euromillionsSecondChance: Boolean
-  euromillions_second_chance: Boolean @deprecated(reason: "Camel case and not snakecase required")
+  euromillions_second_chance: Boolean
+    @deprecated(reason: "Camel case and not snakecase required")
 
-  """Fee - example: 40"""
+  """
+  Fee - example: 40
+  """
   fee: BigInt
   fields: [modelField]
 
-  """First draw - example: Jan 1 2018 00:00:00"""
+  """
+  First draw - example: Jan 1 2018 00:00:00
+  """
   firstDraw: String
 
-  """GlücksSpirale selected - example: true"""
+  """
+  GlücksSpirale selected - example: true
+  """
   gluecksspirale: Boolean
 
-  """Id of the ticket - example: 815"""
+  """
+  Id of the ticket - example: 815
+  """
   id: BigInt
 
-  """Is abonnment - example: false"""
+  """
+  Is abonnment - example: false
+  """
   isAbonnement: Boolean
 
-  """Is active - example: true"""
+  """
+  Is active - example: true
+  """
   isActive: Boolean
 
-  """Is replayable - example: true"""
+  """
+  Is replayable - example: true
+  """
   isReplayable: Boolean!
 
-  """Is jackpot cracker - example: true"""
+  """
+  Is jackpot cracker - example: true
+  """
   jackpotCracker: Boolean
 
-  """Jackpot guarantee selected - example: true"""
+  """
+  Jackpot guarantee selected - example: true
+  """
   jackpotGuarantee: Boolean
 
-  """Last draw - example: Jan 1 2018 00:00:00"""
+  """
+  Last draw - example: Jan 1 2018 00:00:00
+  """
   lastDraw: String
 
-  """LOTTO Plus selected - example: false"""
+  """
+  LOTTO Plus selected - example: false
+  """
   lottoplus: Boolean
 
-  """megaPlier selected - example: true"""
+  """
+  megaPlier selected - example: true
+  """
   megaPlier: Boolean
 
-  """Participation day - example: B"""
+  """
+  Participation day - example: B
+  """
   participationDay: String
 
-  """Participation day text - example: Kombi"""
+  """
+  Participation day text - example: Kombi
+  """
   participationDayText: String
 
   """
@@ -1619,181 +2398,292 @@ type modelTicket {
   """
   participationTime: String
 
-  """Participations - example: 1"""
+  """
+  Participations - example: 1
+  """
   participations: Int
 
-  """Payed at - example: Jan 1 2018 00:00:00"""
+  """
+  Payed at - example: Jan 1 2018 00:00:00
+  """
   payedAt: String
 
-  """Payment method - example: elv"""
+  """
+  Payment method - example: elv
+  """
   paymentMethod: String
 
-  """plus5 selected - example: true"""
+  """
+  plus5 selected - example: true
+  """
   plus5: Boolean
 
-  """powerPlay selected - example: true"""
+  """
+  powerPlay selected - example: true
+  """
   powerPlay: Boolean
 
-  """Original Price without fees - example: 3690"""
+  """
+  Original Price without fees - example: 3690
+  """
   price: Int
 
-  """Package Id for a discounted scratch card bundle - example: 1234"""
+  """
+  Package Id for a discounted scratch card bundle - example: 1234
+  """
   scratchCardPackageId: Int
   sharePackage: modelShare
 
-  """Share text to display - example: ?"""
+  """
+  Share text to display - example: ?
+  """
   shareText: String
 
-  """Amount of shares - example: 1"""
+  """
+  Amount of shares - example: 1
+  """
   shares: Int
 
-  """Siegerchance - example: false"""
+  """
+  Siegerchance - example: false
+  """
   siegerchance: Boolean
 
-  """Spiel77 selected - example: true"""
+  """
+  Spiel77 selected - example: true
+  """
   spiel77: Boolean
 
-  """Stake (e.g. KENO) in cents - example: 100"""
+  """
+  Stake (e.g. KENO) in cents - example: 100
+  """
   stake: Int
 
-  """status of the ticket as identifier - example: WIN"""
+  """
+  status of the ticket as identifier - example: WIN
+  """
   statusText: TicketStatus
   subDetails: [modelSubDetails]
   subTickets: [modelTicket]
 
-  """Super6 selected - example: true"""
+  """
+  Super6 selected - example: true
+  """
   super6: Boolean
 
-  """Super Fette Jahre selected - example: true"""
+  """
+  Super Fette Jahre selected - example: true
+  """
   superFetteJahre: Boolean
 
-  """Super number (e.g. SonntagsLotto) - example: 7"""
+  """
+  Super number (e.g. SonntagsLotto) - example: 7
+  """
   superNumber: String
-  super_fette_jahre: Boolean @deprecated(reason: "Camel case and not snake case required")
+  super_fette_jahre: Boolean
+    @deprecated(reason: "Camel case and not snake case required")
 
-  """Ticket number - example: 1234567"""
+  """
+  Ticket number - example: 1234567
+  """
   ticketNumber: String
 
-  """Total win amount in cents - example: 0"""
+  """
+  Total win amount in cents - example: 0
+  """
   totalWinAmount: BigInt
 
-  """Number of won scratch cards - example: 0"""
+  """
+  Number of won scratch cards - example: 0
+  """
   totalWinScratchCards: BigInt
 
-  """Number of won tickets - example: 0"""
+  """
+  Number of won tickets - example: 0
+  """
   totalWinTickets: BigInt
 
-  """Type of the game - example: lotto"""
+  """
+  Type of the game - example: lotto
+  """
   type: String
 
-  """Printable type text - example: Lotto Normal"""
+  """
+  Printable type text - example: Lotto Normal
+  """
   typeText: String
 
-  """Unknown winnings of draw ids - example: ['2018011']"""
+  """
+  Unknown winnings of draw ids - example: ['2018011']
+  """
   unknownWinnings: [String]
 
-  """Variant - example: black_pearl"""
+  """
+  Variant - example: black_pearl
+  """
   variant: String
 
-  """Max weekly amount in cent - example: 400"""
+  """
+  Max weekly amount in cent - example: 400
+  """
   weeklyAmount: Int
 
-  """Wager id - example: 4712"""
+  """
+  Wager id - example: 4712
+  """
   wid: String
 
-  """Win guarantee selected - example: true"""
+  """
+  Win guarantee selected - example: true
+  """
   winGuarantee: Boolean
   winnings: [modelWinning]
 }
 
 type modelTicketTypes {
-  """name of the ticket - example: EuroJackpot"""
+  """
+  name of the ticket - example: EuroJackpot
+  """
   name: String!
 
-  """type of the ticket - example: eurojackpot"""
+  """
+  type of the ticket - example: eurojackpot
+  """
   type: String!
 }
 
 type modelWinning {
-  """Amount in cents - example: 200"""
+  """
+  Amount in cents - example: 200
+  """
   amount: BigInt
 
-  """Description - example: Rubbellos: 2,00&euro; gewonnen!"""
+  """
+  Description - example: Rubbellos: 2,00&euro; gewonnen!
+  """
   description: String
 
-  """Draw id - example: 2017472"""
+  """
+  Draw id - example: 2017472
+  """
   drawId: String
 
-  """Encoded description - example: Rubbellos: 2,00&euro; gewonnen!"""
+  """
+  Encoded description - example: Rubbellos: 2,00&euro; gewonnen!
+  """
   encodedDescription: String
 
-  """Is high win - example: false"""
+  """
+  Is high win - example: false
+  """
   highWin: Boolean
 
-  """High win status - example: 0"""
+  """
+  High win status - example: 0
+  """
   highWinStatus: Int
   hits: [modelCustomerTicketHit]
 
-  """Wager id - example: 81781408465"""
+  """
+  Wager id - example: 81781408465
+  """
   wid: String
 
-  """Win is winning guarantee - example: false"""
+  """
+  Win is winning guarantee - example: false
+  """
   winGuarantee: Boolean
 }
 
 type Mutation {
-  """Adds a scratch card to the basket"""
+  """
+  Adds a scratch card to the basket
+  """
   addScratchCardToBasket(
-    """Coupon code - example: 784094077"""
+    """
+    Coupon code - example: 784094077
+    """
     coupon: String
 
-    """Amount of tickets - default 1"""
+    """
+    Amount of tickets - default 1
+    """
     count: Int
 
-    """ScratchCard variant - example: dickes_ei"""
+    """
+    ScratchCard variant - example: dickes_ei
+    """
     variant: String!
   ): addScratchCardToBasket
 
-  """Adds a ticket to the basket"""
+  """
+  Adds a ticket to the basket
+  """
   addTicketToBasket(
-    """Abonnement selected - example: false"""
+    """
+    Abonnement selected - example: false
+    """
     abonnement: Boolean
 
-    """Additional ticket numbers - example: [1234567]"""
+    """
+    Additional ticket numbers - example: [1234567]
+    """
     additionalTicketNumbers: [String]
 
-    """Coupon code - example: 784094077"""
+    """
+    Coupon code - example: 784094077
+    """
     coupon: String
 
-    """Amount of tickets - default 1"""
+    """
+    Amount of tickets - default 1
+    """
     count: Int
 
-    """Daily Million Plus selected - example: false"""
+    """
+    Daily Million Plus selected - example: false
+    """
     dailymillionplus: Boolean
 
-    """EuroMillions 2. Chance selected - example: false"""
+    """
+    EuroMillions 2. Chance selected - example: false
+    """
     euromillions_second_chance: Boolean
     fields: [inputModelFieldType]
 
-    """First participation - example: Jan 31 2018 18:10:00"""
+    """
+    First participation - example: Jan 31 2018 18:10:00
+    """
     firstDraw: String
 
-    """GlücksSpirale selected - example: false"""
+    """
+    GlücksSpirale selected - example: false
+    """
     gluecksspirale: Boolean
 
-    """Jackpot-Knacker selected - example: false"""
+    """
+    Jackpot-Knacker selected - example: false
+    """
     jackpotCracker: Boolean
 
-    """LOTTO Plus selected - example: false"""
+    """
+    LOTTO Plus selected - example: false
+    """
     lottoplus: Boolean
 
-    """MegaPlier selected - example: false"""
+    """
+    MegaPlier selected - example: false
+    """
     megaPlier: Boolean
 
-    """Day of participation - example: we,sa"""
+    """
+    Day of participation - example: we,sa
+    """
     participationDay: String
 
-    """Amount of participations - example: 1"""
+    """
+    Amount of participations - example: 1
+    """
     participations: Int
 
     """
@@ -1801,37 +2691,59 @@ type Mutation {
     """
     participationTime: String
 
-    """Plus5 selected - example: false"""
+    """
+    Plus5 selected - example: false
+    """
     plus5: Boolean
 
-    """PowerPlay selected - example: false"""
+    """
+    PowerPlay selected - example: false
+    """
     powerPlay: Boolean
 
-    """Name of the share - example: L"""
+    """
+    Name of the share - example: L
+    """
     shareName: String
 
-    """Amount of shares - example: 1"""
+    """
+    Amount of shares - example: 1
+    """
     shares: Int
 
-    """Sieger-Chance selected - example: false"""
+    """
+    Sieger-Chance selected - example: false
+    """
     siegerchance: Boolean
 
-    """Spiel 77 selected - example: false"""
+    """
+    Spiel 77 selected - example: false
+    """
     spiel77: Boolean
 
-    """Stake (e.g. KENO) in cents - example: 100"""
+    """
+    Stake (e.g. KENO) in cents - example: 100
+    """
     stake: Int
 
-    """Super 6 selected - example: true"""
+    """
+    Super 6 selected - example: true
+    """
     super6: Boolean
 
-    """Super Fette Jahre selected - example: true"""
+    """
+    Super Fette Jahre selected - example: true
+    """
     super_fette_jahre: Boolean
 
-    """Super number (e.g. SonntagsLotto & SwissLotto) - example: 1"""
+    """
+    Super number (e.g. SonntagsLotto & SwissLotto) - example: 1
+    """
     superNumber: Int
 
-    """Ticket number - example: 0123456"""
+    """
+    Ticket number - example: 0123456
+    """
     ticketNumber: String
 
     """
@@ -1849,152 +2761,250 @@ type Mutation {
     """
     type: String
 
-    """Game community variant - example: duo_jackpot"""
+    """
+    Game community variant - example: duo_jackpot
+    """
     variant: String
 
-    """Gewinngarantie selected - example: false"""
+    """
+    Gewinngarantie selected - example: false
+    """
     winGuarantee: Boolean
   ): addTicketToBasket
 
-  """Saves bank data"""
+  """
+  Saves bank data
+  """
   bankData(
-    """Change win account - example: true"""
+    """
+    Change win account - example: true
+    """
     changeWinAccount: Boolean
 
-    """Iban - example: DE44123456781234567890"""
+    """
+    Iban - example: DE44123456781234567890
+    """
     iban: String
   ): bankData
 
-  """Pays the basket"""
+  """
+  Pays the basket
+  """
   basketPay(
-    """base64 encoded session-data from SEON"""
+    """
+    base64 encoded session-data from SEON
+    """
     sessionPayload: String
   ): basketPay
 
-  """Cancels an abonnement"""
+  """
+  Cancels an abonnement
+  """
   cancelAbonnement(
-    """Ticket id - example: 874653654"""
+    """
+    Ticket id - example: 874653654
+    """
     abonnementId: BigInt
   ): cancelAbonnement
 
-  """confirms that the player has seen the game revenues"""
+  """
+  confirms that the player has seen the game revenues
+  """
   confirmPlayerGamesRevenues: confirmPlayerGamesRevenues
 
-  """Sends contact form"""
+  """
+  Sends contact form
+  """
   contact(
-    """Email address - example: ex@ample.org"""
+    """
+    Email address - example: ex@ample.org
+    """
     from: String
 
-    """Subject - example: asdfgh12"""
+    """
+    Subject - example: asdfgh12
+    """
     subject: String
 
-    """Salutation - [Herr|Frau|Tippgemeinschaft]"""
+    """
+    Salutation - [Herr|Frau|Tippgemeinschaft]
+    """
     salutation: String
 
-    """Tip community - example: Asdfgasdf"""
+    """
+    Tip community - example: Asdfgasdf
+    """
     tipCommunity: String
 
-    """First name - example: Max"""
+    """
+    First name - example: Max
+    """
     firstName: String
 
-    """last name - example: Mustermann"""
+    """
+    last name - example: Mustermann
+    """
     lastName: String
 
-    """body - example: Ich kann kein...."""
+    """
+    body - example: Ich kann kein....
+    """
     body: String
   ): contact
 
-  """Deposit money"""
+  """
+  Deposit money
+  """
   deposit(
-    """Amount in cents to deposit - example: 100"""
+    """
+    Amount in cents to deposit - example: 100
+    """
     amount: Int!
 
-    """Payment method - [elv | cc | gp | su]"""
+    """
+    Payment method - [elv | cc | gp | su]
+    """
     paymentMethod: String!
     redirectTo: inputModelRedirectToType
 
-    """base64 encoded session-data from SEON"""
+    """
+    base64 encoded session-data from SEON
+    """
     sessionPayload: String
   ): deposit
 
-  """Activates newsletters"""
+  """
+  Activates newsletters
+  """
   doubleOptIn(
-    """Identification hash - example: 98asd93jh7"""
+    """
+    Identification hash - example: 98asd93jh7
+    """
     hashKey: String
   ): doubleOptIn
 
-  """Cancels an abonnement and puts a new to the basket"""
+  """
+  Cancels an abonnement and puts a new to the basket
+  """
   editAbonnement(
-    """Ticket id - example: 874653654"""
+    """
+    Ticket id - example: 874653654
+    """
     abonnementId: BigInt
   ): editAbonnement
 
-  """Changes the e-mail address"""
+  """
+  Changes the e-mail address
+  """
   email(
-    """email address - example: t@est.de"""
+    """
+    email address - example: t@est.de
+    """
     email: String
 
-    """email addess confirmation - example: t@est.de"""
+    """
+    email addess confirmation - example: t@est.de
+    """
     emailConfirmation: String
   ): email
 
-  """adds a game break lock"""
+  """
+  adds a game break lock
+  """
   gameBreakLock(
-    """duration of game break lock in hours - example: 24"""
+    """
+    duration of game break lock in hours - example: 24
+    """
     duration: Int!
   ): gameBreakLock
 
-  """Logs in an user"""
+  """
+  Logs in an user
+  """
   login(
-    """User email address - example: ex@ample.org"""
+    """
+    User email address - example: ex@ample.org
+    """
     email: String!
 
-    """Password - example: asdfgh12"""
+    """
+    Password - example: asdfgh12
+    """
     password: String!
 
-    """Webtrekk everid - example: asda2"""
+    """
+    Webtrekk everid - example: asda2
+    """
     webtrekkEverid: String
 
-    """Keep session - example: true"""
+    """
+    Keep session - example: true
+    """
     keep: Boolean
 
-    """is login device mobile - example: false"""
+    """
+    is login device mobile - example: false
+    """
     mobile: Boolean
 
-    """login user agent - example: Mozilla/5.0 (Macintosh; Intel Mac OS X..."""
+    """
+    login user agent - example: Mozilla/5.0 (Macintosh; Intel Mac OS X...
+    """
     userAgent: String
 
-    """login operating system - example: MacIntel"""
+    """
+    login operating system - example: MacIntel
+    """
     operatingSystem: String
 
-    """login screen size - example: 2560×1440@24Bit"""
+    """
+    login screen size - example: 2560×1440@24Bit
+    """
     screenSize: String
 
-    """base64 encoded session-data from SEON"""
+    """
+    base64 encoded session-data from SEON
+    """
     sessionPayload: String
   ): login
 
-  """Logs out current user"""
+  """
+  Logs out current user
+  """
   logout: logout
 
-  """Sets a new password"""
+  """
+  Sets a new password
+  """
   newPassword(
-    """Identification hash - example: 98asd93jh7s7"""
+    """
+    Identification hash - example: 98asd93jh7s7
+    """
     hashKey: String
 
-    """New password - example: asdfgh12"""
+    """
+    New password - example: asdfgh12
+    """
     password: String
 
-    """Password confirmation - example: asdfgh12"""
+    """
+    Password confirmation - example: asdfgh12
+    """
     passwordConfirmation: String
 
-    """One time password - example: kj2h4s"""
+    """
+    One time password - example: kj2h4s
+    """
     otPassword: String
   ): newPassword
 
-  """Sets the newsletter configuration"""
+  """
+  Sets the newsletter configuration
+  """
   newsletterConfiguration(
-    """Campaign identifier - example: 123123123"""
+    """
+    Campaign identifier - example: 123123123
+    """
     cid: String
     drawings: [inputModelDrawingNewsletterType]
 
@@ -2004,113 +3014,185 @@ type Mutation {
     hashKey: String
     jackpotAlarms: [inputModelJackpotAlarmType]
 
-    """Launch list identifier - example: 123123123"""
+    """
+    Launch list identifier - example: 123123123
+    """
     llid: String
 
-    """news notification - example: false"""
+    """
+    news notification - example: false
+    """
     news: Boolean
 
-    """sportsBetting notification - example: false"""
+    """
+    sportsBetting notification - example: false
+    """
     sportsBetting: Boolean
 
-    """Mobile number for SMS notification - example: 01771234567"""
+    """
+    Mobile number for SMS notification - example: 01771234567
+    """
     phone: String
 
-    """The string contact identifier - example: 123123123"""
+    """
+    The string contact identifier - example: 123123123
+    """
     uid: String
 
-    """Winning SMS notification - example: true"""
+    """
+    Winning SMS notification - example: true
+    """
     winningSMSNotification: Boolean
   ): newsletterConfiguration
 
-  """Changes the password"""
+  """
+  Changes the password
+  """
   password(
-    """Password - example: asdfgh12"""
+    """
+    Password - example: asdfgh12
+    """
     oldPassword: String
 
-    """Password - example: besondersSicher"""
+    """
+    Password - example: besondersSicher
+    """
     password: String
 
-    """Password confirmation - example: besondersSicher"""
+    """
+    Password confirmation - example: besondersSicher
+    """
     passwordConfirmation: String
   ): password
 
-  """Pays out money to the bank account"""
+  """
+  Pays out money to the bank account
+  """
   payOut(
-    """Amount to pay out in cents - example: 100"""
+    """
+    Amount to pay out in cents - example: 100
+    """
     amount: Int!
   ): payOut
 
-  """Sets the payment method"""
+  """
+  Sets the payment method
+  """
   paymentMethod(
-    """BIC - example: PBNKDEFFXXX"""
+    """
+    BIC - example: PBNKDEFFXXX
+    """
     bic: String
 
-    """Credit card reference - example: jh76"""
+    """
+    Credit card reference - example: jh76
+    """
     ccReference: String
 
-    """Change win account - example: true"""
+    """
+    Change win account - example: true
+    """
     changeWinAccount: Boolean
     creditCardType: PaymentMethodCreditCardType
 
-    """Coded credit card information - example: x2s7d"""
+    """
+    Coded credit card information - example: x2s7d
+    """
     cse: String
 
-    """for deposit - example: false"""
+    """
+    for deposit - example: false
+    """
     deposit: Boolean
 
-    """IBAN - example: DE44123456781234567890"""
+    """
+    IBAN - example: DE44123456781234567890
+    """
     iban: String
 
-    """Payment method - [elv | cc | nn | gh | su]"""
+    """
+    Payment method - [elv | cc | nn | gh | su]
+    """
     paymentMethod: String
 
-    """Save credit card data - example: true"""
+    """
+    Save credit card data - example: true
+    """
     saveCcData: Boolean
 
-    """Terms - example: true"""
+    """
+    Terms - example: true
+    """
     terms: Boolean
   ): paymentMethod
 
-  """Changes the personal data"""
+  """
+  Changes the personal data
+  """
   personalData(
-    """City - example: Berlin"""
+    """
+    City - example: Berlin
+    """
     city: String
 
-    """email address - example: t@est.de"""
+    """
+    email address - example: t@est.de
+    """
     email: String
 
-    """Mobile number - example: 01771234567"""
+    """
+    Mobile number - example: 01771234567
+    """
     phone: String
 
-    """Street - example: Unter der Brücke 1b"""
+    """
+    Street - example: Unter der Brücke 1b
+    """
     street: String
 
-    """Zip code - example: 12345"""
+    """
+    Zip code - example: 12345
+    """
     zipCode: String
   ): personalData
 
-  """Saves player limits"""
+  """
+  Saves player limits
+  """
   playerLimits(
-    """weekly deposit limit in cents - example: 10000"""
+    """
+    weekly deposit limit in cents - example: 10000
+    """
     depositLimit: Int
 
-    """weekly game limit in cents - example: 10000"""
+    """
+    weekly game limit in cents - example: 10000
+    """
     gameLimit: Int
 
-    """weekly lottery and scratch card limit in cents - example: 10000"""
+    """
+    weekly lottery and scratch card limit in cents - example: 10000
+    """
     lotteryAndScratchCardLimit: Int
 
-    """weekly sportsbetting limit in cents - example: 10000"""
+    """
+    weekly sportsbetting limit in cents - example: 10000
+    """
     sportsBettingLimit: Int
   ): playerLimits
 
-  """stores the push notification settings"""
+  """
+  stores the push notification settings
+  """
   pushNotification(
-    """The firebase token - example: 123456789 """
+    """
+    The firebase token - example: 123456789
+    """
     token: String!
 
-    """Collection of general subscriptions"""
+    """
+    Collection of general subscriptions
+    """
     generalSubscriptions: inputModelPushNotificationGeneralSubscription
 
     """
@@ -2125,110 +3207,180 @@ type Mutation {
     lotterySubscriptions: [inputModelPushNotificationSubscription]
   ): pushNotification
 
-  """Registers a player"""
+  """
+  Registers a player
+  """
   register(
-    """Affiliate id - example: td34hdf"""
+    """
+    Affiliate id - example: td34hdf
+    """
     affiliateId: String
 
-    """City - example: Berlin"""
+    """
+    City - example: Berlin
+    """
     city: String
 
-    """Coupon - example: test"""
+    """
+    Coupon - example: test
+    """
     coupon: String
 
-    """Date of birth - example: Jan 18 1980"""
+    """
+    Date of birth - example: Jan 18 1980
+    """
     dateOfBirth: String
 
-    """email address - example: t@est.de"""
+    """
+    email address - example: t@est.de
+    """
     email: String
 
-    """First name - example: Max"""
+    """
+    First name - example: Max
+    """
     firstName: String
     language: Language
 
-    """uuid-hash for threatmetrix - example: 6c3a2921fab7da8badaa41588d1d970e"""
+    """
+    uuid-hash for threatmetrix - example: 6c3a2921fab7da8badaa41588d1d970e
+    """
     metrixHash: String
 
-    """Last name - example: Mustermann"""
+    """
+    Last name - example: Mustermann
+    """
     lastName: String
 
-    """Password - example: asdfgh12"""
+    """
+    Password - example: asdfgh12
+    """
     password: String
 
-    """Password confirmation - example: asdfgh12"""
+    """
+    Password confirmation - example: asdfgh12
+    """
     passwordConfirmation: String
 
-    """Salutation - [Herr | Frau | Tippgemeinschaft]"""
+    """
+    Salutation - [Herr | Frau | Tippgemeinschaft]
+    """
     salutation: String
 
-    """base64 encoded session-data from SEON"""
+    """
+    base64 encoded session-data from SEON
+    """
     sessionPayload: String
 
-    """Street - example: Unter der Brücke 1b"""
+    """
+    Street - example: Unter der Brücke 1b
+    """
     street: String
 
-    """TradeDoubler data - example: kjh234"""
+    """
+    TradeDoubler data - example: kjh234
+    """
     tdData: String
 
-    """Tip community name - example: Muskeltiere"""
+    """
+    Tip community name - example: Muskeltiere
+    """
     tipCommunity: String
 
-    """Webtrekk everid - example: 7asdfasuzdf"""
+    """
+    Webtrekk everid - example: 7asdfasuzdf
+    """
     webtrekkEverid: String
 
-    """zip code - example: 12345"""
+    """
+    zip code - example: 12345
+    """
     zipCode: String
   ): register
 
-  """Removes specified tickets from the basket"""
+  """
+  Removes specified tickets from the basket
+  """
   removeTicketsFromBasket(
-    """ticketIds - example: [4711, 4712]"""
+    """
+    ticketIds - example: [4711, 4712]
+    """
     ticketIds: [Int!]!
 
-    """Coupon code - example: test"""
+    """
+    Coupon code - example: test
+    """
     coupon: String
   ): removeTicketsFromBasket
 
-  """Adds a ticket to the basket"""
+  """
+  Adds a ticket to the basket
+  """
   replaceTicket(
-    """Ticket id to replace - example: 12345"""
+    """
+    Ticket id to replace - example: 12345
+    """
     ticketId: BigInt
 
-    """Abonnement selected - example: false"""
+    """
+    Abonnement selected - example: false
+    """
     abonnement: Boolean
 
-    """Additional ticket numbers - example: [1234567]"""
+    """
+    Additional ticket numbers - example: [1234567]
+    """
     additionalTicketNumbers: [String]
 
-    """Amount of tickets - default 1"""
+    """
+    Amount of tickets - default 1
+    """
     count: Int
 
-    """Daily Million Plus selected - example: false"""
+    """
+    Daily Million Plus selected - example: false
+    """
     dailymillionplus: Boolean
 
-    """EuroMillions 2. Chance selected - example: false"""
+    """
+    EuroMillions 2. Chance selected - example: false
+    """
     euromillions_second_chance: Boolean
     fields: [inputModelFieldType]
 
-    """First participation - example: Jan 31 2018 18:10:00"""
+    """
+    First participation - example: Jan 31 2018 18:10:00
+    """
     firstDraw: String
 
-    """GlücksSpirale selected - example: false"""
+    """
+    GlücksSpirale selected - example: false
+    """
     gluecksspirale: Boolean
 
-    """Jackpot-Knacker selected - example: false"""
+    """
+    Jackpot-Knacker selected - example: false
+    """
     jackpotCracker: Boolean
 
-    """LOTTO Plus selected - example: false"""
+    """
+    LOTTO Plus selected - example: false
+    """
     lottoplus: Boolean
 
-    """MegaPlier selected - example: false"""
+    """
+    MegaPlier selected - example: false
+    """
     megaPlier: Boolean
 
-    """Day of participation - example: we,sa"""
+    """
+    Day of participation - example: we,sa
+    """
     participationDay: String
 
-    """Amount of participations - example: 1"""
+    """
+    Amount of participations - example: 1
+    """
     participations: Int
 
     """
@@ -2236,37 +3388,59 @@ type Mutation {
     """
     participationTime: String
 
-    """Plus5 selected - example: false"""
+    """
+    Plus5 selected - example: false
+    """
     plus5: Boolean
 
-    """PowerPlay selected - example: false"""
+    """
+    PowerPlay selected - example: false
+    """
     powerPlay: Boolean
 
-    """Name of the share - example: L"""
+    """
+    Name of the share - example: L
+    """
     shareName: String
 
-    """Amount of shares - example: 1"""
+    """
+    Amount of shares - example: 1
+    """
     shares: Int
 
-    """Sieger-Chance selected - example: false"""
+    """
+    Sieger-Chance selected - example: false
+    """
     siegerchance: Boolean
 
-    """Spiel 77 selected - example: false"""
+    """
+    Spiel 77 selected - example: false
+    """
     spiel77: Boolean
 
-    """Stake (e.g. KENO) in cents - example: 100"""
+    """
+    Stake (e.g. KENO) in cents - example: 100
+    """
     stake: Int
 
-    """Super 6 selected - example: true"""
+    """
+    Super 6 selected - example: true
+    """
     super6: Boolean
 
-    """Super Fette Jahre selected - example: true"""
+    """
+    Super Fette Jahre selected - example: true
+    """
     super_fette_jahre: Boolean
 
-    """Super number (e.g. SonntagsLotto) - example: 1"""
+    """
+    Super number (e.g. SonntagsLotto) - example: 1
+    """
     superNumber: Int
 
-    """Ticket number - example: 0123456"""
+    """
+    Ticket number - example: 0123456
+    """
     ticketNumber: String
 
     """
@@ -2284,26 +3458,40 @@ type Mutation {
     """
     type: String
 
-    """Game community variant - example: duo_jackpot"""
+    """
+    Game community variant - example: duo_jackpot
+    """
     variant: String
 
-    """Gewinngarantie selected - example: false"""
+    """
+    Gewinngarantie selected - example: false
+    """
     winGuarantee: Boolean
   ): addTicketToBasket
 
-  """Adds played ticket to basket"""
+  """
+  Adds played ticket to basket
+  """
   replayTicket(
-    """ticketId - example: 4711"""
+    """
+    ticketId - example: 4711
+    """
     ticketId: BigInt
   ): replayTicket
 
-  """Resends the double opt in mail"""
+  """
+  Resends the double opt in mail
+  """
   resendDoubleOptIn(
-    """Identification hash - example: 98asd93jh7"""
+    """
+    Identification hash - example: 98asd93jh7
+    """
     hashKey: String!
   ): resendDoubleOptIn
 
-  """Resets the newsletter configuration"""
+  """
+  Resets the newsletter configuration
+  """
   resetNewsletterConfiguration(
     """
     identification hash for setting the newsletter configuration when not logged in - example: 98asd93jh
@@ -2311,54 +3499,86 @@ type Mutation {
     hashKey: String
   ): resetNewsletterConfiguration
 
-  """Sends reset password email"""
+  """
+  Sends reset password email
+  """
   resetPassword(
-    """User email address - example: ex@ample.org"""
+    """
+    User email address - example: ex@ample.org
+    """
     email: String!
 
-    """Date of birth - example: Jan 18 1980"""
+    """
+    Date of birth - example: Jan 18 1980
+    """
     dateOfBirth: String!
   ): resetPassword
 
-  """Save partner id in session"""
+  """
+  Save partner id in session
+  """
   savePartner(
-    """Partner id"""
+    """
+    Partner id
+    """
     id: String!
   ): savePartner
 
-  """Sends receipt email"""
+  """
+  Sends receipt email
+  """
   sendReceipt(
-    """ticketId - example: 4711"""
+    """
+    ticketId - example: 4711
+    """
     ticketId: BigInt
   ): sendReceipt
 
-  """sets a casino pause lock for fixed 24 hours"""
+  """
+  sets a casino pause lock for fixed 24 hours
+  """
   setCasinoPause: setCasinoPause
 
-  """Sets a new password"""
+  """
+  Sets a new password
+  """
   sofortueberweisung(
-    """Transaction id - example: 98asd93jh"""
+    """
+    Transaction id - example: 98asd93jh
+    """
     transactionId: String
 
-    """Transaction type - [success|abort]"""
+    """
+    Transaction type - [success|abort]
+    """
     type: String!
   ): sofortueberweisung
 
-  """Saves win account data"""
+  """
+  Saves win account data
+  """
   winAccount(
-    """Auto paying out winnings - example: true"""
+    """
+    Auto paying out winnings - example: true
+    """
     autoPayingOut: Boolean
 
-    """IBAN for payouts - example: DE44123456781234567890"""
+    """
+    IBAN for payouts - example: DE44123456781234567890
+    """
     payoutIban: String
   ): winAccount
 }
 
 type newPassword implements ErrorHandling & Token {
-  """Errors string - example: session_not_found"""
+  """
+  Errors string - example: session_not_found
+  """
   backendError: String
 
-  """Status of the mutation - example: true"""
+  """
+  Status of the mutation - example: true
+  """
   success: Boolean!
 
   """
@@ -2369,10 +3589,14 @@ type newPassword implements ErrorHandling & Token {
 }
 
 type newsletterConfiguration implements ErrorHandling & Token {
-  """Errors string - example: session_not_found"""
+  """
+  Errors string - example: session_not_found
+  """
   backendError: String
 
-  """Status of the mutation - example: true"""
+  """
+  Status of the mutation - example: true
+  """
   success: Boolean!
 
   """
@@ -2382,7 +3606,9 @@ type newsletterConfiguration implements ErrorHandling & Token {
   visibleErrors: visibleErrors!
 }
 
-"""offset account type"""
+"""
+offset account type
+"""
 enum OffsetAccount {
   API
   BANK_DEPOSIT
@@ -2446,10 +3672,14 @@ enum OffsetAccount {
 }
 
 type password implements ErrorHandling & Token {
-  """Errors string - example: session_not_found"""
+  """
+  Errors string - example: session_not_found
+  """
   backendError: String
 
-  """Status of the mutation - example: true"""
+  """
+  Status of the mutation - example: true
+  """
   success: Boolean!
 
   """
@@ -2460,10 +3690,14 @@ type password implements ErrorHandling & Token {
 }
 
 type paymentMethod implements ErrorHandling & Token {
-  """Errors string - example: session_not_found"""
+  """
+  Errors string - example: session_not_found
+  """
   backendError: String
 
-  """Status of the mutation - example: true"""
+  """
+  Status of the mutation - example: true
+  """
   success: Boolean!
 
   """
@@ -2473,23 +3707,33 @@ type paymentMethod implements ErrorHandling & Token {
   visibleErrors: visibleErrors!
 }
 
-"""credit card type"""
+"""
+credit card type
+"""
 enum PaymentMethodCreditCardType {
   MC
   VI
 }
 
 type payOut implements ErrorHandling & Token {
-  """Errors string - example: session_not_found"""
+  """
+  Errors string - example: session_not_found
+  """
   backendError: String
 
-  """Current balance of the player in cents - example: 123"""
+  """
+  Current balance of the player in cents - example: 123
+  """
   balance: BigInt
 
-  """Cashable amount of the player in cents - example: 100"""
+  """
+  Cashable amount of the player in cents - example: 100
+  """
   cashable: BigInt
 
-  """Status of the mutation - example: true"""
+  """
+  Status of the mutation - example: true
+  """
   success: Boolean!
 
   """
@@ -2500,10 +3744,14 @@ type payOut implements ErrorHandling & Token {
 }
 
 type personalData implements ErrorHandling & Token {
-  """Errors string - example: session_not_found"""
+  """
+  Errors string - example: session_not_found
+  """
   backendError: String
 
-  """Status of the mutation - example: true"""
+  """
+  Status of the mutation - example: true
+  """
   success: Boolean!
 
   """
@@ -2514,11 +3762,15 @@ type personalData implements ErrorHandling & Token {
 }
 
 type player implements ErrorHandling & Token {
-  """Errors string - example: session_not_found"""
+  """
+  Errors string - example: session_not_found
+  """
   backendError: String
   player: modelPlayer
 
-  """Status of the mutation - example: true"""
+  """
+  Status of the mutation - example: true
+  """
   success: Boolean!
 
   """
@@ -2529,16 +3781,24 @@ type player implements ErrorHandling & Token {
 }
 
 type playerGamesRevenues implements ErrorHandling & Token {
-  """Errors string - example: session_not_found"""
+  """
+  Errors string - example: session_not_found
+  """
   backendError: String
 
-  """loosing amount"""
+  """
+  loosing amount
+  """
   loosingAmount: BigInt
 
-  """stake amount"""
+  """
+  stake amount
+  """
   stakeAmount: BigInt
 
-  """Status of the mutation - example: true"""
+  """
+  Status of the mutation - example: true
+  """
   success: Boolean!
 
   """
@@ -2547,16 +3807,22 @@ type playerGamesRevenues implements ErrorHandling & Token {
   token: String!
   visibleErrors: visibleErrors!
 
-  """winning amount"""
+  """
+  winning amount
+  """
   winningAmount: BigInt
 }
 
 type playerLimits implements ErrorHandling & Token {
-  """Errors string - example: session_not_found"""
+  """
+  Errors string - example: session_not_found
+  """
   backendError: String
   limits: modelPlayLimit
 
-  """Status of the mutation - example: true"""
+  """
+  Status of the mutation - example: true
+  """
   success: Boolean!
 
   """
@@ -2567,10 +3833,14 @@ type playerLimits implements ErrorHandling & Token {
 }
 
 type playerTickets implements ErrorHandling & Token {
-  """Errors string - example: session_not_found"""
+  """
+  Errors string - example: session_not_found
+  """
   backendError: String
 
-  """Status of the mutation - example: true"""
+  """
+  Status of the mutation - example: true
+  """
   success: Boolean!
   tickets: [modelTicket]!
 
@@ -2579,19 +3849,27 @@ type playerTickets implements ErrorHandling & Token {
   """
   token: String!
 
-  """Total items - example: 10"""
+  """
+  Total items - example: 10
+  """
   totalItemCount: Int!
 
-  """Total tickets - example: 20"""
+  """
+  Total tickets - example: 20
+  """
   totalTicketCount: Int!
   visibleErrors: visibleErrors!
 }
 
 type playerTicketTypes implements ErrorHandling & Token {
-  """Errors string - example: session_not_found"""
+  """
+  Errors string - example: session_not_found
+  """
   backendError: String
 
-  """Status of the mutation - example: true"""
+  """
+  Status of the mutation - example: true
+  """
   success: Boolean!
   ticketTypes: [modelTicketTypes]!
 
@@ -2603,16 +3881,24 @@ type playerTicketTypes implements ErrorHandling & Token {
 }
 
 type playGame implements ErrorHandling & Token {
-  """Errors string - example: session_not_found"""
+  """
+  Errors string - example: session_not_found
+  """
   backendError: String
 
-  """If player´s balance is too low - example: false"""
+  """
+  If player´s balance is too low - example: false
+  """
   notEnoughBalance: Boolean
 
-  """Redirect to this URL - example: https://pariplay.com/89sd9fhskjhg9"""
+  """
+  Redirect to this URL - example: https://pariplay.com/89sd9fhskjhg9
+  """
   redirectTo: String
 
-  """Status of the mutation - example: true"""
+  """
+  Status of the mutation - example: true
+  """
   success: Boolean!
 
   """
@@ -2623,10 +3909,14 @@ type playGame implements ErrorHandling & Token {
 }
 
 type pushNotification implements ErrorHandling {
-  """Errors string - example: session_not_found"""
+  """
+  Errors string - example: session_not_found
+  """
   backendError: String
 
-  """Status of the mutation - example: true"""
+  """
+  Status of the mutation - example: true
+  """
   success: Boolean!
   visibleErrors: visibleErrors!
 }
@@ -2634,12 +3924,16 @@ type pushNotification implements ErrorHandling {
 type pushNotificationStatus implements ErrorHandling & Token {
   authorizedSubscriptions: modelPushNotificationAuthorizedSubscription
 
-  """Errors string - example: session_not_found"""
+  """
+  Errors string - example: session_not_found
+  """
   backendError: String
   generalSubscriptions: modelPushNotificationGeneralSubscription
   lotterySubscriptions: [modelPushNotificationLotterySubscription]
 
-  """Status of the mutation - example: true"""
+  """
+  Status of the mutation - example: true
+  """
   success: Boolean!
 
   """
@@ -2650,50 +3944,80 @@ type pushNotificationStatus implements ErrorHandling & Token {
 }
 
 type Query {
-  """Returns accounting history rows of the player"""
+  """
+  Returns accounting history rows of the player
+  """
   accountingRow(
-    """End date - example: Jan 01 2019"""
+    """
+    End date - example: Jan 01 2019
+    """
     endDate: String!
 
-    """Pagination limit - example: 10"""
+    """
+    Pagination limit - example: 10
+    """
     limit: Int!
 
-    """Pagination offset - example: 0"""
+    """
+    Pagination offset - example: 0
+    """
     offset: Int!
     sortOption: AccountingRowSortOption!
 
-    """Start date - example: Jan 01 2018"""
+    """
+    Start date - example: Jan 01 2018
+    """
     startDate: String!
     types: [AccountingRowTypes]!
   ): accountingRow
 
-  """Validates the basket and returns it"""
+  """
+  Validates the basket and returns it
+  """
   basketSummary: basketSummary
 
-  """Returns session informations"""
+  """
+  Returns session informations
+  """
   checkSession: checkSession
 
-  """Returns cities that have the given zip code"""
+  """
+  Returns cities that have the given zip code
+  """
   cities(
-    """Zip code - example: 25335"""
+    """
+    Zip code - example: 25335
+    """
     zip: String
   ): cities
 
-  """Returns the config for one coupon"""
+  """
+  Returns the config for one coupon
+  """
   couponConfig(
-    """coupon code - example: 934105329"""
+    """
+    coupon code - example: 934105329
+    """
     coupon: String!
   ): couponConfig
 
-  """Returns deadlines"""
+  """
+  Returns deadlines
+  """
   deadlines: deadlines
 
-  """Returns the requested draw(s)"""
+  """
+  Returns the requested draw(s)
+  """
   draw(
-    """Date of draw - example: Jan 18 2018"""
+    """
+    Date of draw - example: Jan 18 2018
+    """
     date: String
 
-    """Limit - example: 10"""
+    """
+    Limit - example: 10
+    """
     limit: Int
 
     """
@@ -2709,7 +4033,9 @@ type Query {
     type: String
   ): draw
 
-  """Returns the requested drawing dates for a type"""
+  """
+  Returns the requested drawing dates for a type
+  """
   drawDates(
     """
     Limit - example: 10 (The default value is "-1" which will return all entries.)
@@ -2729,52 +4055,87 @@ type Query {
     type: String!
   ): drawsdates
 
-  """Returns the category items for the given type and filter"""
-  filteredCategories(filter: CategoryFilter!, type: TicketsType!): filteredCategories
+  """
+  Returns the category items for the given type and filter
+  """
+  filteredCategories(
+    filter: CategoryFilter!
+    type: TicketsType!
+  ): filteredCategories
 
-  """Returns game config"""
+  """
+  Returns game config
+  """
   gameConfig: gameConfig
 
-  """Returns google???"""
+  """
+  Returns google???
+  """
   googleAnalytics(
-    """Order id - example: SU394"""
+    """
+    Order id - example: SU394
+    """
     orderId: String
   ): googleAnalytics
 
-  """Returns the requested lucky numbers"""
+  """
+  Returns the requested lucky numbers
+  """
   luckyNumbers(
-    """Lottery - example: lotto"""
+    """
+    Lottery - example: lotto
+    """
     lottery: String!
 
-    """Numbers - example: [1, 2, 3]"""
+    """
+    Numbers - example: [1, 2, 3]
+    """
     numbers: [Int!]!
   ): luckyNumbers
 
-  """Ping Query - For nagios healthcheck monitoring"""
+  """
+  Ping Query - For nagios healthcheck monitoring
+  """
   ping: String!
 
-  """Returns a game URL"""
+  """
+  Returns a game URL
+  """
   playGame(
-    """Mobile URL - example: false"""
+    """
+    Mobile URL - example: false
+    """
     mobile: Boolean
 
-    """Game provider - [pariplay|glueck]"""
+    """
+    Game provider - [pariplay|glueck]
+    """
     provider: String
 
-    """Game variant - example: gluexsterne"""
+    """
+    Game variant - example: gluexsterne
+    """
     variant: String
 
-    """Play demo - example: true"""
+    """
+    Play demo - example: true
+    """
     demo: Boolean
   ): playGame
 
-  """Returns current player"""
+  """
+  Returns current player
+  """
   player: player
 
-  """Returns games revenues of the player from the last 30 days"""
+  """
+  Returns games revenues of the player from the last 30 days
+  """
   playerGamesRevenues: playerGamesRevenues
 
-  """Returns the types of tickets for the player"""
+  """
+  Returns the types of tickets for the player
+  """
   playerTicketTypes(
     """
     returns archive tickets if true, otherwise active tickets - example: false
@@ -2783,22 +4144,30 @@ type Query {
     type: TicketsType!
   ): playerTicketTypes
 
-  """Returns tickets of the player"""
+  """
+  Returns tickets of the player
+  """
   playerTickets(
     """
     returns archive tickets if true, otherwise active tickets - example: false
     """
     archive: Boolean!
 
-    """Pagination limit - example: 10"""
+    """
+    Pagination limit - example: 10
+    """
     limit: Int!
 
-    """Pagination offset - example: 0"""
+    """
+    Pagination offset - example: 0
+    """
     offset: Int!
     type: TicketsType!
   ): playerTickets
 
-  """Returns the current PushNotification settings"""
+  """
+  Returns the current PushNotification settings
+  """
   pushNotificationStatus(
     """
     FCM Token - example: eB9kOz-_vMs:APA91bG_p1Ud-Pykn_wZHgKNh5nSC01WDF7fkQEgVQU4nTs1t7QX50zYM4UlTU7W-j8mbv49vmRYZdikT3haRQ2RmMsC2qmbSKQYEZI60EZx1w5a_EnZNDdmaH7bcEqvUwQrnT2XiMYL
@@ -2806,67 +4175,109 @@ type Query {
     fcmToken: String!
   ): pushNotificationStatus
 
-  """Returns randomized numbers for a lottery"""
+  """
+  Returns randomized numbers for a lottery
+  """
   quickPick(
-    """number of randomized numbers - example: 1"""
+    """
+    number of randomized numbers - example: 1
+    """
     fields: Int!
 
-    """lottery - example: lotto"""
+    """
+    lottery - example: lotto
+    """
     type: String!
   ): quickPick
 
-  """Returns the receipt data"""
+  """
+  Returns the receipt data
+  """
   receipt(
-    """ticketId - example: 4711"""
+    """
+    ticketId - example: 4711
+    """
     ticketId: BigInt
   ): receipt
 
-  """Returns scratch card chances"""
+  """
+  Returns scratch card chances
+  """
   scratchCardChances: scratchCardChances
 
-  """Returns scratch card config"""
+  """
+  Returns scratch card config
+  """
   scratchCardConfig: scratchCardConfig
 
-  """Returns a scratch card demo URL"""
+  """
+  Returns a scratch card demo URL
+  """
   scratchCardDemo(
-    """Scratch card variant - example: dickes_ei"""
+    """
+    Scratch card variant - example: dickes_ei
+    """
     variant: String
 
-    """Mobile URL - example: false"""
+    """
+    Mobile URL - example: false
+    """
     mobile: Boolean
   ): scratchCardDemo
 
-  """Returns not opened scratch card info"""
+  """
+  Returns not opened scratch card info
+  """
   scratchCardInfo: scratchCardInfo
 
-  """Returns a scratch card URL"""
+  """
+  Returns a scratch card URL
+  """
   scratchCardPlay(
-    """Scratch card variant - example: dickes_ei"""
+    """
+    Scratch card variant - example: dickes_ei
+    """
     variant: String
 
-    """Mobile URL - example: false"""
+    """
+    Mobile URL - example: false
+    """
     mobile: Boolean
   ): scratchCardPlay
 
-  """Returns the timestamp of the server"""
+  """
+  Returns the timestamp of the server
+  """
   serverDateTime: serverDateTime
 
-  """Returns filtered lottery archive tickets of the player"""
+  """
+  Returns filtered lottery archive tickets of the player
+  """
   sortedLotteryTickets(
-    """End date - example: Jan 01 2019"""
+    """
+    End date - example: Jan 01 2019
+    """
     endDate: String
 
-    """Pagination limit - example: 10"""
+    """
+    Pagination limit - example: 10
+    """
     limit: Int!
 
-    """Pagination offset - example: 0"""
+    """
+    Pagination offset - example: 0
+    """
     offset: Int!
     sortOption: SortedLotteryTicketsSortOption
 
-    """Start date - example: Jan 01 2019"""
+    """
+    Start date - example: Jan 01 2019
+    """
     startDate: String
 
-    """game type - example: lotto"""
+    """
+    game type - example: lotto
+    """
     type: String
 
     """
@@ -2875,16 +4286,24 @@ type Query {
     only_winnings: Boolean!
   ): playerTickets
 
-  """Token Service for sports betting"""
+  """
+  Token Service for sports betting
+  """
   sportsBettingTokenService: sportsBettingTokenService
 
-  """Returns the requested statistics"""
+  """
+  Returns the requested statistics
+  """
   statistics(
-    """Lottery - example: lotto"""
+    """
+    Lottery - example: lotto
+    """
     lottery: String!
   ): statistics
 
-  """Returns the ticket definition for the requested lotterie type"""
+  """
+  Returns the ticket definition for the requested lotterie type
+  """
   ticketDefinition(
     """
     Game type - [cash4life, dailymillion, elgordo, elnino, eurojackpot,
@@ -2905,12 +4324,18 @@ type Query {
     gameCommunityGroup: String
   ): ticketDefinition
 
-  """Returns a free ticket number"""
+  """
+  Returns a free ticket number
+  """
   ticketNumber(
-    """Amount of numbers (worldmillions) - example: 1"""
+    """
+    Amount of numbers (worldmillions) - example: 1
+    """
     limit: Int
 
-    """Day of participation (worldmillions) - example: [th, su]"""
+    """
+    Day of participation (worldmillions) - example: [th, su]
+    """
     participationDay: String
 
     """
@@ -2925,22 +4350,32 @@ type Query {
     type: String!
   ): ticketNumber
 
-  """Returns newsletter_configuration of the player"""
+  """
+  Returns newsletter_configuration of the player
+  """
   viewNewsletterConfiguration(
-    """Hash key of the player - example: akjshdf"""
+    """
+    Hash key of the player - example: akjshdf
+    """
     hashKey: String
   ): viewNewsletterConfiguration
 }
 
 type quickPick implements ErrorHandling & Token {
-  """Errors string - example: session_not_found"""
+  """
+  Errors string - example: session_not_found
+  """
   backendError: String
   fields: [modelField]
 
-  """Status of the mutation - example: true"""
+  """
+  Status of the mutation - example: true
+  """
   success: Boolean!
 
-  """Ticket number for lotto - example: 1234567"""
+  """
+  Ticket number for lotto - example: 1234567
+  """
   ticketNumber: String
 
   """
@@ -2951,10 +4386,14 @@ type quickPick implements ErrorHandling & Token {
 }
 
 type receipt implements ErrorHandling & Token {
-  """Errors string - example: session_not_found"""
+  """
+  Errors string - example: session_not_found
+  """
   backendError: String
 
-  """Status of the mutation - example: true"""
+  """
+  Status of the mutation - example: true
+  """
   success: Boolean!
   ticket: modelTicket
 
@@ -2966,11 +4405,15 @@ type receipt implements ErrorHandling & Token {
 }
 
 type register implements ErrorHandling & Token {
-  """Errors string - example: session_not_found"""
+  """
+  Errors string - example: session_not_found
+  """
   backendError: String
   player: modelPlayer
 
-  """Status of the mutation - example: true"""
+  """
+  Status of the mutation - example: true
+  """
   success: Boolean!
 
   """
@@ -2981,23 +4424,35 @@ type register implements ErrorHandling & Token {
 }
 
 type removeTicketsFromBasket implements ErrorHandling & Token & BasketObject {
-  """Total amount - example: 120"""
+  """
+  Total amount - example: 120
+  """
   amount: Int
 
-  """Amount to pay - example: 0"""
+  """
+  Amount to pay - example: 0
+  """
   amountToPay: Int
 
-  """Errors string - example: session_not_found"""
+  """
+  Errors string - example: session_not_found
+  """
   backendError: String
   coupon: modelCoupon
 
-  """If the basket may be purchased due to limits - example: true"""
+  """
+  If the basket may be purchased due to limits - example: true
+  """
   isPurchasable: Boolean!
 
-  """Total amount reduced by credit - example: 0"""
+  """
+  Total amount reduced by credit - example: 0
+  """
   reducedAmount: Int
 
-  """Status of the mutation - example: true"""
+  """
+  Status of the mutation - example: true
+  """
   success: Boolean!
   tickets: [modelTicket]
 
@@ -3009,23 +4464,35 @@ type removeTicketsFromBasket implements ErrorHandling & Token & BasketObject {
 }
 
 type replayTicket implements ErrorHandling & Token & BasketObject {
-  """Total amount - example: 120"""
+  """
+  Total amount - example: 120
+  """
   amount: Int
 
-  """Amount to pay - example: 0"""
+  """
+  Amount to pay - example: 0
+  """
   amountToPay: Int
 
-  """Errors string - example: session_not_found"""
+  """
+  Errors string - example: session_not_found
+  """
   backendError: String
   coupon: modelCoupon
 
-  """If the basket may be purchased due to limits - example: true"""
+  """
+  If the basket may be purchased due to limits - example: true
+  """
   isPurchasable: Boolean!
 
-  """Total amount reduced by credit - example: 0"""
+  """
+  Total amount reduced by credit - example: 0
+  """
   reducedAmount: Int
 
-  """Status of the mutation - example: true"""
+  """
+  Status of the mutation - example: true
+  """
   success: Boolean!
   tickets: [modelTicket]
 
@@ -3037,10 +4504,14 @@ type replayTicket implements ErrorHandling & Token & BasketObject {
 }
 
 type resendDoubleOptIn implements ErrorHandling & Token {
-  """Errors string - example: session_not_found"""
+  """
+  Errors string - example: session_not_found
+  """
   backendError: String
 
-  """Status of the mutation - example: true"""
+  """
+  Status of the mutation - example: true
+  """
   success: Boolean!
 
   """
@@ -3051,11 +4522,15 @@ type resendDoubleOptIn implements ErrorHandling & Token {
 }
 
 type resetNewsletterConfiguration implements ErrorHandling & Token {
-  """Errors string - example: session_not_found"""
+  """
+  Errors string - example: session_not_found
+  """
   backendError: String
   newsletterConfiguration: modelNewsletterConfiguration
 
-  """Status of the mutation - example: true"""
+  """
+  Status of the mutation - example: true
+  """
   success: Boolean!
 
   """
@@ -3066,10 +4541,14 @@ type resetNewsletterConfiguration implements ErrorHandling & Token {
 }
 
 type resetPassword implements ErrorHandling & Token {
-  """Errors string - example: session_not_found"""
+  """
+  Errors string - example: session_not_found
+  """
   backendError: String
 
-  """Status of the mutation - example: true"""
+  """
+  Status of the mutation - example: true
+  """
   success: Boolean!
 
   """
@@ -3080,10 +4559,14 @@ type resetPassword implements ErrorHandling & Token {
 }
 
 type savePartner implements ErrorHandling & Token {
-  """Errors string - example: session_not_found"""
+  """
+  Errors string - example: session_not_found
+  """
   backendError: String
 
-  """Status of the mutation - example: true"""
+  """
+  Status of the mutation - example: true
+  """
   success: Boolean!
 
   """
@@ -3094,33 +4577,47 @@ type savePartner implements ErrorHandling & Token {
 }
 
 type scratchCardChances implements ErrorHandling {
-  """Errors string - example: session_not_found"""
+  """
+  Errors string - example: session_not_found
+  """
   backendError: String
   scratchCards: [modelScratchCardChances]
 
-  """Status of the mutation - example: true"""
+  """
+  Status of the mutation - example: true
+  """
   success: Boolean!
   visibleErrors: visibleErrors!
 }
 
 type scratchCardConfig implements ErrorHandling {
-  """Errors string - example: session_not_found"""
+  """
+  Errors string - example: session_not_found
+  """
   backendError: String
   scratchCards: [modelScratchCard]
 
-  """Status of the mutation - example: true"""
+  """
+  Status of the mutation - example: true
+  """
   success: Boolean!
   visibleErrors: visibleErrors!
 }
 
 type scratchCardDemo implements ErrorHandling & Token {
-  """Errors string - example: session_not_found"""
+  """
+  Errors string - example: session_not_found
+  """
   backendError: String
 
-  """Redirect to this URL - example: https://glueck.com/89sd9fhskjhg9"""
+  """
+  Redirect to this URL - example: https://glueck.com/89sd9fhskjhg9
+  """
   redirectTo: String
 
-  """Status of the mutation - example: true"""
+  """
+  Status of the mutation - example: true
+  """
   success: Boolean!
 
   """
@@ -3131,13 +4628,19 @@ type scratchCardDemo implements ErrorHandling & Token {
 }
 
 type scratchCardInfo implements ErrorHandling & Token {
-  """Errors string - example: session_not_found"""
+  """
+  Errors string - example: session_not_found
+  """
   backendError: String
 
-  """JSON string of unplayed scratch cards - example: {"platin7": 1}"""
+  """
+  JSON string of unplayed scratch cards - example: {"platin7": 1}
+  """
   scratchCards: String
 
-  """Status of the mutation - example: true"""
+  """
+  Status of the mutation - example: true
+  """
   success: Boolean!
 
   """
@@ -3148,13 +4651,19 @@ type scratchCardInfo implements ErrorHandling & Token {
 }
 
 type scratchCardPlay implements ErrorHandling & Token {
-  """Errors string - example: session_not_found"""
+  """
+  Errors string - example: session_not_found
+  """
   backendError: String
 
-  """Redirect to this URL - example: https://glueck.com/89sd9fhskjhg9"""
+  """
+  Redirect to this URL - example: https://glueck.com/89sd9fhskjhg9
+  """
   redirectTo: String
 
-  """Status of the mutation - example: true"""
+  """
+  Status of the mutation - example: true
+  """
   success: Boolean!
 
   """
@@ -3164,23 +4673,35 @@ type scratchCardPlay implements ErrorHandling & Token {
   visibleErrors: visibleErrors!
 }
 
-"""status of the scratchcard"""
+"""
+status of the scratchcard
+"""
 enum ScratchCardStatus {
-  """scratchcard is available"""
+  """
+  scratchcard is available
+  """
   AVAILABLE
 
-  """scratchcard is not available"""
+  """
+  scratchcard is not available
+  """
   NOT_AVAILABLE
 
-  """scratchcard is sold out"""
+  """
+  scratchcard is sold out
+  """
   SOLD_OUT
 }
 
 type sendReceipt implements ErrorHandling & Token {
-  """Errors string - example: session_not_found"""
+  """
+  Errors string - example: session_not_found
+  """
   backendError: String
 
-  """Status of the mutation - example: true"""
+  """
+  Status of the mutation - example: true
+  """
   success: Boolean!
 
   """
@@ -3191,22 +4712,32 @@ type sendReceipt implements ErrorHandling & Token {
 }
 
 type serverDateTime implements ErrorHandling {
-  """Errors string - example: session_not_found"""
+  """
+  Errors string - example: session_not_found
+  """
   backendError: String
 
-  """Status of the mutation - example: true"""
+  """
+  Status of the mutation - example: true
+  """
   success: Boolean!
 
-  """timestamp - example: 2019-05-01T08:00:00.000+0000"""
+  """
+  timestamp - example: 2019-05-01T08:00:00.000+0000
+  """
   timestamp: String!
   visibleErrors: visibleErrors!
 }
 
 type setCasinoPause implements ErrorHandling & Token {
-  """Errors string - example: session_not_found"""
+  """
+  Errors string - example: session_not_found
+  """
   backendError: String
 
-  """Status of the mutation - example: true"""
+  """
+  Status of the mutation - example: true
+  """
   success: Boolean!
 
   """
@@ -3217,28 +4748,44 @@ type setCasinoPause implements ErrorHandling & Token {
 }
 
 type sofortueberweisung implements ErrorHandling & Token {
-  """Paid amount in Euro - example: 5.95"""
+  """
+  Paid amount in Euro - example: 5.95
+  """
   amount: String
 
-  """Errors string - example: session_not_found"""
+  """
+  Errors string - example: session_not_found
+  """
   backendError: String
 
-  """Basket id - example: 1234"""
+  """
+  Basket id - example: 1234
+  """
   basketId: BigInt
 
-  """Deposit transaction - example: false"""
+  """
+  Deposit transaction - example: false
+  """
   deposit: Boolean
 
-  """Order id - example: 5223"""
+  """
+  Order id - example: 5223
+  """
   orderId: BigInt
 
-  """Payment result - example: ?untraceable"""
+  """
+  Payment result - example: ?untraceable
+  """
   paymentResult: String
 
-  """JSON string of unplayed scratch cards - example: {"platin7": 1}"""
+  """
+  JSON string of unplayed scratch cards - example: {"platin7": 1}
+  """
   scratchCards: String
 
-  """Status of the mutation - example: true"""
+  """
+  Status of the mutation - example: true
+  """
   success: Boolean!
 
   """
@@ -3248,7 +4795,9 @@ type sofortueberweisung implements ErrorHandling & Token {
   visibleErrors: visibleErrors!
 }
 
-"""sort tickets by buy date or drawing date"""
+"""
+sort tickets by buy date or drawing date
+"""
 enum SortedLotteryTicketsSortOption {
   BUYDATE_ASC
   BUYDATE_DESC
@@ -3257,114 +4806,174 @@ enum SortedLotteryTicketsSortOption {
 }
 
 type sportsBettingTokenService implements ErrorHandling {
-  """Errors string - example: session_not_found"""
+  """
+  Errors string - example: session_not_found
+  """
   backendError: String
   sportsBettingToken: String!
 
-  """Status of the mutation - example: true"""
+  """
+  Status of the mutation - example: true
+  """
   success: Boolean!
   visibleErrors: visibleErrors!
 }
 
 type statistics implements ErrorHandling {
-  """Errors string - example: session_not_found"""
+  """
+  Errors string - example: session_not_found
+  """
   backendError: String
   statistics: [modelStatisticsStatistics]!
 
-  """Status of the mutation - example: true"""
+  """
+  Status of the mutation - example: true
+  """
   success: Boolean!
   visibleErrors: visibleErrors!
 }
 
 type ticketDefinition implements ErrorHandling {
-  """Lottery is available - example: true"""
+  """
+  Lottery is available - example: true
+  """
   available: Boolean
 
-  """Errors string - example: session_not_found"""
+  """
+  Errors string - example: session_not_found
+  """
   backendError: String
   discounts: [modelDiscount]
 
-  """Drawing days"""
+  """
+  Drawing days
+  """
   drawings: [ticketDefinitionDrawing]
 
-  """Number of playing fields per ticket - example: 8"""
+  """
+  Number of playing fields per ticket - example: 8
+  """
   fields: Int
   gameCommunities: [modelGameCommunity]
 
-  """Current jackpot - example: 1000000"""
+  """
+  Current jackpot - example: 1000000
+  """
   jackpot: BigInt
 
-  """Amount of draws since last jackpot hit - example: 2"""
+  """
+  Amount of draws since last jackpot hit - example: 2
+  """
   jackpotDrawsSinceLastHit: Int
 
-  """Date of last jackpot hit - example: May 25 1979"""
+  """
+  Date of last jackpot hit - example: May 25 1979
+  """
   jackpotLastHit: String
 
-  """Tipable numbers per field"""
+  """
+  Tipable numbers per field
+  """
   numbersPerField: ticketDefinitionField
 
-  """Lottery is seasonal - example: false"""
+  """
+  Lottery is seasonal - example: false
+  """
   seasonal: Boolean
   shares: [modelShare]
 
-  """Status of the mutation - example: true"""
+  """
+  Status of the mutation - example: true
+  """
   success: Boolean!
 
-  """Tips needed to complete a field"""
+  """
+  Tips needed to complete a field
+  """
   tipsPerField: ticketDefinitionField
 
-  """Lottery is visible - example: true"""
+  """
+  Lottery is visible - example: true
+  """
   visible: Boolean
   visibleErrors: visibleErrors!
 }
 
 type ticketDefinitionDrawing {
-  """available additional games"""
+  """
+  available additional games
+  """
   additionalGames: [ticketDefinitionGame]
 
-  """available additional game options"""
+  """
+  available additional game options
+  """
   additionalOptions: [ticketDefinitionGame]
 
-  """deadline - example: Dec 23 2018 19:00:00"""
+  """
+  deadline - example: Dec 23 2018 19:00:00
+  """
   deadline: String
 
-  """drawing - example: Dec 23 2018 19:15:00"""
+  """
+  drawing - example: Dec 23 2018 19:15:00
+  """
   drawing: String
 
-  """price per field in cents - example: 100"""
+  """
+  price per field in cents - example: 100
+  """
   pricePerField: Int
 
-  """ticket fee in cents - example: 20"""
+  """
+  ticket fee in cents - example: 20
+  """
   ticketFee: Int
 }
 
 type ticketDefinitionField {
-  """Max base numbers - example: 5"""
+  """
+  Max base numbers - example: 5
+  """
   base: Int
 
-  """Max extra numbers - example: 2"""
+  """
+  Max extra numbers - example: 2
+  """
   extra: Int
 }
 
 type ticketDefinitionGame {
-  """fee in cents for the ticket, if it is chosen - example: 0"""
+  """
+  fee in cents for the ticket, if it is chosen - example: 0
+  """
   fee: Int
 
-  """Name of the game - example: spiel77"""
+  """
+  Name of the game - example: spiel77
+  """
   game: String
 
-  """price in cents for each participation - example: 250"""
+  """
+  price in cents for each participation - example: 250
+  """
   price: Int
 }
 
 type ticketNumber implements ErrorHandling & Token {
-  """Errors string - example: session_not_found"""
+  """
+  Errors string - example: session_not_found
+  """
   backendError: String
 
-  """Free numbers - example: [12345, 67890]"""
+  """
+  Free numbers - example: [12345, 67890]
+  """
   numbers: [String]
 
-  """Status of the mutation - example: true"""
+  """
+  Status of the mutation - example: true
+  """
   success: Boolean!
 
   """
@@ -3374,43 +4983,69 @@ type ticketNumber implements ErrorHandling & Token {
   visibleErrors: visibleErrors!
 }
 
-"""status of the ticket"""
+"""
+status of the ticket
+"""
 enum TicketStatus {
-  """ticket has been created"""
+  """
+  ticket has been created
+  """
   CREATED
 
-  """ticket has not yet been paid"""
+  """
+  ticket has not yet been paid
+  """
   IN_PAYMENT
 
-  """ticket has been paid and will be submitted"""
+  """
+  ticket has been paid and will be submitted
+  """
   PAID
 
-  """abonnement was terminated"""
+  """
+  abonnement was terminated
+  """
   TERMINATED
 
-  """abonnement will be extended"""
+  """
+  abonnement will be extended
+  """
   IN_EXTENSION
 
-  """ticket participates"""
+  """
+  ticket participates
+  """
   PARTICIPATES
 
-  """ticket has participated"""
+  """
+  ticket has participated
+  """
   PARTICIPATED
 
-  """ticket won"""
+  """
+  ticket won
+  """
   WON
 
-  """ticket did not win"""
+  """
+  ticket did not win
+  """
   NOT_WON
 
-  """ticket has been canceled"""
+  """
+  ticket has been canceled
+  """
   CANCELED
 
-  """Fallback: ticket status is unknown"""
+  """
+  Fallback: ticket status is unknown
+  """
   UNKNOWN
 }
 
-"""ticket type"""
+"""
+ticket type
+"""
 enum TicketsType {
   GAME
   LOTTERY
@@ -3425,7 +5060,9 @@ interface Token {
   token: String!
 }
 
-"""transaction type"""
+"""
+transaction type
+"""
 enum Transaction {
   BUY_CASH4LIFE
   BUY_DAILYMILLION
@@ -3493,11 +5130,15 @@ enum Transaction {
 }
 
 type viewNewsletterConfiguration implements ErrorHandling & Token {
-  """Errors string - example: session_not_found"""
+  """
+  Errors string - example: session_not_found
+  """
   backendError: String
   newsletterConfiguration: modelNewsletterConfiguration
 
-  """Status of the mutation - example: true"""
+  """
+  Status of the mutation - example: true
+  """
   success: Boolean!
 
   """
@@ -3508,7 +5149,9 @@ type viewNewsletterConfiguration implements ErrorHandling & Token {
 }
 
 type visibleErrors {
-  """List of error keys - example: ["email.Message_Email_Already_Exists"]"""
+  """
+  List of error keys - example: ["email.Message_Email_Already_Exists"]
+  """
   idents: [String]!
 
   """
@@ -3516,27 +5159,41 @@ type visibleErrors {
   """
   messages: [String]!
 
-  """List of error types - example: ["NOT_AVAILABLE"]"""
+  """
+  List of error types - example: ["NOT_AVAILABLE"]
+  """
   types: [String]
 }
 
 type winAccount implements ErrorHandling & Token {
-  """Auto paying out winnings - example: true"""
+  """
+  Auto paying out winnings - example: true
+  """
   autoPayingOut: Boolean
 
-  """Errors string - example: session_not_found"""
+  """
+  Errors string - example: session_not_found
+  """
   backendError: String
 
-  """Bank data already exists - example: true"""
+  """
+  Bank data already exists - example: true
+  """
   doubleBank: Boolean
 
-  """Masked IBAN for payments - example: DE44****90"""
+  """
+  Masked IBAN for payments - example: DE44****90
+  """
   iban: String
 
-  """Masked IBAN for payouts - example: DE44****90"""
+  """
+  Masked IBAN for payouts - example: DE44****90
+  """
   payoutIban: String
 
-  """Status of the mutation - example: true"""
+  """
+  Status of the mutation - example: true
+  """
   success: Boolean!
 
   """
@@ -3545,4 +5202,3 @@ type winAccount implements ErrorHandling & Token {
   token: String!
   visibleErrors: visibleErrors!
 }
-
