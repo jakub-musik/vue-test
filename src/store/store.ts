@@ -10,7 +10,7 @@ import { actions, Actions } from "./actions";
 import { LoadingStateEnum } from "../shared/loading-state.enum";
 
 export type State = {
-  superlotto: {
+  eurojackpot: {
     numbers: string[];
     additionalNumbers: string[];
     expiresAt: number;
@@ -22,17 +22,17 @@ export type State = {
 export const key: InjectionKey<VuexStore<State>> = Symbol();
 
 export const makeInitialState = ({
-  superlotto
+  eurojackpot
 }: {
-  superlotto?: Partial<State["superlotto"]>;
+  eurojackpot?: Partial<State["eurojackpot"]>;
 } = {}) => ({
-  superlotto: {
+  eurojackpot: {
     numbers: [],
     additionalNumbers: [],
     expiresAt: 0,
     date: 0,
     loadingState: LoadingStateEnum.notStarted,
-    ...superlotto
+    ...eurojackpot
   }
 });
 

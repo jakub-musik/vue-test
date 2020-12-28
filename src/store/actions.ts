@@ -12,45 +12,44 @@ type AugmentedActionContext = {
 } & Omit<ActionContext<State, State>, "commit">;
 
 export enum ActionTypes {
-  fetchSuperlotto = "fetchSuperlotto"
+  fetchEurojackpot = "fetchEurojackpot"
 }
 
 export interface Actions {
-  [ActionTypes.fetchSuperlotto]({
+  [ActionTypes.fetchEurojackpot]({
     commit
   }: AugmentedActionContext): Promise<void>;
 }
 
-export const actions: ActionTree<State, State> & Actions = {
-  [ActionTypes.fetchSuperlotto]: async function({ commit, state }) {
-    if (state.superlotto.expiresAt < new Date().getTime()) {
-      commit(MutationTypes.startLoadingSuperlotto);
+const fetchEurojackpotQuery = gql`
+  {
+    draw(type: "eurojackpot", limit: 1) {
+      draws {
+        numbers
+        additionalNumbers
+        date
+      }
+    }
+  }
+`;
 
-      const query = gql`
-        {
-          draw(type: "superlotto", limit: 1) {
-            draws {
-              numbers
-              additionalNumbers
-              date
-            }
-          }
-        }
-      `;
+export const actions: ActionTree<State, State> & Actions = {
+  [ActionTypes.fetchEurojackpot]: async function({ commit, state }) {
+    if (state.eurojackpot.expiresAt < new Date().getTime()) {
+      commit(MutationTypes.startLoadingEurojackpot);
 
       try {
         const result = await request<DrawQueryResponse>(
           "https://www.lottohelden.de/graphql",
-          query
+          fetchEurojackpotQuery
         );
 
-        console.log({ result });
         if (
           result?.draw?.draws?.[0]?.numbers &&
           result.draw.draws[0].date &&
           result.draw.draws[0].additionalNumbers
         ) {
-          commit(MutationTypes.updateSuperlotto, {
+          commit(MutationTypes.updateEurojackpot, {
             numbers: result.draw.draws[0].numbers,
             additionalNumbers: result.draw.draws[0].additionalNumbers,
             date: new Date(result.draw.draws[0].date)
@@ -60,7 +59,7 @@ export const actions: ActionTree<State, State> & Actions = {
         }
       } catch (error) {
         //   TODO: improve error handling
-        commit(MutationTypes.errorWhileLoadingSuperlotto);
+        commit(MutationTypes.errorWhileLoadingEurojackpot);
 
         console.error(error);
       }

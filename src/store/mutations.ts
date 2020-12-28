@@ -3,61 +3,57 @@ import { LoadingStateEnum } from "../shared/loading-state.enum";
 import { State } from "./store";
 
 export enum MutationTypes {
-  updateSuperlotto = "updateSuperlotto",
-  startLoadingSuperlotto = "startLoadingSuperlotto",
-  errorWhileLoadingSuperlotto = "errorWhileLoadingSuperlotto"
+  updateEurojackpot = "updateEurojackpot",
+  startLoadingEurojackpot = "startLoadingEurojackpot",
+  errorWhileLoadingEurojackpot = "errorWhileLoadingEurojackpot"
 }
 
-export type UpdateSuperlottoMutationPayload = {
+export type UpdateEurojackpotMutationPayload = {
   date: Date;
   numbers: string[];
   additionalNumbers: string[];
 };
 
 export type Mutations<S = State> = {
-  [MutationTypes.updateSuperlotto](
+  [MutationTypes.updateEurojackpot](
     state: S,
-    payload: UpdateSuperlottoMutationPayload
+    payload: UpdateEurojackpotMutationPayload
   ): void;
-  [MutationTypes.startLoadingSuperlotto](state: S): void;
-  [MutationTypes.errorWhileLoadingSuperlotto](state: S): void;
+  [MutationTypes.startLoadingEurojackpot](state: S): void;
+  [MutationTypes.errorWhileLoadingEurojackpot](state: S): void;
 };
 
+// eurojackpot is drawn every friday at 7pn UTC
+// hours are back by 5 minutes to always refresh when close to next draw
+const eurojackpotDrawHour = [18, 55, 0];
+const daysToNextEurojackpot = 7;
+
 export const mutations: MutationTree<State> & Mutations = {
-  [MutationTypes.updateSuperlotto](
+  [MutationTypes.updateEurojackpot](
     state,
-    payload: UpdateSuperlottoMutationPayload
+    payload: UpdateEurojackpotMutationPayload
   ) {
     const localDate = new Date(payload.date);
 
-    // if saturday, next is wednesday
-    const isSaturday = localDate.getDay() === 6;
-
-    // The Germany Lotto draw takes place twice a week on Wednesday and Saturday. The draws run at 5:25 pm and 6:25 pm (UTC)
-    // hours are back by 5 minutes to always refresh when close to next draw
-    const hours = isSaturday ? [17, 20, 0] : [18, 20, 0];
-
-    const daysToNextLotto = isSaturday ? 4 : 3;
-
-    const nextLottoUtcDate = new Date(
+    const nextEurojackpotUtcDate = new Date(
       Date.UTC(
         localDate.getFullYear(),
         localDate.getMonth(),
-        localDate.getDate() + daysToNextLotto,
-        ...hours
+        localDate.getDate() + daysToNextEurojackpot,
+        ...eurojackpotDrawHour
       )
     );
 
-    state.superlotto.loadingState = LoadingStateEnum.loaded;
-    state.superlotto.numbers = payload.numbers;
-    state.superlotto.date = payload.date.getTime();
-    state.superlotto.expiresAt = nextLottoUtcDate.getTime();
-    state.superlotto.additionalNumbers = payload.additionalNumbers;
+    state.eurojackpot.loadingState = LoadingStateEnum.loaded;
+    state.eurojackpot.numbers = payload.numbers;
+    state.eurojackpot.date = payload.date.getTime();
+    state.eurojackpot.expiresAt = nextEurojackpotUtcDate.getTime();
+    state.eurojackpot.additionalNumbers = payload.additionalNumbers;
   },
-  [MutationTypes.startLoadingSuperlotto](state) {
-    state.superlotto.loadingState = LoadingStateEnum.loading;
+  [MutationTypes.startLoadingEurojackpot](state) {
+    state.eurojackpot.loadingState = LoadingStateEnum.loading;
   },
-  [MutationTypes.errorWhileLoadingSuperlotto](state) {
-    state.superlotto.loadingState = LoadingStateEnum.failed;
+  [MutationTypes.errorWhileLoadingEurojackpot](state) {
+    state.eurojackpot.loadingState = LoadingStateEnum.failed;
   }
 };

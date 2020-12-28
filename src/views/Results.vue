@@ -37,27 +37,27 @@ export const Results = defineComponent({
   },
   computed: {
     loadingState() {
-      return this.$store.state.superlotto.loadingState;
+      return this.$store.state.eurojackpot.loadingState;
     },
     numbers() {
-      return this.$store.state.superlotto.numbers;
+      return this.$store.state.eurojackpot.numbers;
     },
     additionalNumbers() {
-      return this.$store.state.superlotto.additionalNumbers;
+      return this.$store.state.eurojackpot.additionalNumbers;
     },
     isReady() {
       return (
-        this.$store.state.superlotto.loadingState === LoadingStateEnum.loaded
+        this.$store.state.eurojackpot.loadingState === LoadingStateEnum.loaded
       );
     },
     isError() {
       return (
-        this.$store.state.superlotto.loadingState === LoadingStateEnum.failed
+        this.$store.state.eurojackpot.loadingState === LoadingStateEnum.failed
       );
     }
   },
   created() {
-    this.$store.dispatch(ActionTypes.fetchSuperlotto, undefined);
+    this.$store.dispatch(ActionTypes.fetchEurojackpot, undefined);
   }
 });
 
