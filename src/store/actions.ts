@@ -61,6 +61,7 @@ export const actions: ActionTree<State, State> & Actions = {
         //   TODO: improve error handling
         commit(MutationTypes.errorWhileLoadingEurojackpot);
 
+        // eslint-disable-next-line no-console
         console.error(error);
       }
     }

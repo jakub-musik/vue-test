@@ -6,6 +6,9 @@ describe("Results page", () => {
   it("Displays the results on results route", () => {
     cy.visit(routing.results);
 
-    console.log(cy.get(".results__list").children());
+    cy.get(".results__list")
+      .children()
+      .its("length")
+      .then(length => expect(length).to.be.equal(7));
   });
 });

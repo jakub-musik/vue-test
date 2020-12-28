@@ -13,9 +13,6 @@ module.exports = (on, config) => {
   const webpackOptions = require("@vue/cli-service/webpack.config");
   const webpack = require("@cypress/webpack-preprocessor");
 
-  // webpackOptions.mode = "development";
-  webpackOptions.entry = undefined;
-
   // optimization breaks compilation - cypress cannot find tests
   webpackOptions.optimization = undefined;
 
